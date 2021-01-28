@@ -5,21 +5,21 @@
       "title": "Blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-01-28T21:31:08+01:00"
+      "last_modified": "2021-01-28T23:30:17+01:00"
     },
     {
       "path": "index.html",
       "title": "Etienne Bacher",
       "author": [],
       "contents": "\n\n          \n          \n          Etienne Bacher\n          \n          \n          Home\n          Blog\n          Projects\n          CV\n          \n          \n          \n          ☰\n          \n          \n      \n        \n          \n            \n              \n            \n              Etienne Bacher\n            \n            \n              \n                \n                    \n                      \n                        GitHub\n                      \n                    \n                  \n                                    \n                    \n                      \n                        Twitter\n                      \n                    \n                  \n                                    \n                    \n                      \n                        Email\n                      \n                    \n                  \n                                  \n            \n          \n        \n        \n        \n          \n            I am a French PhD student in the Doctoral Team Unit ACROSS at LISER, Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences.\n            Besides working on this topic, I also enjoy programming with R by creating Shiny apps or packages that you can find on my GitHub repo. I also write blog articles about R from time to time, that you can find in the “Blog” tab above.\n            If you want to contact me, the best way to do so is by email at etienne.bacher@protonmail.com, or via Twitter (though I’m not very active on it).\n          \n        \n      \n    \n\n    \n      \n        \n          \n            \n              \n            \n              Etienne Bacher\n            \n            \n              \n                \n                                    \n                    \n                      GitHub\n                    \n                  \n                                    \n                    \n                      Twitter\n                    \n                  \n                                    \n                    \n                      Email\n                    \n                  \n                                  \n              \n            \n            \n              I am a French PhD student in the Doctoral Team Unit ACROSS at LISER, Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences.\n              Besides working on this topic, I also enjoy programming with R by creating Shiny apps or packages that you can find on my GitHub repo. I also write blog articles about R from time to time, that you can find in the “Blog” tab above.\n              If you want to contact me, the best way to do so is by email at etienne.bacher@protonmail.com, or via Twitter (though I’m not very active on it).\n            \n        \n      \n    \n\n    \n    \n    ",
-      "last_modified": "2021-01-28T21:31:08+01:00"
+      "last_modified": "2021-01-28T23:30:17+01:00"
     },
     {
       "path": "projects.html",
       "title": "",
       "author": [],
-      "contents": "\nProjects\n\n\n\n.grid-container {\n  display: grid;\n  grid-template-columns: 50% 50%;\n  grid-gap: 50px;\n  padding: 10px;\n}\n\n.grid-container > div {\n  text-align: justify;\n  padding: 20px 0;\n  font-size: 30px;\n}\n    \n.card .card-text {\n    padding: .75rem 1rem;\n    font-size: 15px;\n}\n.card-text:last-child {\n    margin-bottom: 0;\n}\n    \n\n                    \n         \n           \n    \n         \n          tinyslider\n\n          \n            Adaptation into R of the Javascript library tiny-slider.js. This package creates carousels in interactive environments, such as R Shiny.\n          \n\n        \n    \n                    \n         \n          docsifier\n\n          \n            Use docsify.js to create the documentation for an R package.\n          \n\n        \n    \n  \n\n\n\n\n\n",
-      "last_modified": "2021-01-28T21:31:09+01:00"
+      "contents": "\nProjects\n\n\n      \n         \n          tinyslider\n          \n            Adaptation into R of the Javascript library tiny-slider.js. This package creates carousels in interactive environments, such as R Shiny. \n          \n          See more\n        \n    \n                    \n         \n          docsifier\n          \n            Use this package to build a webpage for your package/project documentation. It is the adaptation of docsify.js.\n           \n          See more\n\n        \n    \n  \n\n\n\n\n\n",
+      "last_modified": "2021-01-28T23:30:18+01:00"
     }
   ],
   "collections": ["posts/posts.json", "projects/projects.json"]

@@ -631,7 +631,7 @@
 
               var script = document.createElement("script");
               script.src = "https://utteranc.es/client.js";
-              script.setAttribute("repo", "etiennebacher/personal_website");
+              script.setAttribute("repo", "etiennebacher/personal_website_distill");
               script.setAttribute("issue-term", "og:title");
               script.setAttribute("crossorigin", "anonymous");
               script.setAttribute("label", "comment_thread");
@@ -768,6 +768,45 @@
           	color: #4682b4;
           }
 
+          /* Cards in "Projects" */
+          .grid-container {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-gap: 50px;
+            padding: 10px;
+          }
+
+          .grid-container > div {
+            text-align: justify;
+            padding: 20px 0;
+            font-size: 30px;
+            background-color: #dae7f1;
+          }
+              
+          .card .card-text {
+          	padding: .75rem 1rem;
+            transition: 0.3s;
+            font-size: 15px;
+            background-color: #dae7f1;
+          }
+          .card-text:last-child {
+          	margin-bottom: 0;
+          	background-color: #dae7f1;
+          }
+
+          .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          }
+
+          /* Center title in cards */
+          .card-text > h4 {
+            display: flex;
+          }
+          h4 > a {
+          	text-align: center;
+          	display: flex;
+          	margin: auto;
+          }
 
 
           </style>
@@ -796,7 +835,7 @@
           <a href="blog.html">Blog</a>
           <a href="projects.html">Projects</a>
           <a href="cv.pdf">CV</a>
-          <a href="https://github.com/etiennebacher/test_distill" aria-label="Link to source">
+          <a href="https://github.com/etiennebacher/personal_website_distill" aria-label="Link to source">
           <i class="fab fa-github" aria-hidden="true"></i>
           </a>
           <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
