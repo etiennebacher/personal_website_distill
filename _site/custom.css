@@ -159,3 +159,16 @@ h4 > a {
 	margin: auto;
 }
 
+.card-text > a {
+  	background-color: #4682b4;
+	border: none;
+	color: white;
+	padding: 10px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: flex;
+	margin: 0 auto;
+	font-size: 16px;
+	justify-content: center;
+	width: 25%;
+}
