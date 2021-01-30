@@ -33,6 +33,10 @@ html {
   --navbar-font:     "Montserrat", sans-serif;  /* websites + blogs only */
 }
 
+* {
+  font-family: "Montserrat";
+}
+
 /*-- ARTICLE METADATA --*/
 d-byline {
   --heading-size:    0.6rem;
