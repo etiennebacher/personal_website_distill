@@ -128,7 +128,7 @@ a {
 }
 
 .grid-container > div {
-  text-align: justify;
+  text-align: left;
   padding: 20px 0;
   font-size: 30px;
   background-color: #dae7f1;
