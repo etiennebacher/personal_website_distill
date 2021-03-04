@@ -12,7 +12,32 @@ output:
   postcards::trestles
 site: distill::distill_website
 ---
+
+<!-- The postcard had a useless second scrollbar (in addition to the big one of distill). For some reason, I couldn't remove it with the CSS in custom.css. My only solution is to modify the source of the postcards::trestle template to remove this scrollbar. -->
+```{r, include = FALSE}
+trestles_orig <- readLines(
+  system.file("pandoc_templates/trestles.html",
+              package = "postcards")
+)
+
+trestles_mod <- trestles_orig
+
+trestles_mod[
+  which(
+    grepl(
+      'class="d-flex flex-column col px-5 align-items-center align-self-center mh-100" style="overflow-y: scroll;"',
+      trestles_mod
+    )
+  )
+] <- '<div class="d-flex flex-column col px-5 align-items-center align-self-center mh-100" style="overflow-y: none;">'
+
+cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/trestles.html",
+              package = "postcards"))
+
+```
+
  
+
 I am a French PhD student in the [Doctoral Team Unit ACROSS](https://sites.google.com/view/fredericdocquier/xingb-blog/across) at LISER, Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences.
 
 Besides working on this topic, I also enjoy programming with R by creating Shiny apps or packages that you can find on my [GitHub repo](https://github.com/etiennebacher/). I also write blog articles about R from time to time, that you can find in the "Blog" tab above.
