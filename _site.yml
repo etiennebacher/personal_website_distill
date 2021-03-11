@@ -5,7 +5,7 @@ description: |
 output_dir: "_site"
 navbar:
   right:
-    - text: "Home"
+    - icon: fa-home
       href: index.html
     - text: "Blog"
       href: blog.html
