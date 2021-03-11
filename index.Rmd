@@ -36,7 +36,7 @@ cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/t
 
 ```
 
- 
+<br>
 
 I am a French PhD student in the [Doctoral Team Unit ACROSS](https://sites.google.com/view/fredericdocquier/xingb-blog/across) at LISER, Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences.
 
@@ -44,3 +44,35 @@ Besides working on this topic, I also enjoy programming with R by creating Shiny
 
 If you want to contact me, the best way to do so is by email, or via Twitter (though I'm not very active on it).
 
+<br>
+
+:::: {style="display: grid; grid-template-columns: 40% 50%; grid-column-gap: 30px; line-height: 1.5rem;"}
+::: {}
+<span style = "font-size: 1.5rem; font-weight: 600;"> Interests </span>
+
+* Economics
+* International migration
+* Political attitudes
+* R programming
+:::
+::: {}
+<span style = "font-size: 1.4rem; font-weight: 600;"> Education </span>
+
+<ul>
+ 
+<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   PhD in Economics of Migration, 2020 - current, LISER </li>
+<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Master's degree in Development Economics, 2018 - 2020, University Clermont-Auvergne </li>
+<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Bachelor's degree in Development Economics, 2017 - 2018, University Clermont-Auvergne
+</li>
+
+</ul>
+:::
+::::
+
+<!-- <span style = "font-size: 1.4rem; font-weight: 600;"> Education </span> -->
+
+<!-- * PhD in Economics of Migration, 2020 - current <br> LISER  -->
+
+<!-- * Master's degree in Development Economics, 2018 - 2020 <br> University Clermont-Auvergne  -->
+
+<!-- * Bachelor's degree in Development Economics, 2017 - 2018 <br> University Clermont-Auvergne -->
