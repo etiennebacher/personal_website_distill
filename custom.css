@@ -33,14 +33,6 @@ html {
   --navbar-font:     "Montserrat", sans-serif;  /* websites + blogs only */
 }
 
-:root {
-  --color-background: #e6e6ff;
-  --color-primary:    #74a08a;
-  --color-primary-dark: #2F4238;
-  --color-secondary:  #8a74a0;
-  --color-tertiary:  #a08a74;
-}
-
 * {
   font-family: "Montserrat";
 }
@@ -183,7 +175,20 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 	display: none !important;
 }
 
+/* change background color */
 
 body {
-    background-color: var(--color-background);
+    background-color: #e6e6ff;
+}
+
+/* Buttons on home page */
+
+.btn-outline-dark {
+    background-color: #4682b4;
+    color: #fff;
+    border: 0px;
+}
+
+.btn-outline-dark:hover {
+    background-color: #6c9dc6;
 }
