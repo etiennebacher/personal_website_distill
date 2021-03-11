@@ -47,21 +47,28 @@ If you want to contact me, the best way to do so is by email, or via Twitter (th
 <br>
 
 :::: {style="display: grid; grid-template-columns: 40% 50%; grid-column-gap: 30px; line-height: 1.5rem;"}
+
 ::: {}
 <span style = "font-size: 1.5rem; font-weight: 600;"> Interests </span>
 
 * Economics
+
 * International migration
+
 * Political attitudes
+
 * R programming
 :::
+
 ::: {}
 <span style = "font-size: 1.4rem; font-weight: 600;"> Education </span>
 
 <ul>
  
 <li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   PhD in Economics of Migration, 2020 - current, LISER </li>
+<br>
 <li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Master's degree in Development Economics, 2018 - 2020, University Clermont-Auvergne </li>
+<br>
 <li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Bachelor's degree in Development Economics, 2017 - 2018, University Clermont-Auvergne
 </li>
 
