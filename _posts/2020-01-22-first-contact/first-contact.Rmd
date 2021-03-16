@@ -2,11 +2,11 @@
 title: "First contact with the data on R"
 date: "2020-01-22"
 author: "Etienne Bacher"
-summary: A blog post describing the first steps of data cleaning and analysis using R.
-tags: ["R", "Stata"]
+description: A blog post describing the first steps of data cleaning and analysis using R.
 output:
-  blogdown::html_page:
+  distill::distill_article:
     toc: true
+    toc_float: true
 creative_commons: CC BY
 ---
 
@@ -31,7 +31,7 @@ Why is this package important? Your code must be reproducible, either for your c
 
 ## Import data
 
-We will use data contained in Excel (**`.xlsx`**) and text (**`.txt`**) files. You can find these files (and the full R script corresponding to this post) [here](https://github.com/etiennebacher/personal_website/tree/master/public/Data/first-contact). To import Excel data, we will need the **`readxl`** package. 
+We will use data contained in Excel (**`.xlsx`**) and text (**`.txt`**) files. You can find these files (and the full R script corresponding to this post) [here](https://github.com/etiennebacher/personal_website/tree/master/_posts/2020-01-22-first-contact/). To import Excel data, we will need the **`readxl`** package. 
 
 ```{r}
 library(readxl)
@@ -48,10 +48,10 @@ base4 <- read.table(here("Bases_Used/Base_Text.txt"), header = TRUE)
 ```
 <!-- La partie qui suit ne doit pas être visible mais doit être exécutée -->
 ```{r include = FALSE}
-base1 <- read_excel(here("public/Data/first-contact/Base_Excel.xlsx"), sheet = "Base1")
-base2 <- read_excel(here("public/Data/first-contact/Base_Excel.xlsx"), sheet = "Base2")
-base3 <- read_excel(here("public/Data/first-contact/Base_Excel.xlsx"), sheet = "Base3")
-base4 <- read.table(here("public/Data/first-contact/Base_Text.txt"), header = TRUE)
+base1 <- read_excel(here("_posts/2020-01-22-first-contact/Base_Excel.xlsx"), sheet = "Base1")
+base2 <- read_excel(here("_posts/2020-01-22-first-contact/Base_Excel.xlsx"), sheet = "Base2")
+base3 <- read_excel(here("_posts/2020-01-22-first-contact/Base_Excel.xlsx"), sheet = "Base3")
+base4 <- read.table(here("_posts/2020-01-22-first-contact/Base_Text.txt"), header = TRUE)
 ```
 
 <details>
