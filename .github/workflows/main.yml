@@ -12,12 +12,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r@master
 
-      - name: Install dependencies
-        run: |
-          install.packages("fs")
-        shell: Rscript {0}
-
       - name: Copy redirects in site
         run: |
-          fs::file_copy("_redirects", "_site/_redirects")
+          file.copy("_redirects", "_site/_redirects", overwrite = T)
         shell: Rscript {0}
