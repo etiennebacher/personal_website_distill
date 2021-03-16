@@ -12,7 +12,10 @@ jobs:
 
       - uses: r-lib/actions/setup-r@master
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - name: Install dependencies
+        run: |
+          install.packages("fs")
+        shell: Rscript {0}
 
       - name: Copy redirects in site
         run: |
