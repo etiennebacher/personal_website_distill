@@ -19,6 +19,8 @@ jobs:
           install.packages("rmarkdown")
           install.packages("distill")
           install.packages("postcards")
+          install.packages("devtools")
+          devtools::install_github("etiennebacher/ebmisc")
         shell: Rscript {0}
 
       - name: Render Site
