@@ -1,0 +1,58 @@
+---
+title: "Use GitHub actions with R Markdown and Distill"
+description: |
+  How can you automatically render README, site...
+author: Etienne Bacher
+date: 2021-03-18
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    highlight: pygments
+    highlight_downlit: true
+draft: true
+---
+  
+Sometimes, it is useful to automatically render an R Markdown document or a website, made with [distill]() for example. In this post, I will present you two cases in which I use GitHub Actions to automatically do that.
+
+# Render a README
+
+One of my GitHub repos is a list of JavaScript libraries that have been adapted in R. You can find the repo [here](). I wanted this list to be easy to update, so that it can be done on GitHub directly. The idea is that when I (or someone else) find a JavaScript library that has been adapted into an R package, I add it to a CSV file on GitHub. The problem is that this CSV file is then used into an R Markdown file, that creates a clean README with all the information. 
+
+Without GitHub Actions, in addition to modify the CSV file, I would have to clone the repo, open it in RStudio, render the README, and push it back on GitHub. 
+
+But this task is repetitive: apart from the details I add to the CSV file, it can be automated. This is where GitHub Actions comes into play. The idea is that you create a `.yaml` file that contains the R code that you want to run in order to render the README. This is what mine looks like:
+  
+```{yaml}
+on:
+  push:
+  branches: master
+
+name: Render README
+
+jobs:
+  render:
+  name: Render README
+runs-on: macOS-latest
+steps:
+  - uses: actions/checkout@v2
+- uses: r-lib/actions/setup-r@v1
+- uses: r-lib/actions/setup-pandoc@v1
+- name: Install rmarkdown
+run: Rscript -e 'install.packages("rmarkdown")'
+- name: Render README
+run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
+- name: Commit results
+run: |
+  git commit README.md -m 'Re-build README.Rmd' || echo "No changes to commit"
+git push origin || echo "No changes to commit"
+```
+
+
+The first two parts are quite self-explanatory:
+  
+  * the jobs run every time there's a push on the master branch;
+
+  * the name of this process is "Render README".
+
+
