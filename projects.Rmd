@@ -3,7 +3,7 @@ title: ""  # any name you want here
 listing: projects # do this exactly
 ---
 
-## Test GHA
+## Hello
 
 ```{r echo = FALSE}
 library(ebmisc)

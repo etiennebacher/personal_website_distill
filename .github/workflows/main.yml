@@ -24,6 +24,9 @@ jobs:
         shell: Rscript {0}
 
       - name: Render Site
+        run: Rscript -e 'rmarkdown::render_site(encoding = "UTF-8")'
+      - name: Commit results
         run: |
-          rmarkdown::render_site(encoding = "UTF-8")
-        shell: Rscript {0}
+          git add -A
+          git commit -m 'Rebuild site' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
