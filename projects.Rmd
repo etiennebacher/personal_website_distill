@@ -1,9 +1,9 @@
 ---
-title: "Test GHA"  # any name you want here
+title: ""  # any name you want here
 listing: projects # do this exactly
 ---
 
-## Projects
+## Test GHA
 
 ```{r echo = FALSE}
 library(ebmisc)
