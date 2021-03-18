@@ -15,612 +15,612 @@
 
     
           <!--radix_placeholder_navigation_in_header-->
-      <meta name="distill:offset" content=""/>
-      
-      <script type="application/javascript">
-      
-        window.headroom_prevent_pin = false;
-      
-        window.document.addEventListener("DOMContentLoaded", function (event) {
-      
-          // initialize headroom for banner
-          var header = $('header').get(0);
-          var headerHeight = header.offsetHeight;
-          var headroom = new Headroom(header, {
-            tolerance: 5,
-            onPin : function() {
-              if (window.headroom_prevent_pin) {
-                window.headroom_prevent_pin = false;
+          <meta name="distill:offset" content=""/>
+
+          <script type="application/javascript">
+
+            window.headroom_prevent_pin = false;
+
+            window.document.addEventListener("DOMContentLoaded", function (event) {
+
+              // initialize headroom for banner
+              var header = $('header').get(0);
+              var headerHeight = header.offsetHeight;
+              var headroom = new Headroom(header, {
+                tolerance: 5,
+                onPin : function() {
+                  if (window.headroom_prevent_pin) {
+                    window.headroom_prevent_pin = false;
+                    headroom.unpin();
+                  }
+                }
+              });
+              headroom.init();
+              if(window.location.hash)
                 headroom.unpin();
-              }
-            }
-          });
-          headroom.init();
-          if(window.location.hash)
-            headroom.unpin();
-          $(header).addClass('headroom--transition');
-      
-          // offset scroll location for banner on hash change
-          // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-          window.addEventListener("hashchange", function(event) {
-            window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-          });
-      
-          // responsive menu
-          $('.distill-site-header').each(function(i, val) {
-            var topnav = $(this);
-            var toggle = topnav.find('.nav-toggle');
-            toggle.on('click', function() {
-              topnav.toggleClass('responsive');
+              $(header).addClass('headroom--transition');
+
+              // offset scroll location for banner on hash change
+              // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+              window.addEventListener("hashchange", function(event) {
+                window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+              });
+
+              // responsive menu
+              $('.distill-site-header').each(function(i, val) {
+                var topnav = $(this);
+                var toggle = topnav.find('.nav-toggle');
+                toggle.on('click', function() {
+                  topnav.toggleClass('responsive');
+                });
+              });
+
+              // nav dropdowns
+              $('.nav-dropbtn').click(function(e) {
+                $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+                $(this).parent().siblings('.nav-dropdown')
+                   .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+              });
+              $("body").click(function(e){
+                $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+              });
+              $(".nav-dropdown").click(function(e){
+                e.stopPropagation();
+              });
             });
-          });
-      
-          // nav dropdowns
-          $('.nav-dropbtn').click(function(e) {
-            $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-            $(this).parent().siblings('.nav-dropdown')
-               .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-          });
-          $("body").click(function(e){
-            $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-          });
-          $(".nav-dropdown").click(function(e){
-            e.stopPropagation();
-          });
-        });
-      </script>
-      
-      <style type="text/css">
-      
-      /* Theme (user-documented overrideables for nav appearance) */
-      
-      .distill-site-nav {
-        color: rgba(255, 255, 255, 0.8);
-        background-color: #0F2E3D;
-        font-size: 15px;
-        font-weight: 300;
-      }
-      
-      .distill-site-nav a {
-        color: inherit;
-        text-decoration: none;
-      }
-      
-      .distill-site-nav a:hover {
-        color: white;
-      }
-      
-      @media print {
-        .distill-site-nav {
-          display: none;
-        }
-      }
-      
-      .distill-site-header {
-      
-      }
-      
-      .distill-site-footer {
-      
-      }
-      
-      
-      /* Site Header */
-      
-      .distill-site-header {
-        width: 100%;
-        box-sizing: border-box;
-        z-index: 3;
-      }
-      
-      .distill-site-header .nav-left {
-        display: inline-block;
-        margin-left: 8px;
-      }
-      
-      @media screen and (max-width: 768px) {
-        .distill-site-header .nav-left {
-          margin-left: 0;
-        }
-      }
-      
-      
-      .distill-site-header .nav-right {
-        float: right;
-        margin-right: 8px;
-      }
-      
-      .distill-site-header a,
-      .distill-site-header .title {
-        display: inline-block;
-        text-align: center;
-        padding: 14px 10px 14px 10px;
-      }
-      
-      .distill-site-header .title {
-        font-size: 18px;
-        min-width: 150px;
-      }
-      
-      .distill-site-header .logo {
-        padding: 0;
-      }
-      
-      .distill-site-header .logo img {
-        display: none;
-        max-height: 20px;
-        width: auto;
-        margin-bottom: -4px;
-      }
-      
-      .distill-site-header .nav-image img {
-        max-height: 18px;
-        width: auto;
-        display: inline-block;
-        margin-bottom: -3px;
-      }
-      
-      
-      
-      @media screen and (min-width: 1000px) {
-        .distill-site-header .logo img {
-          display: inline-block;
-        }
-        .distill-site-header .nav-left {
-          margin-left: 20px;
-        }
-        .distill-site-header .nav-right {
-          margin-right: 20px;
-        }
-        .distill-site-header .title {
-          padding-left: 12px;
-        }
-      }
-      
-      
-      .distill-site-header .nav-toggle {
-        display: none;
-      }
-      
-      .nav-dropdown {
-        display: inline-block;
-        position: relative;
-      }
-      
-      .nav-dropdown .nav-dropbtn {
-        border: none;
-        outline: none;
-        color: rgba(255, 255, 255, 0.8);
-        padding: 16px 10px;
-        background-color: transparent;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        margin: 0;
-        margin-top: 1px;
-        z-index: 2;
-      }
-      
-      .nav-dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: white;
-        min-width: 200px;
-        border: 1px solid rgba(0,0,0,0.15);
-        border-radius: 4px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-        z-index: 1;
-        margin-top: 2px;
-        white-space: nowrap;
-        padding-top: 4px;
-        padding-bottom: 4px;
-      }
-      
-      .nav-dropdown-content hr {
-        margin-top: 4px;
-        margin-bottom: 4px;
-        border: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      }
-      
-      .nav-dropdown-active {
-        display: block;
-      }
-      
-      .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-        color: black;
-        padding: 6px 24px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-      }
-      
-      .nav-dropdown-content .nav-dropdown-header {
-        display: block;
-        padding: 5px 24px;
-        padding-bottom: 0;
-        text-transform: uppercase;
-        font-size: 14px;
-        color: #999999;
-        white-space: nowrap;
-      }
-      
-      .nav-dropdown:hover .nav-dropbtn {
-        color: white;
-      }
-      
-      .nav-dropdown-content a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      
-      .nav-right .nav-dropdown-content {
-        margin-left: -45%;
-        right: 0;
-      }
-      
-      @media screen and (max-width: 768px) {
-        .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-        .distill-site-header a.nav-toggle {
-          float: right;
-          display: block;
-        }
-        .distill-site-header .title {
-          margin-left: 0;
-        }
-        .distill-site-header .nav-right {
-          margin-right: 0;
-        }
-        .distill-site-header {
-          overflow: hidden;
-        }
-        .nav-right .nav-dropdown-content {
-          margin-left: 0;
-        }
-      }
-      
-      
-      @media screen and (max-width: 768px) {
-        .distill-site-header.responsive {position: relative; min-height: 500px; }
-        .distill-site-header.responsive a.nav-toggle {
-          position: absolute;
-          right: 0;
-          top: 0;
-        }
-        .distill-site-header.responsive a,
-        .distill-site-header.responsive .nav-dropdown {
-          display: block;
-          text-align: left;
-        }
-        .distill-site-header.responsive .nav-left,
-        .distill-site-header.responsive .nav-right {
-          width: 100%;
-        }
-        .distill-site-header.responsive .nav-dropdown {float: none;}
-        .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-        .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-          display: block;
-          width: 100%;
-          text-align: left;
-        }
-      }
-      
-      /* Site Footer */
-      
-      .distill-site-footer {
-        width: 100%;
-        overflow: hidden;
-        box-sizing: border-box;
-        z-index: 3;
-        margin-top: 30px;
-        padding-top: 30px;
-        padding-bottom: 30px;
-        text-align: center;
-      }
-      
-      /* Headroom */
-      
-      d-title {
-        padding-top: 6rem;
-      }
-      
-      @media print {
-        d-title {
-          padding-top: 4rem;
-        }
-      }
-      
-      .headroom {
-        z-index: 1000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-      }
-      
-      .headroom--transition {
-        transition: all .4s ease-in-out;
-      }
-      
-      .headroom--unpinned {
-        top: -100px;
-      }
-      
-      .headroom--pinned {
-        top: 0;
-      }
-      
-      /* adjust viewport for navbar height */
-      /* helps vertically center bootstrap (non-distill) content */
-      .min-vh-100 {
-        min-height: calc(100vh - 100px) !important;
-      }
-      
-      </style>
-      
-      <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-      <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-      <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-      <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-      <!--/radix_placeholder_navigation_in_header-->
-          <!--radix_placeholder_site_in_header-->
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          if (!/posts/.test(location.pathname)) {
-            return;
+          </script>
+
+          <style type="text/css">
+
+          /* Theme (user-documented overrideables for nav appearance) */
+
+          .distill-site-nav {
+            color: rgba(255, 255, 255, 0.8);
+            background-color: #0F2E3D;
+            font-size: 15px;
+            font-weight: 300;
           }
-      
-          var script = document.createElement("script");
-          script.src = "https://utteranc.es/client.js";
-          script.setAttribute("repo", "etiennebacher/personal_website_distill");
-          script.setAttribute("issue-term", "og:title");
-          script.setAttribute("crossorigin", "anonymous");
-          script.setAttribute("label", "comment_thread");
-      
-          /* wait for article to load, append script to article element */
-          var observer = new MutationObserver(function (mutations, observer) {
-            var article = document.querySelector("d-article");
-            if (article) {
-              observer.disconnect();
-              /* HACK: article scroll */
-              article.setAttribute("style", "overflow-y: hidden");
-              article.appendChild(script);
+
+          .distill-site-nav a {
+            color: inherit;
+            text-decoration: none;
+          }
+
+          .distill-site-nav a:hover {
+            color: white;
+          }
+
+          @media print {
+            .distill-site-nav {
+              display: none;
             }
-          });
-      
-          observer.observe(document.body, { childList: true });
-        });
-      </script>
-      <style type="text/css">
-      
-      /* base variables */
-      
-      /* Edit the CSS properties in this file to create a custom
-         Distill theme. Only edit values in the right column
-         for each row; values shown are the CSS defaults.
-         To return any property to the default,
-         you may set its value to: unset
-         All rows must end with a semi-colon.                      */
-      
-      /* Optional: embed custom fonts here with `@import`          */
-      /* This must remain at the top of this file.                 */
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat');
-      
-      
-      html {
-        /*-- Main font sizes --*/
-        --title-size:      50px;
-        --body-size:       1.06rem;
-        --code-size:       1.06rem;
-        --aside-size:      12px;
-        --fig-cap-size:    13px;
-        /*-- Main font colors --*/
-        --title-color:     #000000;
-        --header-color:    rgba(0, 0, 0, 0.8);
-        --body-color:      rgba(0, 0, 0, 0.8);
-        --aside-color:     rgba(0, 0, 0, 0.6);
-        --fig-cap-color:   rgba(0, 0, 0, 0.6);
-        /*-- Specify custom fonts ~~~ must be imported above   --*/
-        --heading-font:    "Montserrat", sans-serif;
-        --mono-font:       "Montserrat", monospace;
-        --body-font:       "Montserrat", sans-serif;
-        --navbar-font:     "Montserrat", sans-serif;  /* websites + blogs only */
-      }
-      
-      * {
-        font-family: "Montserrat";
-      }
-      
-      /*-- ARTICLE METADATA --*/
-      d-byline {
-        --heading-size:    0.6rem;
-        --heading-color:   rgba(0, 0, 0, 0.5);
-        --body-size:       0.8rem;
-        --body-color:      rgba(0, 0, 0, 0.8);
-      }
-      
-      /*-- ARTICLE TABLE OF CONTENTS --*/
-      .d-contents {
-        --heading-size:    18px;
-        --contents-size:   13px;
-      }
-      
-      /*-- ARTICLE APPENDIX --*/
-      d-appendix {
-        --heading-size:    15px;
-        --heading-color:   rgba(0, 0, 0, 0.65);
-        --text-size:       0.8em;
-        --text-color:      rgba(0, 0, 0, 0.5);
-      }
-      
-      /*-- WEBSITE HEADER + FOOTER --*/
-      /* These properties only apply to Distill sites and blogs  */
-      
-      .distill-site-header {
-        --title-size:       20px;
-        --text-color:       rgba(255, 255, 255, 0.8);
-        --text-size:        20px;
-        --hover-color:      white;
-        --bkgd-color:       #0F2E3D;
-      }
-      
-      .distill-site-footer {
-        --text-color:       rgba(255, 255, 255, 0.8);
-        --text-size:        15px;
-        --hover-color:      white;
-        --bkgd-color:       #0F2E3D;
-      }
-      
-      
-      /* MISC: ADDED BY ETIENNE */
-      
-      d-article div.sourceCode pre {
-      	border: 1px solid #fff;
-      	padding: .25em;
-      	background: #dae7f1;
-      	overflow-x: auto;
-      	border-radius: 0;
-      }
-      
-      code {
-        background-color: #dae7f1;
-      }
-      
-      d-article pre  {
-        background-color: #dae7f1;
-      }
-      
-      .distill-site-nav {
-          color: #fff;
-          background-color: #4682b4;
-          font-size: 20px;
-          font-weight: 300;
-      }
-      
-      .distill-site-header .title {
-        font-size: 20px;
-      }
-      
-      .distill-site-nav a:hover {
-          font-weight: 600;
-      }
-      
-      a {
-      	color: #4682b4;
-      }
-      
-      /* Cards in "Projects" */
-      .grid-container {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-gap: 50px;
-        padding: 10px;
-      }
-      
-      .grid-container > div {
-        text-align: left;
-        padding: 20px 0;
-        font-size: 30px;
-        background-color: #dae7f1;
-      }
+          }
+
+          .distill-site-header {
+
+          }
+
+          .distill-site-footer {
+
+          }
+
+
+          /* Site Header */
+
+          .distill-site-header {
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 3;
+          }
+
+          .distill-site-header .nav-left {
+            display: inline-block;
+            margin-left: 8px;
+          }
+
+          @media screen and (max-width: 768px) {
+            .distill-site-header .nav-left {
+              margin-left: 0;
+            }
+          }
+
+
+          .distill-site-header .nav-right {
+            float: right;
+            margin-right: 8px;
+          }
+
+          .distill-site-header a,
+          .distill-site-header .title {
+            display: inline-block;
+            text-align: center;
+            padding: 14px 10px 14px 10px;
+          }
+
+          .distill-site-header .title {
+            font-size: 18px;
+            min-width: 150px;
+          }
+
+          .distill-site-header .logo {
+            padding: 0;
+          }
+
+          .distill-site-header .logo img {
+            display: none;
+            max-height: 20px;
+            width: auto;
+            margin-bottom: -4px;
+          }
+
+          .distill-site-header .nav-image img {
+            max-height: 18px;
+            width: auto;
+            display: inline-block;
+            margin-bottom: -3px;
+          }
+
+
+
+          @media screen and (min-width: 1000px) {
+            .distill-site-header .logo img {
+              display: inline-block;
+            }
+            .distill-site-header .nav-left {
+              margin-left: 20px;
+            }
+            .distill-site-header .nav-right {
+              margin-right: 20px;
+            }
+            .distill-site-header .title {
+              padding-left: 12px;
+            }
+          }
+
+
+          .distill-site-header .nav-toggle {
+            display: none;
+          }
+
+          .nav-dropdown {
+            display: inline-block;
+            position: relative;
+          }
+
+          .nav-dropdown .nav-dropbtn {
+            border: none;
+            outline: none;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 16px 10px;
+            background-color: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            margin: 0;
+            margin-top: 1px;
+            z-index: 2;
+          }
+
+          .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 4px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 1;
+            margin-top: 2px;
+            white-space: nowrap;
+            padding-top: 4px;
+            padding-bottom: 4px;
+          }
+
+          .nav-dropdown-content hr {
+            margin-top: 4px;
+            margin-bottom: 4px;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          }
+
+          .nav-dropdown-active {
+            display: block;
+          }
+
+          .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+            color: black;
+            padding: 6px 24px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+          }
+
+          .nav-dropdown-content .nav-dropdown-header {
+            display: block;
+            padding: 5px 24px;
+            padding-bottom: 0;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: #999999;
+            white-space: nowrap;
+          }
+
+          .nav-dropdown:hover .nav-dropbtn {
+            color: white;
+          }
+
+          .nav-dropdown-content a:hover {
+            background-color: #ddd;
+            color: black;
+          }
+
+          .nav-right .nav-dropdown-content {
+            margin-left: -45%;
+            right: 0;
+          }
+
+          @media screen and (max-width: 768px) {
+            .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+            .distill-site-header a.nav-toggle {
+              float: right;
+              display: block;
+            }
+            .distill-site-header .title {
+              margin-left: 0;
+            }
+            .distill-site-header .nav-right {
+              margin-right: 0;
+            }
+            .distill-site-header {
+              overflow: hidden;
+            }
+            .nav-right .nav-dropdown-content {
+              margin-left: 0;
+            }
+          }
+
+
+          @media screen and (max-width: 768px) {
+            .distill-site-header.responsive {position: relative; min-height: 500px; }
+            .distill-site-header.responsive a.nav-toggle {
+              position: absolute;
+              right: 0;
+              top: 0;
+            }
+            .distill-site-header.responsive a,
+            .distill-site-header.responsive .nav-dropdown {
+              display: block;
+              text-align: left;
+            }
+            .distill-site-header.responsive .nav-left,
+            .distill-site-header.responsive .nav-right {
+              width: 100%;
+            }
+            .distill-site-header.responsive .nav-dropdown {float: none;}
+            .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+            .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+              display: block;
+              width: 100%;
+              text-align: left;
+            }
+          }
+
+          /* Site Footer */
+
+          .distill-site-footer {
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+            z-index: 3;
+            margin-top: 30px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+          }
+
+          /* Headroom */
+
+          d-title {
+            padding-top: 6rem;
+          }
+
+          @media print {
+            d-title {
+              padding-top: 4rem;
+            }
+          }
+
+          .headroom {
+            z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+          }
+
+          .headroom--transition {
+            transition: all .4s ease-in-out;
+          }
+
+          .headroom--unpinned {
+            top: -100px;
+          }
+
+          .headroom--pinned {
+            top: 0;
+          }
+
+          /* adjust viewport for navbar height */
+          /* helps vertically center bootstrap (non-distill) content */
+          .min-vh-100 {
+            min-height: calc(100vh - 100px) !important;
+          }
+
+          </style>
+
+          <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+          <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+          <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+          <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+          <!--/radix_placeholder_navigation_in_header-->
+          <!--radix_placeholder_site_in_header-->
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              if (!/posts/.test(location.pathname)) {
+                return;
+              }
+
+              var script = document.createElement("script");
+              script.src = "https://utteranc.es/client.js";
+              script.setAttribute("repo", "etiennebacher/personal_website_distill");
+              script.setAttribute("issue-term", "og:title");
+              script.setAttribute("crossorigin", "anonymous");
+              script.setAttribute("label", "comment_thread");
+
+              /* wait for article to load, append script to article element */
+              var observer = new MutationObserver(function (mutations, observer) {
+                var article = document.querySelector("d-article");
+                if (article) {
+                  observer.disconnect();
+                  /* HACK: article scroll */
+                  article.setAttribute("style", "overflow-y: hidden");
+                  article.appendChild(script);
+                }
+              });
+
+              observer.observe(document.body, { childList: true });
+            });
+          </script>
+          <style type="text/css">
+
+          /* base variables */
+
+          /* Edit the CSS properties in this file to create a custom
+             Distill theme. Only edit values in the right column
+             for each row; values shown are the CSS defaults.
+             To return any property to the default,
+             you may set its value to: unset
+             All rows must end with a semi-colon.                      */
+
+          /* Optional: embed custom fonts here with `@import`          */
+          /* This must remain at the top of this file.                 */
+          @import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+
+          html {
+            /*-- Main font sizes --*/
+            --title-size:      50px;
+            --body-size:       1.06rem;
+            --code-size:       1.06rem;
+            --aside-size:      12px;
+            --fig-cap-size:    13px;
+            /*-- Main font colors --*/
+            --title-color:     #000000;
+            --header-color:    rgba(0, 0, 0, 0.8);
+            --body-color:      rgba(0, 0, 0, 0.8);
+            --aside-color:     rgba(0, 0, 0, 0.6);
+            --fig-cap-color:   rgba(0, 0, 0, 0.6);
+            /*-- Specify custom fonts ~~~ must be imported above   --*/
+            --heading-font:    "Montserrat", sans-serif;
+            --mono-font:       "Montserrat", monospace;
+            --body-font:       "Montserrat", sans-serif;
+            --navbar-font:     "Montserrat", sans-serif;  /* websites + blogs only */
+          }
+
+          * {
+            font-family: "Montserrat";
+          }
+
+          /*-- ARTICLE METADATA --*/
+          d-byline {
+            --heading-size:    0.6rem;
+            --heading-color:   rgba(0, 0, 0, 0.5);
+            --body-size:       0.8rem;
+            --body-color:      rgba(0, 0, 0, 0.8);
+          }
+
+          /*-- ARTICLE TABLE OF CONTENTS --*/
+          .d-contents {
+            --heading-size:    18px;
+            --contents-size:   13px;
+          }
+
+          /*-- ARTICLE APPENDIX --*/
+          d-appendix {
+            --heading-size:    15px;
+            --heading-color:   rgba(0, 0, 0, 0.65);
+            --text-size:       0.8em;
+            --text-color:      rgba(0, 0, 0, 0.5);
+          }
+
+          /*-- WEBSITE HEADER + FOOTER --*/
+          /* These properties only apply to Distill sites and blogs  */
+
+          .distill-site-header {
+            --title-size:       20px;
+            --text-color:       rgba(255, 255, 255, 0.8);
+            --text-size:        20px;
+            --hover-color:      white;
+            --bkgd-color:       #0F2E3D;
+          }
+
+          .distill-site-footer {
+            --text-color:       rgba(255, 255, 255, 0.8);
+            --text-size:        15px;
+            --hover-color:      white;
+            --bkgd-color:       #0F2E3D;
+          }
+
+
+          /* MISC: ADDED BY ETIENNE */
+
+          d-article div.sourceCode pre {
+          	border: 1px solid #fff;
+          	padding: .25em;
+          	background: #dae7f1;
+          	overflow-x: auto;
+          	border-radius: 0;
+          }
+
+          code {
+            background-color: #dae7f1;
+          }
+
+          d-article pre  {
+            background-color: #dae7f1;
+          }
+
+          .distill-site-nav {
+              color: #fff;
+              background-color: #4682b4;
+              font-size: 20px;
+              font-weight: 300;
+          }
+
+          .distill-site-header .title {
+            font-size: 20px;
+          }
+
+          .distill-site-nav a:hover {
+              font-weight: 600;
+          }
+
+          a {
+          	color: #4682b4;
+          }
+
+          /* Cards in "Projects" */
+          .grid-container {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-gap: 50px;
+            padding: 10px;
+          }
+
+          .grid-container > div {
+            text-align: left;
+            padding: 20px 0;
+            font-size: 30px;
+            background-color: #dae7f1;
+          }
+              
+          .card .card-text {
+          	padding: .75rem 1rem;
+            transition: 0.3s;
+            font-size: 15px;
+            background-color: #dae7f1;
+          }
+          .card-text:last-child {
+          	margin-bottom: 0;
+          	background-color: #dae7f1;
+          }
+
+          .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+          }
+
+          /* Center title in cards */
+          .card-text > h4 {
+            display: flex;
+          }
+          h4 > a {
+          	text-align: center;
+          	display: flex;
+          	margin: auto;
+          }
+
+          .card-text > a {
+            	background-color: #4682b4;
+          	border: none;
+          	color: white;
+          	padding: 10px 25px;
+          	text-align: center;
+          	text-decoration: none;
+          	display: flex;
+          	margin: 0 auto;
+          	font-size: 16px;
+          	justify-content: center;
+          	width: 25%;
+          }
+
+          /* Remove the vertical line between left and right sides on homepage */
+
+          html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-row.vh-100 div.d-flex.flex-column.vh-100.border-left {
+          	display: none !important;
+          }
+
+          /* Buttons on home page */
+
+          .btn-outline-dark {
+              background-color: #4682b4;
+              color: #fff;
+              border: 0px;
+          }
+
+          .btn-outline-dark:hover {
+              background-color: #6c9dc6;
+          }
+
+          </style>
+          <!--/radix_placeholder_site_in_header-->
           
-      .card .card-text {
-      	padding: .75rem 1rem;
-        transition: 0.3s;
-        font-size: 15px;
-        background-color: #dae7f1;
-      }
-      .card-text:last-child {
-      	margin-bottom: 0;
-      	background-color: #dae7f1;
-      }
-      
-      .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-      }
-      
-      /* Center title in cards */
-      .card-text > h4 {
-        display: flex;
-      }
-      h4 > a {
-      	text-align: center;
-      	display: flex;
-      	margin: auto;
-      }
-      
-      .card-text > a {
-        	background-color: #4682b4;
-      	border: none;
-      	color: white;
-      	padding: 10px 25px;
-      	text-align: center;
-      	text-decoration: none;
-      	display: flex;
-      	margin: 0 auto;
-      	font-size: 16px;
-      	justify-content: center;
-      	width: 25%;
-      }
-      
-      /* Remove the vertical line between left and right sides on homepage */
-      
-      html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-row.vh-100 div.d-flex.flex-column.vh-100.border-left {
-      	display: none !important;
-      }
-      
-      /* Buttons on home page */
-      
-      .btn-outline-dark {
-          background-color: #4682b4;
-          color: #fff;
-          border: 0px;
-      }
-      
-      .btn-outline-dark:hover {
-          background-color: #6c9dc6;
-      }
-      
-      </style>
-      <!--/radix_placeholder_site_in_header-->
-          
-      <style type="text/css">
-      body {
-        padding-top: 60px;
-      }
-      </style>
-          <script src="index_files/accessible-code-block-0.0.1/empty-anchor.js"></script>
+          <style type="text/css">
+          body {
+            padding-top: 60px;
+          }
+          </style>
+          <script src="/home/etienne/R/x86_64-pc-linux-gnu-library/4.0/rmarkdown/rmd/h/pandoc/header-attrs.js"></script>
     
     
   </head>
   <body>
 
           <!--radix_placeholder_navigation_before_body-->
-      <header class="header header--fixed" role="banner">
-      <nav class="distill-site-nav distill-site-header">
-      <div class="nav-left">
-      <a href="index.html" class="title">Etienne Bacher</a>
-      </div>
-      <div class="nav-right">
-      <a href="index.html">
-      <i class="fa fa-home" aria-hidden="true"></i>
-      </a>
-      <a href="blog.html">Blog</a>
-      <a href="projects.html">Projects</a>
-      <a href="cv.pdf">CV</a>
-      <a href="index.xml">
-      <i class="fa fa-rss" aria-hidden="true"></i>
-      </a>
-      <a href="https://github.com/etiennebacher/personal_website_distill" aria-label="Link to source">
-      <i class="fab fa-github" aria-hidden="true"></i>
-      </a>
-      <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-      </div>
-      </nav>
-      </header>
-      <!--/radix_placeholder_navigation_before_body-->
+          <header class="header header--fixed" role="banner">
+          <nav class="distill-site-nav distill-site-header">
+          <div class="nav-left">
+          <a href="index.html" class="title">Etienne Bacher</a>
+          </div>
+          <div class="nav-right">
+          <a href="index.html">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          </a>
+          <a href="blog.html">Blog</a>
+          <a href="projects.html">Projects</a>
+          <a href="cv.pdf">CV</a>
+          <a href="index.xml">
+          <i class="fa fa-rss" aria-hidden="true"></i>
+          </a>
+          <a href="https://github.com/etiennebacher/personal_website_distill" aria-label="Link to source">
+          <i class="fab fa-github" aria-hidden="true"></i>
+          </a>
+          <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+          </div>
+          </nav>
+          </header>
+          <!--/radix_placeholder_navigation_before_body-->
           <!--radix_placeholder_site_before_body-->
-      <!--/radix_placeholder_site_before_body-->
+          <!--/radix_placeholder_site_before_body-->
     
     <div class="container-fluid d-none d-lg-block d-xl-block">
       <div class="d-flex row flex-row vh-100">
@@ -790,16 +790,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
       <!--radix_placeholder_site_after_body-->
-    <!--/radix_placeholder_site_after_body-->
+      <!--/radix_placeholder_site_after_body-->
       <!--radix_placeholder_navigation_after_body-->
-    <div class="distill-site-nav distill-site-footer">
-    <p>Website created with the <a href="https://rstudio.github.io/distill/"><strong>distill</strong></a> package.</p>
-    <!-- Add function to open links to external links in new tab, from: -->
-    <!-- https://yihui.name/en/2018/09/target-blank/ -->
-    <!-- and https://github.com/jhelvy/jhelvy.github.io -->
-    <script src="js/external-link.js"></script>
-    </div>
-    <!--/radix_placeholder_navigation_after_body-->
+      <div class="distill-site-nav distill-site-footer">
+      <p>Website created with the <a href="https://rstudio.github.io/distill/"><strong>distill</strong></a> package.</p>
+      <!-- Add function to open links to external links in new tab, from: -->
+      <!-- https://yihui.name/en/2018/09/target-blank/ -->
+      <!-- and https://github.com/jhelvy/jhelvy.github.io -->
+      <script src="js/external-link.js"></script>
+      </div>
+      <!--/radix_placeholder_navigation_after_body-->
+
   
   </body>
 </html>

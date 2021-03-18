@@ -20,11 +20,14 @@ jobs:
           install.packages("distill")
           install.packages("postcards")
           install.packages("devtools")
+          install.packages("fs")
           devtools::install_github("etiennebacher/ebmisc")
         shell: Rscript {0}
 
       - name: Render Site
         run: Rscript -e 'rmarkdown::render_site(encoding = "UTF-8")'
+      - name: Copy redirects
+        run: Rscript -e 'fs::file_copy("_redirects", "_site/_redirects")'
       - name: Commit results
         run: |
           git add -A
