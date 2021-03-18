@@ -17,6 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages("rmarkdown")
+	  install.packages("distill")
         shell: Rscript {0}
 
       - name: Render Site
