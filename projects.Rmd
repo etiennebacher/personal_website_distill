@@ -1,6 +1,40 @@
 ---
-title: ""  # any name you want here
+title: "Test GHA"  # any name you want here
 listing: projects # do this exactly
 ---
 
 ## Projects
+
+```{r echo = FALSE}
+library(ebmisc)
+make_grid_project(
+  
+  make_card_project(
+    title = "tinyslider",
+    title_link = "https://tinyslider.etiennebacher.com/",
+    description = "Adaptation into R of the Javascript library tiny-slider.js. This package creates carousels in interactive environments, such as R Shiny.",
+    button_link = "https://tinyslider.etiennebacher.com/"
+  ),
+  
+  make_card_project(
+    title = "docsifier",
+    title_link = "https://docsifier.etiennebacher.com/",
+    description = "Use this package to build a webpage for your package/project documentation. It is the adaptation of docsify.js.",
+    button_link = "https://docsifier.etiennebacher.com/"
+  ),
+  
+  make_card_project(
+    title = "prompter",
+    title_link = "https://github.com/etiennebacher/prompter",
+    description = "This package allows to easily add tooltips to HTML elements in R Shiny applications. It uses hint.css under the hood.",
+    button_link = "https://github.com/etiennebacher/prompter"
+  ),
+  
+  make_card_project(
+    title = "circletyper",
+    title_link = "https://github.com/etiennebacher/circletyper",
+    description = "Curve text elements in R Shiny applications, using Circletype.js.",
+    button_link = "https://github.com/etiennebacher/circletyper"
+  )
+)
+```
