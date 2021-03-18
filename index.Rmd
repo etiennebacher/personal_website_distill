@@ -65,7 +65,7 @@ If you want to contact me, the best way to do so is by email, or via Twitter (th
 
 <ul>
  
-<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   PhD in Economics of Migration, 2020 - current, LISER </li>
+<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   PhD student in Economics of Migration, 2020 - current, LISER </li>
 <br>
 <li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Master's degree in Development Economics, 2018 - 2020, University Clermont-Auvergne </li>
 <br>
