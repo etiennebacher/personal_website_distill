@@ -12,7 +12,14 @@ jobs:
 
       - uses: r-lib/actions/setup-r@master
 
-      - name: Copy redirects in site
+      - uses: r-lib/actions/setup-pandoc@master
+
+      - name: Install dependencies
         run: |
-          file.copy("_redirects", "_site/_redirects", overwrite = T)
+          install.packages("rmarkdown")
+        shell: Rscript {0}
+
+      - name: Render Site
+        run: |
+          rmarkdown::render_site(encoding = "UTF-8")
         shell: Rscript {0}
