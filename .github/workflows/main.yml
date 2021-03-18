@@ -18,6 +18,7 @@ jobs:
         run: |
           install.packages("rmarkdown")
           install.packages("distill")
+          install.packages("postcards")
         shell: Rscript {0}
 
       - name: Render Site
