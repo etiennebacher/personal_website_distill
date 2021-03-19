@@ -7,14 +7,14 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 17 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Mar 2021 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Use GitHub actions with R Markdown and Distill</title>
       <dc:creator>Etienne Bacher</dc:creator>
       <link>https://jolly-franklin-752277.netlify.app/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill</link>
       <description>How can you automatically render README, Distill website...</description>
       <guid>https://jolly-franklin-752277.netlify.app/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill</guid>
-      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Compare two languages in R Markdown documents</title>
