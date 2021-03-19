@@ -3,7 +3,8 @@ title: "Use GitHub actions with R Markdown and Distill"
 description: |
   How can you automatically render README, Distill website...
 author: Etienne Bacher
-date: 2021-03-18
+date: 2021-03-19
+preview: gha_image.jpg
 output:
   distill::distill_article:
     toc: true
@@ -11,7 +12,9 @@ output:
     highlight: pygments
     highlight_downlit: true
 ---
-  
+
+*<small> The preview image comes from: https://github.com/marketplace/actions/cancel-workflow-action </small>*
+
 Sometimes, it is useful to automatically render an R Markdown document or a website, made with [`distill`](https://rstudio.github.io/distill/) for example. In this post, I will present you two cases in which I use GitHub Actions to automatically do that.
 
 # Render a README
