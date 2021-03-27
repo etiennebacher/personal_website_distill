@@ -46,10 +46,30 @@ If you want to contact me, the best way to do so is by email, or via Twitter (th
 
 <br>
 
+
+```{css, echo = FALSE}
+.columnname {
+  font-size: 1.4rem; 
+  font-weight: 600;
+}
+.grad-item {
+  list-style: none; 
+  background-image: url(graduation-cap-solid.png); 
+  background-repeat: no-repeat;  
+  background-size: 1.2rem; 
+  padding-left: 2rem;
+}
+.grad-location {
+  font-size: 0.8rem;
+  color: grey;
+}
+```
+
+
 :::: {style="display: grid; grid-template-columns: 40% 50%; grid-column-gap: 30px; line-height: 1.5rem;"}
 
 ::: {}
-<span style = "font-size: 1.5rem; font-weight: 600;"> Interests </span>
+<span class = "columnname"> Interests </span>
 
 * Economics
 
@@ -61,15 +81,16 @@ If you want to contact me, the best way to do so is by email, or via Twitter (th
 :::
 
 ::: {}
-<span style = "font-size: 1.4rem; font-weight: 600;"> Education </span>
+<span class = "columnname"> Education </span>
 
 <ul>
  
-<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   PhD student in Economics of Migration, 2020 - current, LISER </li>
+<li class = "grad-item">   PhD student in Economics of Migration, 2020 - current <br> <p class = "grad-location"> LISER, Luxembourg </p> </li>
 <br>
-<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Master's degree in Development Economics, 2018 - 2020, University Clermont-Auvergne </li>
+<li class = "grad-item">   Master's degree in Development Economics, 2018 - 2020 <br>
+<p class = "grad-location"> University Clermont-Auvergne, France </p> </li>
 <br>
-<li style = "list-style: none; background-image: url(graduation-cap-solid.png); background-repeat: no-repeat;  background-size: 1.2rem; padding-left: 2rem;">   Bachelor's degree in Development Economics, 2017 - 2018, University Clermont-Auvergne
+<li class = "grad-item">   Bachelor's degree in Development Economics, 2017 - 2018 <br> <p class = "grad-location"> University Clermont-Auvergne, France </p> 
 </li>
 
 </ul>

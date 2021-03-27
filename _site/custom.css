@@ -10,8 +10,6 @@
 
 /* Optional: embed custom fonts here with `@import`          */
 /* This must remain at the top of this file.                 */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat');
-
 
 html {
   /*-- Main font sizes --*/
@@ -26,16 +24,13 @@ html {
   --body-color:      rgba(0, 0, 0, 0.8);
   --aside-color:     rgba(0, 0, 0, 0.6);
   --fig-cap-color:   rgba(0, 0, 0, 0.6);
-  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  /*-- Specify custom fonts ~~~ must be imported above   --
   --heading-font:    "Montserrat", sans-serif;
   --mono-font:       "Montserrat", monospace;
   --body-font:       "Montserrat", sans-serif;
   --navbar-font:     "Montserrat", sans-serif;  /* websites + blogs only */
 }
 
-* {
-  font-family: "Montserrat";
-}
 
 /*-- ARTICLE METADATA --*/
 d-byline {
