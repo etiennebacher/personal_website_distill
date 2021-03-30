@@ -7,3 +7,35 @@ output:
   distill::distill_article
 base_url: https://www.etiennebacher.com/
 ---
+
+```{css echo = FALSE}
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+```
+
+
+```{r echo = FALSE}
+source(file.path("R", "functions.R"))
+
+withTags(
+  div(
+    class = "row",
+    div(class = "column",
+        p("Hello this is the first column")),
+    div(class = "column",
+        p("Hello this is the second column"))
+  )
+)
+
+```
+
+

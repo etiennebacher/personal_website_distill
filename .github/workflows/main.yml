@@ -16,12 +16,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages("rmarkdown")
-          install.packages("distill")
-          install.packages("postcards")
-          install.packages("devtools")
-          install.packages("fs")
-          devtools::install_github("etiennebacher/ebmisc")
+          install.packages(c("rmarkdown", "distill", "postcards", "devtools",
+          "fs", "htmltools"))
         shell: Rscript {0}
 
       - name: Render Site

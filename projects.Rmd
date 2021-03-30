@@ -6,7 +6,7 @@ listing: projects # do this exactly
 ## Projects
 
 ```{r echo = FALSE}
-library(ebmisc)
+source(file.path("R", "functions.R"))
 make_grid_project(
   
   make_card_project(
