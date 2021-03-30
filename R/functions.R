@@ -1,4 +1,5 @@
 library(htmltools)
+library(httr)
 
 ##########
 ## Create cards for the "Projects" section ##
@@ -46,3 +47,41 @@ make_card_project <- function(
 ## Create the layout for the "Gallery" section ##
 ##########
 
+get_tt_image <- function(year, week) {
+  
+  if (is.numeric(year)) year <- as.character(year)
+  if (is.numeric(week)) week <- as.character(week)
+  
+  ### Get the link to download the image I want
+  req <- GET("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1")
+  stop_for_status(req)
+  file_list <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
+  png_list <- grep(".png", file_list, value = TRUE, fixed = TRUE)
+  png_wanted <- grep(year, png_list, value = TRUE)
+  png_wanted <- grep(paste0("W", week), png_wanted, value = TRUE)
+  origin <- paste0(
+    "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/",
+    png_wanted
+  )
+  destination <- paste0("_gallery/img/", year, "-", week, "-", 
+                        trimws(basename(origin)))
+  
+  if (!file.exists(destination)) {
+    download.file(origin, destination)
+  }
+  
+  return(destination)
+  
+}
+
+layout_tt_image <- function() {
+  
+  images_wanted <- sapply()
+  
+  tagList(
+    lapply(
+      
+    )
+  )
+  
+}

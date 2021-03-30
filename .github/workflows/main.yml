@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("rmarkdown", "distill", "postcards", "devtools",
-          "fs", "htmltools"))
+          "fs", "htmltools", "here"))
         shell: Rscript {0}
 
       - name: Render Site

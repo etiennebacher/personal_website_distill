@@ -1,0 +1,44 @@
+---
+title: "Gallery"
+description: |
+  A selection of the plots I made for #TidyTuesday. Find the whole list
+  [here](https://github.com/etiennebacher/tidytuesday).
+output:
+  distill::distill_article
+base_url: https://www.etiennebacher.com/
+---
+
+```{css echo = FALSE}
+.column {
+  float: left;
+  width: 45%;
+  margin-left: 1rem;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+```
+
+
+```{r echo = FALSE}
+source(here::here("R/functions.R"))
+
+withTags(
+  div(
+    class = "row",
+    div(class = "column",
+        img(src = "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/R/2021/W13-un-votes/un-votes.png")),
+    div(class = "column",
+        img(src = "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/R/2021/W12-steam-games/steam-games.png")),
+    div(class = "column",
+        img(src = "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/R/2021/W12-steam-games/steam-games.png"))
+  )
+)
+
+```
+
+
