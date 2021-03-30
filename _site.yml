@@ -11,13 +11,15 @@ navbar:
       href: blog.html
     - text: "Projects"
       href: projects.html
+    - text: "Gallery"
+      href: gallery.html
     - text: "CV"
       href: cv.pdf
     - icon: fa fa-rss
       href: index.xml
   source_url: https://github.com/etiennebacher/personal_website_distill
   search: false
-base_url: https://jolly-franklin-752277.netlify.app/
+base_url: https://www.etiennebacher.com/
 repository_url: https://github.com/etiennebacher/personal_website_distill
 output: 
   distill::distill_article:

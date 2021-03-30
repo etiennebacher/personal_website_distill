@@ -1,0 +1,9 @@
+---
+title: "Gallery"
+description: |
+  A selection of the plots I made for #TidyTuesday. Find the whole list
+  [here](https://github.com/etiennebacher/tidytuesday).
+output:
+  distill::distill_article
+base_url: https://www.etiennebacher.com/
+---
