@@ -52,6 +52,7 @@ get_tt_image <- function(year, week) {
   
   if (is.numeric(year)) year <- as.character(year)
   if (is.numeric(week)) week <- as.character(week)
+  if (nchar(week) == 1) week <- paste0("0", week)
   
   ### Get the link to download the image I want
   req <- GET("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1")
@@ -70,28 +71,36 @@ get_tt_image <- function(year, week) {
   if (!file.exists(destination)) {
     download.file(origin, destination)
   }
-  
-  return(destination)
-  
-}
-
-layout_tt_image <- function() {
-  
-  images_wanted <- sapply()
-  
-  tagList(
-    lapply(
-      
-    )
-  )
+  resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
   
 }
-
 
 resize_image <- function(image) {
   
-  imFile <- image_read(paste0("_gallery/img/", image))
-  imFile_resized <- magick::image_resize(imFile, "5%")
-  magick::image_write(imFile_resized, paste0("_gallery/img/thumb-", image))
+  imFile <- image_read(paste0("img/", image))
+  imFile_resized <- magick::image_resize(imFile, "6%")
+  magick::image_write(imFile_resized, paste0("img/thumb-", image))
   
 }
+
+make_gallery_layout <- function() {
+  
+  images <- list.files("img")
+  images_full_size <- grep("thumb", images, 
+                           value = TRUE, invert = TRUE)
+  images_thumb <- grep("thumb", images, value = TRUE)
+  
+  images <- data.frame(images_thumb = images_thumb,
+                       images_full_size = images_full_size)
+  
+  tagList(apply(images, 1, function(x) {
+      tags$a(
+        href = paste0("img/", x[["images_full_size"]]),
+        tags$img(src = paste0("img/", x[["images_thumb"]]))
+      )
+  }))
+  
+}
+
+
+

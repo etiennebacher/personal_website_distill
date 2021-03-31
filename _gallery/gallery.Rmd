@@ -41,19 +41,24 @@ base_url: https://www.etiennebacher.com/
 ```{r echo = FALSE}
 source(here::here("R/functions.R"))
 
-tt_plots <- list()
+# Make list of tidytuesday plots I want to show in the gallery
+tt_plots <- rbind(
+  c(2021, 7),
+  c(2021, 8),
+  c(2021, 12),
+  c(2021, 13)
+)
 
+# Download the plots and create the thumbnails
+apply(tt_plots, 1, function(x) get_tt_image(x[1], x[2]))
+
+# Create layout
 withTags(
   div(
     class = "row",
     id = "lightgallery",
-    a(href="img/base.png", 
-      `data-sub-html`="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>",
-        img(src = "img/thumb-base.png")
-    ),
-    a(href="img2.png", 
-      `data-sub-html`="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>",
-      img(src ="thumb-img2.png")
+    tagList(
+      make_gallery_layout()
     )
   )
 )
