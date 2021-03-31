@@ -63,7 +63,7 @@ get_tt_image <- function(year, week) {
   png_wanted <- grep(paste0("W", week), png_wanted, value = TRUE)
   origin <- paste0(
     "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/",
-    png_wanted
+    png_wanted 
   )
   destination <- paste0("_gallery/img/", year, "-", week, "-", 
                         trimws(basename(origin)))
