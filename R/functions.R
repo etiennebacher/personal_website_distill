@@ -1,5 +1,6 @@
 library(htmltools)
 library(httr)
+library(magick)
 
 ##########
 ## Create cards for the "Projects" section ##
@@ -83,5 +84,14 @@ layout_tt_image <- function() {
       
     )
   )
+  
+}
+
+
+resize_image <- function(image) {
+  
+  imFile <- image_read(paste0("_gallery/img/", image))
+  imFile_resized <- magick::image_resize(imFile, "5%")
+  magick::image_write(imFile_resized, paste0("_gallery/img/thumb-", image))
   
 }

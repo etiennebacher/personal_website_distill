@@ -8,6 +8,14 @@ output:
 base_url: https://www.etiennebacher.com/
 ---
 
+<head>
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/css/lightgallery.css" /> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js"></script>
+<!-- lightgallery plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js"></script>
+</head>
+
 ```{css echo = FALSE}
 .column {
   float: left;
@@ -21,24 +29,37 @@ base_url: https://www.etiennebacher.com/
   display: table;
   clear: both;
 }
+
+#lightgallery > a > img:hover {
+   transform: scale(1.2, 1.2);
+   transition: 0.2s ease-in-out;
+   cursor: pointer;
+}
 ```
 
 
 ```{r echo = FALSE}
 source(here::here("R/functions.R"))
 
+tt_plots <- list()
+
 withTags(
   div(
     class = "row",
-    div(class = "column",
-        img(src = "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/R/2021/W13-un-votes/un-votes.png")),
-    div(class = "column",
-        img(src = "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/R/2021/W12-steam-games/steam-games.png")),
-    div(class = "column",
-        img(src = "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/R/2021/W12-steam-games/steam-games.png"))
+    id = "lightgallery",
+    a(href="img/base.png", 
+      `data-sub-html`="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>",
+        img(src = "img/thumb-base.png")
+    ),
+    a(href="img2.png", 
+      `data-sub-html`="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>",
+      img(src ="thumb-img2.png")
+    )
   )
 )
 
 ```
 
-
+<script type="text/javascript">
+    lightGallery(document.getElementById('lightgallery')); 
+</script>
