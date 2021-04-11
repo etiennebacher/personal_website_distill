@@ -69,9 +69,9 @@ get_tt_image <- function(year, week) {
                         trimws(basename(origin)))
   
   if (!file.exists(destination)) {
-    download.file(origin, destination, quiet = TRUE)
+    download.file(origin, destination)
   }
-  # resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
+  resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
   
 }
 
