@@ -68,8 +68,11 @@ get_tt_image <- function(year, week) {
   destination <- paste0("_gallery/img/", year, "-", week, "-", 
                         trimws(basename(origin)))
   
-  if (!file.exists(destination)) {
-    download.file(origin, destination)
+  if (!file.exists(here::here("_gallery/img"))) {
+    dir.create(here::here("_gallery/img"))
+  }
+  if (!file.exists(here::here(destination))) {
+    download.file(origin, here::here(destination))
   }
   resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
   
@@ -85,7 +88,7 @@ resize_image <- function(image) {
 
 make_gallery_layout <- function() {
   
-  images <- list.files("img")
+  images <- list.files("_gallery/img")
   images_full_size <- grep("thumb", images, 
                            value = TRUE, invert = TRUE)
   images_thumb <- grep("thumb", images, value = TRUE)
@@ -95,8 +98,8 @@ make_gallery_layout <- function() {
   
   tagList(apply(images, 1, function(x) {
       tags$a(
-        href = paste0("img/", x[["images_full_size"]]),
-        tags$img(src = paste0("img/", x[["images_thumb"]]))
+        href = paste0("_gallery/img/", x[["images_full_size"]]),
+        tags$img(src = paste0("_gallery/img/", x[["images_thumb"]]))
       )
   }))
   

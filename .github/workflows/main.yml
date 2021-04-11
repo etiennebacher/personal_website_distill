@@ -22,8 +22,8 @@ jobs:
 
       - name: Render Site
         run: Rscript -e 'rmarkdown::render_site(encoding = "UTF-8")'
-      - name: Copy redirects
-        run: Rscript -e 'fs::file_copy("_redirects", "_site/_redirects")'
+      - name: Copy redirects and gallery images
+        run: Rscript -e 'fs::file_copy("_redirects", "_site/_redirects"); fs::file_copy("_gallery/img", "_site/_gallery/img")'
       - name: Commit results
         run: |
           git add -A
