@@ -1,0 +1,114 @@
+---
+title: "How to create a gallery in Distill"
+description: |
+  A short description of the post.
+author: Etienne Bacher
+date: 2021-04-11
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+    highlight: pygments
+    highlight_downlit: true
+draft: true
+---
+
+This post shows how to create a gallery on a Distill website. Keep in mind that Distill is (purposely) less flexible than other tools, such as `{blogdown}`, so the gallery might look quite different from what you expect.
+
+# Create a gallery with lightgallery.js
+
+[Lightgallery.js]() is a great Javascript library that allows you to build a gallery very simply. You will need images in full size and thumbnails, i.e a smaller version of the images (we will see how to make them automatically later in this post). 
+
+First of all, let's construct our gallery with HTML, CSS, and Javascript. We will see how to adapt this in R then. We need to load the Javascript and CSS files for lightgallery.js in the head:
+
+```{html}
+<head>
+
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.0/css/lightgallery.min.css" /> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js"></script>
+
+<!-- lightgallery plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js"></script>
+
+</head>
+```
+
+Then, we construct the layout of the gallery. Here, I make the minimum layout, just to make sure this works:
+
+```{html}
+<div id="lightgallery">
+  <a href="img1.png">
+    <img src="thumb-img1.png" />
+  </a>
+  <a href="img2.png">
+    <img src="thumb-img2.png" />
+  </a>
+</div>
+```
+
+As you can see, the whole gallery is in a `div` element. To add an image to the gallery, we just have to add an `a` element as the two already there.
+
+Then, we add the Javascript code to run lightgallery.js:
+
+```{html}
+<script type="text/javascript">
+  lightGallery(document.getElementById('lightgallery')); 
+</script>
+```
+
+This should work, but I just add a CSS animation to zoom a bit when I hover an image:
+
+```{html}
+<style>
+  #lightgallery > a > img:hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+  }
+</style>
+```
+
+That's it for the proof of concept that this library works well. Now let's adapt it in R.
+
+<details>
+<summary>Click to see the full HTML.</summary>
+
+```{html}
+<!doctype html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/css/lightgallery.css" /> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js"></script>
+
+   <!-- lightgallery plugins -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js"></script>
+  </head>
+  <body>
+    <div id="lightgallery">
+      <a href="img1.png" data-sub-html="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>">
+          <img src="thumb-img1.png" />
+      </a>
+      <a href="img2.png">
+          <img src="thumb-img2.png" />
+      </a>
+    </div>
+
+    <script type="text/javascript">
+      lightGallery(document.getElementById('lightgallery')); 
+    </script>
+        
+    <style>
+      #lightgallery > a > img:hover {
+        transform: scale(1.2, 1.2);
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+      }
+    </style>
+  
+  </body>
+</html>
+```
+
+</details>
