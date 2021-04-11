@@ -8,7 +8,7 @@ library(magick)
 
 make_grid_project <- function(...) {
   
-  shiny::tags$div(class = "grid-container", ...)
+  htmltools::tags$div(class = "grid-container", ...)
   
 }
 
@@ -20,7 +20,7 @@ make_card_project <- function(
   button_link = NULL
 ) {
   
-  x <- shiny::withTags(
+  x <- htmltools::withTags(
     div(class = "card",
         div(class = "card-text",
             h4(a(target="_blank")),
