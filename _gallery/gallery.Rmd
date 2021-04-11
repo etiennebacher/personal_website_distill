@@ -8,6 +8,13 @@ output:
 base_url: https://www.etiennebacher.com/
 ---
 
+```{r echo = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE
+)
+```
+
+
 <head>
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/css/lightgallery.css" /> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js"></script>
@@ -16,7 +23,7 @@ base_url: https://www.etiennebacher.com/
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js"></script>
 </head>
 
-```{css echo = FALSE}
+```{css}
 .column {
   float: left;
   width: 45%;
@@ -38,7 +45,7 @@ base_url: https://www.etiennebacher.com/
 ```
 
 
-```{r echo = FALSE}
+```{r include = FALSE}
 source(here::here("R/functions.R"))
 
 # Make list of tidytuesday plots I want to show in the gallery
@@ -51,7 +58,9 @@ tt_plots <- rbind(
 
 # Download the plots and create the thumbnails
 apply(tt_plots, 1, function(x) get_tt_image(x[1], x[2]))
+```
 
+```{r}
 # Create layout
 withTags(
   div(

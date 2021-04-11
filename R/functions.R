@@ -69,17 +69,17 @@ get_tt_image <- function(year, week) {
                         trimws(basename(origin)))
   
   if (!file.exists(destination)) {
-    download.file(origin, destination)
+    download.file(origin, destination, quiet = TRUE)
   }
-  resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
+  # resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
   
 }
 
 resize_image <- function(image) {
   
-  imFile <- image_read(paste0("img/", image))
+  imFile <- image_read(here::here(paste0("_gallery/img/", image)))
   imFile_resized <- magick::image_resize(imFile, "6%")
-  magick::image_write(imFile_resized, paste0("img/thumb-", image))
+  magick::image_write(imFile_resized, here::here(paste0("_gallery/img/thumb-", image)))
   
 }
 
