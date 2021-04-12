@@ -48,17 +48,22 @@ knitr::opts_chunk$set(
 
 
 /* For some reason, icons are not loaded so I choose them myself */
-.lg-actions .lg-next:before {
+.lg-actions .lg-next {
   content:"\1433"
 }
-.lg-actions .lg-prev:after {
+.lg-actions .lg-prev {
   content:"\1438"
 }
-.lg-toolbar .lg-download:after {
+.lg-toolbar .lg-download {
  content:"\2913"
 }
-.lg-toolbar .lg-close:after {
+.lg-toolbar .lg-close {
  content:"\00D7"
+}
+.lg-toolbar .lg-icon {
+	background-color: #000;
+	border-color: #000;
+	border-style: solid;
 }
 ```
 
