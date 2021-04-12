@@ -46,6 +46,15 @@ knitr::opts_chunk$set(
    cursor: pointer;
 }
 
+/* Custom class added in functions */
+.gallery-link > a {
+   color: white
+}
+.gallery-link > a:hover {
+   color: white;
+  font-weight: 500;
+}
+
 
 /* For some reason, icons are not loaded so I choose them myself */
 .lg-actions .lg-next {
