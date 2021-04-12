@@ -97,8 +97,15 @@ make_gallery_layout <- function() {
                        images_full_size = images_full_size)
   
   tagList(apply(images, 1, function(x) {
+      year <- substr(x[["images_full_size"]], 1, 4)
+      gh_link <- paste0(
+        "https://github.com/etiennebacher/tidytuesday/tree/master/R/",
+        year, "/W", substr(x[["images_full_size"]], 6, 
+                          nchar(x[["images_full_size"]])-4)
+      )
       tags$a(
         href = paste0("_gallery/img/", x[["images_full_size"]]),
+        `data-sub-html`=tags$p("See code and image", tags$a(href = gh_link, "here")),
         tags$img(src = paste0("_gallery/img/", x[["images_thumb"]]))
       )
   }))
