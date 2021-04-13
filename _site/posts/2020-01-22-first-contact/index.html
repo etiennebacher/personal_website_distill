@@ -1627,10 +1627,7 @@ function init_distill() {
 
     // hoverable references
     $('span.citation[data-cites]').each(function() {
-      var refs = $(this).attr('data-cites').split(" ");
-      var refHtml = refs.map(function(ref) {
-        return "<p>" + $('#ref-' + ref).html() + "</p>";
-      }).join("\n");
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
       window.tippy(this, {
         allowHTML: true,
         content: refHtml,
@@ -2035,7 +2032,7 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"First contact with the data on R","description":"A blog post describing the first steps of data cleaning and analysis using R.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-01-22T00:00:00.000+01:00","citationText":"Bacher, 2020"}
+{"title":"First contact with the data on R","description":"A blog post describing the first steps of data cleaning and analysis using R.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-01-22T00:00:00.000+00:00","citationText":"Bacher, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
