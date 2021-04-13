@@ -108,5 +108,7 @@ withTags(
 ```
 
 <script type="text/javascript">
-    lightGallery(document.getElementById('lightgallery')); 
+    lightGallery(document.getElementById('lightgallery'), {
+      hideBarsDelay: 1000;
+    }); 
 </script>

@@ -1621,7 +1621,10 @@ function init_distill() {
 
     // hoverable references
     $('span.citation[data-cites]').each(function() {
-      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      var refs = $(this).attr('data-cites').split(" ");
+      var refHtml = refs.map(function(ref) {
+        return "<p>" + $('#ref-' + ref).html() + "</p>";
+      }).join("\n");
       window.tippy(this, {
         allowHTML: true,
         content: refHtml,
@@ -2026,7 +2029,7 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Why you should move from Stata to R","description":"Some reasons that explain why I prefer R to Stata.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2019-12-01T00:00:00.000+00:00","citationText":"Bacher, 2019"}
+{"title":"Why you should move from Stata to R","description":"Some reasons that explain why I prefer R to Stata.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2019-12-01T00:00:00.000+01:00","citationText":"Bacher, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
