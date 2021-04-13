@@ -68,14 +68,19 @@ get_tt_image <- function(year, week) {
   destination <- paste0("_gallery/img/", year, "-", week, "-", 
                         trimws(basename(origin)))
   
-  if (!file.exists(here::here("_gallery/img"))) {
-    dir.create(here::here("_gallery/img"))
-  }
   if (!file.exists(here::here(destination))) {
+    if (!file.exists(here::here("_gallery/img"))) {
+      dir.create(here::here("_gallery/img"))
+    }
     download.file(origin, here::here(destination))
   }
-  resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
   
+  thumb_destination <- paste0("_gallery/img/thumb-", year, "-", week, "-", 
+                        trimws(basename(origin)))
+  if (!file.exists(thumb_destination)) {
+    resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
+  }
+ 
 }
 
 resize_image <- function(image) {
