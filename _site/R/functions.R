@@ -68,14 +68,19 @@ get_tt_image <- function(year, week) {
   destination <- paste0("_gallery/img/", year, "-", week, "-", 
                         trimws(basename(origin)))
   
-  if (!file.exists(here::here("_gallery/img"))) {
-    dir.create(here::here("_gallery/img"))
-  }
   if (!file.exists(here::here(destination))) {
+    if (!file.exists(here::here("_gallery/img"))) {
+      dir.create(here::here("_gallery/img"))
+    }
     download.file(origin, here::here(destination))
   }
-  resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
   
+  thumb_destination <- paste0("_gallery/img/thumb-", year, "-", week, "-", 
+                        trimws(basename(origin)))
+  if (!file.exists(thumb_destination)) {
+    resize_image(paste0(year, "-", week, "-", trimws(basename(origin))))
+  }
+ 
 }
 
 resize_image <- function(image) {
@@ -97,8 +102,19 @@ make_gallery_layout <- function() {
                        images_full_size = images_full_size)
   
   tagList(apply(images, 1, function(x) {
+      year <- substr(x[["images_full_size"]], 1, 4)
+      gh_link <- paste0(
+        "https://github.com/etiennebacher/tidytuesday/tree/master/R/",
+        year, "/W", substr(x[["images_full_size"]], 6, 
+                          nchar(x[["images_full_size"]])-4)
+      )
       tags$a(
         href = paste0("_gallery/img/", x[["images_full_size"]]),
+        `data-sub-html`= tags$p(
+          "See code and image", 
+          tags$a(href = gh_link, "here"),
+          class = "gallery-link"
+        ),
         tags$img(src = paste0("_gallery/img/", x[["images_thumb"]]))
       )
   }))
