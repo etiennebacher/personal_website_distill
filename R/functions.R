@@ -112,7 +112,7 @@ make_gallery_layout <- function() {
         href = paste0("_gallery/img/", x[["images_full_size"]]),
         `data-sub-html`= tags$p(
           "See code and image", 
-          tags$a(href = gh_link, "here"),
+          tags$a(href = gh_link, target = "_blank", "here"),
           class = "gallery-link"
         ),
         tags$img(src = paste0("_gallery/img/", x[["images_thumb"]]))
