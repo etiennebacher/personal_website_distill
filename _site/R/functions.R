@@ -61,6 +61,9 @@ get_tt_image <- function(year, week) {
   png_list <- grep(".png", file_list, value = TRUE, fixed = TRUE)
   png_wanted <- grep(year, png_list, value = TRUE)
   png_wanted <- grep(paste0("W", week), png_wanted, value = TRUE)
+  if (any(grepl("accidental_art", png_wanted))) {
+    png_wanted <- png_wanted[-which(grepl("accidental_art", png_wanted))]
+  }
   origin <- paste0(
     "https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/",
     png_wanted 
@@ -68,11 +71,11 @@ get_tt_image <- function(year, week) {
   destination <- paste0("_gallery/img/", year, "-", week, "-", 
                         trimws(basename(origin)))
   
-  if (!file.exists(here::here(destination))) {
-    if (!file.exists(here::here("_gallery/img"))) {
-      dir.create(here::here("_gallery/img"))
+  if (!file.exists(destination)) {
+    if (!file.exists("_gallery/img")) {
+      dir.create("_gallery/img")
     }
-    download.file(origin, here::here(destination))
+    download.file(origin, destination)
   }
   
   thumb_destination <- paste0("_gallery/img/thumb-", year, "-", week, "-", 

@@ -1621,7 +1621,10 @@ function init_distill() {
 
     // hoverable references
     $('span.citation[data-cites]').each(function() {
-      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      var refs = $(this).attr('data-cites').split(" ");
+      var refHtml = refs.map(function(ref) {
+        return "<p>" + $('#ref-' + ref).html() + "</p>";
+      }).join("\n");
       window.tippy(this, {
         allowHTML: true,
         content: refHtml,
@@ -2026,7 +2029,7 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"My favorite shortcuts in RStudio","description":"Did you know that RStudio contains a lot of shortcuts to write code faster? Here are my favorites.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-04-06T00:00:00.000+00:00","citationText":"Bacher, 2020"}
+{"title":"My favorite shortcuts in RStudio","description":"Did you know that RStudio contains a lot of shortcuts to write code faster? Here are my favorites.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-04-06T00:00:00.000+02:00","citationText":"Bacher, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
