@@ -4,6 +4,7 @@ description: |
   Use lightgallery.js to create a gallery for your plots or images.
 author: Etienne Bacher
 date: 2021-05-20
+preview: gallery_image.jpg
 output:
   distill::distill_article:
     toc: true
