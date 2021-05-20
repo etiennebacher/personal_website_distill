@@ -23,6 +23,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -110,7 +111,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["How to create a gallery in Distill"]},{"type":"character","attributes":{},"value":["Use lightgallery.js to create a gallery for your plots or images.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2021-04-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["pygments"]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["How to create a gallery in Distill"]},{"type":"character","attributes":{},"value":["Use lightgallery.js to create a gallery for your plots or images.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2021-04-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["pygments"]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1262,10 +1263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refs = $(this).attr('data-cites').split(" ");
-        var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
-        }).join("\n");
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1486,7 +1484,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Contents</h3>
 <ul>
 <li><a href="#create-a-gallery-with-lightgallery.js">Create a gallery with lightgallery.js</a></li>
-<li><a href="#make-this-gallery-with-r">Make this gallery with R</a>
+<li><a href="#make-the-gallery-with-r">Make the gallery with R</a>
 <ul>
 <li><a href="#create-thumbnails">Create thumbnails</a></li>
 <li><a href="#build-the-html-structure">Build the HTML structure</a></li>
@@ -1499,8 +1497,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>This post shows how to create a gallery on a Distill website. Keep in mind that Distill is (purposely) less flexible than other tools, such as <code>{blogdown}</code>, so the gallery might look quite different from what you expect.</p>
 <h2 id="create-a-gallery-with-lightgallery.js">Create a gallery with lightgallery.js</h2>
-<p><a href>Lightgallery.js</a> is a great Javascript library that allows you to build a gallery very simply. You will need images in full size and thumbnails, i.e a smaller version of the images (we will see how to automatically make them later in this post).</p>
-<p>First of all, let’s construct our gallery with HTML, CSS, and Javascript. We will see how to adapt this in R then. We need to load the Javascript and CSS files for lightgallery.js in the head:</p>
+<p><a href="https://github.com/sachinchoolur/lightgallery">Lightgallery.js</a> is a Javascript library that allows you to build a gallery very simply. You will need images in full size and thumbnails, i.e a smaller version of the images (we will see how to automatically make them later in this post).</p>
+<p>First of all, let’s construct the gallery with HTML, CSS, and Javascript. We will see how to adapt this in R then. We need to load the Javascript and CSS files for lightgallery.js in the head:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1524,14 +1522,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/a&gt;</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 </div>
-<p>As you can see, the whole gallery is in a <code>div</code> element. To add an image to the gallery, we just have to add an <code>a</code> element as the two already there.</p>
+<p>As you can see, the whole gallery is in a <code>&lt;div&gt;</code> element. To add an image to the gallery, we just have to add an <code>&lt;a&gt;</code> element as the two already there.</p>
 <p>Then, we add the Javascript code to run lightgallery.js:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lightGallery</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;lightgallery&#39;</span>))<span class="op">;</span> </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
 </div>
-<p>This should work, but I just add a CSS animation to zoom a bit when I hover an image:</p>
+<p>This should work, but I just add a CSS animation to zoom a bit when hovering a thumbnail:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#lightgallery</span> <span class="op">&gt;</span> a <span class="op">&gt;</span> img<span class="in">:hover</span> {</span>
@@ -1583,7 +1581,7 @@ Click to see the full HTML.
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
 </div>
 </details>
-<h2 id="make-this-gallery-with-r">Make this gallery with R</h2>
+<h2 id="make-the-gallery-with-r">Make the gallery with R</h2>
 <h3 id="create-thumbnails">Create thumbnails</h3>
 <p>First, store your (full-size) images in a folder, let’s say <code>_gallery/img</code>. As we saw above, <code>lightgallery.js</code> also requires thumbnails in addition to full-size images. To automatically create these thumbnails, we can use the function <code>image_resize()</code> in the package <code>magick</code>. First, I create a function to resize a single image, and I will apply it to all the images I have:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1604,7 +1602,6 @@ Click to see the full HTML.
 </code></pre>
 </div>
 </div>
-<p>Note that the names of the created thumbnails contain <code>thumb</code>. This is useful if you want to customize this function so that <code>list_png</code> only contains the full-size images and not the thumbnails that already exist.</p>
 <h3 id="build-the-html-structure">Build the HTML structure</h3>
 <p>We can now start building the HTML structure with the package <code>htmltools</code>. First, we can see that the HTML code for each image is very similar:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1615,19 +1612,19 @@ Click to see the full HTML.
 <p>This can be reproduced in R with:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class="va">tags</span><span class="op">$</span><span class="fu">a</span><span class="op">(</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools">htmltools</a></span><span class="op">)</span>
+
+<span class="va">tags</span><span class="op">$</span><span class="fu">a</span><span class="op">(</span>
   href <span class="op">=</span> <span class="st">&quot;img.png&quot;</span>,
   <span class="va">tags</span><span class="op">$</span><span class="fu">img</span><span class="op">(</span>src <span class="op">=</span> <span class="st">&quot;thumb-img.png&quot;</span><span class="op">)</span>
 <span class="op">)</span>
 </code></pre>
 </div>
 </div>
-<p>We can now create a function to apply this type of code to all the images we have:</p>
+<p>We can now create a function to apply this structure to all the images we have:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools">htmltools</a></span><span class="op">)</span>
-
-<span class="va">make_gallery_layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="va">make_gallery_layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="co"># Get the names of all images</span>
   <span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">&quot;_gallery/img&quot;</span><span class="op">)</span>
@@ -1731,11 +1728,11 @@ withTags(
 </code></pre>
 </details>
 <h2 id="update-github-actions">Update GitHub Actions</h2>
-<p>You need to add <code>fs::dir_copy(&quot;_gallery/img&quot;, &quot;_site/_gallery/img&quot;)</code> in your GitHub Actions so that the images are found when the gallery is built. You also have to add <code>magick</code> and <code>httr</code> in the list of packages to install.</p>
+<p>We need to add <code>fs::dir_copy(&quot;_gallery/img&quot;, &quot;_site/_gallery/img&quot;)</code> in GitHub Actions so that the images are found when the gallery is built. We also have to add <code>magick</code> and <code>httr</code> in the list of packages to install.</p>
 <p>If you haven’t set up GitHub Actions yet, you can check <a href="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/">my previous post</a>, or check my <a href="https://github.com/etiennebacher/personal_website_distill/blob/master/.github/workflows/main.yml">current GitHub Actions</a> for this site.</p>
 <h2 id="bonus-make-a-gallery-for-tidytuesday">Bonus: make a gallery for #tidytuesday</h2>
 <p>I have started participating to <a href="https://github.com/rfordatascience/tidytuesday">#tidytuesday</a> this year, and the main reason I wanted to create a gallery was to display my favorite plots. Therefore, I created a function to make it as easy as possible for me to update the plots I want to display in the gallery.</p>
-<p>The purpose of the function below is to get a plot for a specific week in a specific year in the <a href="https://github.com/etiennebacher/tidytuesday">repo containing my plots</a>.</p>
+<p>The purpose of the function below is to download a plot for a specific week in a specific year in the <a href="https://github.com/etiennebacher/tidytuesday">repo containing my plots</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span>
@@ -1860,7 +1857,7 @@ withTags(
 </code></pre>
 </details>
 <h2 id="conclusion">Conclusion</h2>
-<p>In this post, I tried to explain how to build a gallery with a simple example. However, you can also check the <a href="https://github.com/etiennebacher/personal_website_distill">repo for this website</a> to have a clearer view of how to do so. I also added some CSS styling that is not described here, to limit the code to what is really necessary.</p>
+<p>In this post, I tried to explain how to build a gallery with a simple example. However, you can also check the <a href="https://github.com/etiennebacher/personal_website_distill">repo of my website</a> to have a clearer view of how to do so. I also added some CSS styling that is not described here, to limit the code to what is really necessary.</p>
 <p>Check the <a href="https://www.etiennebacher.com/gallery.html">gallery</a> to see the result.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

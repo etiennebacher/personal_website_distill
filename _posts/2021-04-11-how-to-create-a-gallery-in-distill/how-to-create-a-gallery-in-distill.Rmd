@@ -3,14 +3,13 @@ title: "How to create a gallery in Distill"
 description: |
   Use lightgallery.js to create a gallery for your plots or images.
 author: Etienne Bacher
-date: 2021-04-11
+date: 2021-05-20
 output:
   distill::distill_article:
     toc: true
     toc_float: true
     highlight: pygments
     highlight_downlit: true
-draft: true
 ---
 
 ```{r include = FALSE}
@@ -24,9 +23,9 @@ This post shows how to create a gallery on a Distill website. Keep in mind that 
 
 ## Create a gallery with lightgallery.js
 
-[Lightgallery.js]() is a great Javascript library that allows you to build a gallery very simply. You will need images in full size and thumbnails, i.e a smaller version of the images (we will see how to automatically make them later in this post). 
+[Lightgallery.js](https://github.com/sachinchoolur/lightgallery) is a Javascript library that allows you to build a gallery very simply. You will need images in full size and thumbnails, i.e a smaller version of the images (we will see how to automatically make them later in this post). 
 
-First of all, let's construct our gallery with HTML, CSS, and Javascript. We will see how to adapt this in R then. We need to load the Javascript and CSS files for lightgallery.js in the head:
+First of all, let's construct the gallery with HTML, CSS, and Javascript. We will see how to adapt this in R then. We need to load the Javascript and CSS files for lightgallery.js in the head:
 
 ```{html}
 <head>
@@ -54,7 +53,7 @@ Then, we construct the layout of the gallery. Here, I make the minimum layout, j
 </div>
 ```
 
-As you can see, the whole gallery is in a `div` element. To add an image to the gallery, we just have to add an `a` element as the two already there.
+As you can see, the whole gallery is in a `<div>` element. To add an image to the gallery, we just have to add an `<a>` element as the two already there.
 
 Then, we add the Javascript code to run lightgallery.js:
 
@@ -64,7 +63,7 @@ Then, we add the Javascript code to run lightgallery.js:
 </script>
 ```
 
-This should work, but I just add a CSS animation to zoom a bit when I hover an image:
+This should work, but I just add a CSS animation to zoom a bit when hovering a thumbnail:
 
 ```{html}
 <style>
@@ -120,7 +119,7 @@ That's it for the proof of concept. Now let's adapt it in R.
 
 </details>
 
-## Make this gallery with R
+## Make the gallery with R
 
 ### Create thumbnails
 
@@ -142,7 +141,6 @@ list_png <- list.files("_gallery/img")
 lapply(list_png, resize_image)
 ```
 
-Note that the names of the created thumbnails contain `thumb`. This is useful if you want to customize this function so that `list_png` only contains the full-size images and not the thumbnails that already exist.
 
 ### Build the HTML structure
 
@@ -157,17 +155,17 @@ We can now start building the HTML structure with the package `htmltools`. First
 This can be reproduced in R with:
 
 ```{r}
+library(htmltools)
+
 tags$a(
   href = "img.png",
   tags$img(src = "thumb-img.png")
 )
 ```
 
-We can now create a function to apply this type of code to all the images we have:
+We can now create a function to apply this structure to all the images we have:
 
 ```{r}
-library(htmltools)
-
 make_gallery_layout <- function() {
   
   # Get the names of all images
@@ -275,7 +273,7 @@ withTags(
 
 ## Update GitHub Actions
 
-You need to add `fs::dir_copy("_gallery/img", "_site/_gallery/img")` in your GitHub Actions so that the images are found when the gallery is built. You also have to add `magick` and `httr` in the list of packages to install.
+We need to add `fs::dir_copy("_gallery/img", "_site/_gallery/img")` in GitHub Actions so that the images are found when the gallery is built. We also have to add `magick` and `httr` in the list of packages to install.
 
 If you haven't set up GitHub Actions yet, you can check [my previous post](https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/), or check my [current GitHub Actions](https://github.com/etiennebacher/personal_website_distill/blob/master/.github/workflows/main.yml) for this site.
 
@@ -283,7 +281,7 @@ If you haven't set up GitHub Actions yet, you can check [my previous post](https
 
 I have started participating to [#tidytuesday](https://github.com/rfordatascience/tidytuesday) this year, and the main reason I wanted to create a gallery was to display my favorite plots. Therefore, I created a function to make it as easy as possible for me to update the plots I want to display in the gallery.
 
-The purpose of the function below is to get a plot for a specific week in a specific year in the [repo containing my plots](https://github.com/etiennebacher/tidytuesday).
+The purpose of the function below is to download a plot for a specific week in a specific year in the [repo containing my plots](https://github.com/etiennebacher/tidytuesday).
 
 ```{r}
 library(httr)
@@ -413,6 +411,6 @@ withTags(
 
 ## Conclusion
 
-In this post, I tried to explain how to build a gallery with a simple example. However, you can also check the [repo for this website](https://github.com/etiennebacher/personal_website_distill) to have a clearer view of how to do so. I also added some CSS styling that is not described here, to limit the code to what is really necessary.
+In this post, I tried to explain how to build a gallery with a simple example. However, you can also check the [repo of my website](https://github.com/etiennebacher/personal_website_distill) to have a clearer view of how to do so. I also added some CSS styling that is not described here, to limit the code to what is really necessary.
 
 Check the [gallery](https://www.etiennebacher.com/gallery.html) to see the result.

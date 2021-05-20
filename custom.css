@@ -83,12 +83,10 @@ d-article div.sourceCode pre {
 	border-radius: 0;
 }
 
-code {
+code, d-article pre {
   background-color: #dae7f1;
-}
-
-d-article pre  {
-  background-color: #dae7f1;
+  font-size: 1rem;
+  overflow-x: scroll !important;
 }
 
 .distill-site-nav {
@@ -103,7 +101,7 @@ d-article pre  {
 }
 
 .distill-site-nav a:hover {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 a {
@@ -180,4 +178,10 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 
 .btn-outline-dark:hover {
     background-color: #6c9dc6;
+}
+
+/* Scroll horizontally when code is too wide (e.g URLs) */
+
+d-article div.sourceCode pre {
+  overflow-x: auto !important;
 }

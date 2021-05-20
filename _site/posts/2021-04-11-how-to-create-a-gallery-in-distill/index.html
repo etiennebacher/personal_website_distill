@@ -23,6 +23,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -85,46 +86,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Etienne Bacher: Use GitHub actions with R Markdown and Distill</title>
+<title>Etienne Bacher: How to create a gallery in Distill</title>
 
-<meta property="description" itemprop="description" content="How can you automatically render README, Distill website..."/>
+<meta property="description" itemprop="description" content="Use lightgallery.js to create a gallery for your plots or images."/>
 
-<link rel="canonical" href="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/"/>
+<link rel="canonical" href="https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/"/>
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
 
 <!--  https://schema.org/Article -->
-<meta property="article:published" itemprop="datePublished" content="2021-03-19"/>
-<meta property="article:created" itemprop="dateCreated" content="2021-03-19"/>
+<meta property="article:published" itemprop="datePublished" content="2021-04-11"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-04-11"/>
 <meta name="article:author" content="Etienne Bacher"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Etienne Bacher: Use GitHub actions with R Markdown and Distill"/>
+<meta property="og:title" content="Etienne Bacher: How to create a gallery in Distill"/>
 <meta property="og:type" content="article"/>
-<meta property="og:description" content="How can you automatically render README, Distill website..."/>
-<meta property="og:url" content="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/"/>
-<meta property="og:image" content="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/gha_image.jpg"/>
+<meta property="og:description" content="Use lightgallery.js to create a gallery for your plots or images."/>
+<meta property="og:url" content="https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:site_name" content="Etienne Bacher"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:title" content="Etienne Bacher: Use GitHub actions with R Markdown and Distill"/>
-<meta property="twitter:description" content="How can you automatically render README, Distill website..."/>
-<meta property="twitter:url" content="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/"/>
-<meta property="twitter:image" content="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/gha_image.jpg"/>
+<meta property="twitter:card" content="summary"/>
+<meta property="twitter:title" content="Etienne Bacher: How to create a gallery in Distill"/>
+<meta property="twitter:description" content="Use lightgallery.js to create a gallery for your plots or images."/>
+<meta property="twitter:url" content="https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/"/>
 
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
-<meta name="citation_title" content="Etienne Bacher: Use GitHub actions with R Markdown and Distill"/>
-<meta name="citation_fulltext_html_url" content="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/"/>
+<meta name="citation_title" content="Etienne Bacher: How to create a gallery in Distill"/>
+<meta name="citation_fulltext_html_url" content="https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/"/>
 <meta name="citation_fulltext_world_readable" content=""/>
-<meta name="citation_online_date" content="2021/03/19"/>
-<meta name="citation_publication_date" content="2021/03/19"/>
+<meta name="citation_online_date" content="2021/04/11"/>
+<meta name="citation_publication_date" content="2021/04/11"/>
 <meta name="citation_author" content="Etienne Bacher"/>
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","preview","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Use GitHub actions with R Markdown and Distill"]},{"type":"character","attributes":{},"value":["How can you automatically render README, Distill website..."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2021-03-19"]},{"type":"character","attributes":{},"value":["gha_image.jpg"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["pygments"]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/"]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["How to create a gallery in Distill"]},{"type":"character","attributes":{},"value":["Use lightgallery.js to create a gallery for your plots or images."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2021-04-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_float","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["pygments"]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/"]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1918,12 +1917,10 @@ d-article div.sourceCode pre {
 	border-radius: 0;
 }
 
-code {
+code, d-article pre {
   background-color: #dae7f1;
-}
-
-d-article pre  {
-  background-color: #dae7f1;
+  font-size: 1rem;
+  overflow-x: scroll !important;
 }
 
 .distill-site-nav {
@@ -1938,7 +1935,7 @@ d-article pre  {
 }
 
 .distill-site-nav a:hover {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 a {
@@ -2017,6 +2014,11 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
     background-color: #6c9dc6;
 }
 
+/* Scroll horizontally when code is too wide (e.g URLs) */
+
+d-article div.sourceCode pre {
+  overflow-x: auto !important;
+}
 </style>
 <!--/radix_placeholder_site_in_header-->
 
@@ -2028,7 +2030,7 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Use GitHub actions with R Markdown and Distill","description":"How can you automatically render README, Distill website...","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-03-19T00:00:00.000+00:00","citationText":"Bacher, 2021"}
+{"title":"How to create a gallery in Distill","description":"Use lightgallery.js to create a gallery for your plots or images.","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-04-11T00:00:00.000+02:00","citationText":"Bacher, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2061,17 +2063,17 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Use GitHub actions with R Markdown and Distill</h1>
+<h1>How to create a gallery in Distill</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>How can you automatically render README, Distill website…</p></p>
+<p><p>Use lightgallery.js to create a gallery for your plots or images.</p></p>
 </div>
 
 <div class="d-byline">
   
   Etienne Bacher
   
-<br />2021-03-19
+<br />2021-04-11
 </div>
 
 <div class="d-article">
@@ -2079,120 +2081,383 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#render-a-readme">Render a README</a></li>
-<li><a href="#render-a-distill-website">Render a Distill website</a></li>
+<li><a href="#create-a-gallery-with-lightgallery.js">Create a gallery with lightgallery.js</a></li>
+<li><a href="#make-the-gallery-with-r">Make the gallery with R</a>
+<ul>
+<li><a href="#create-thumbnails">Create thumbnails</a></li>
+<li><a href="#build-the-html-structure">Build the HTML structure</a></li>
+</ul></li>
+<li><a href="#update-github-actions">Update GitHub Actions</a></li>
+<li><a href="#bonus-make-a-gallery-for-tidytuesday">Bonus: make a gallery for #tidytuesday</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
 </ul>
 </nav>
 </div>
-<p><em><small> The preview image comes from: <a href="https://github.com/marketplace/actions/cancel-workflow-action" class="uri">https://github.com/marketplace/actions/cancel-workflow-action</a> </small></em></p>
-<p>Sometimes, it is useful to automatically render an R Markdown document or a website, made with <a href="https://rstudio.github.io/distill/"><code>distill</code></a> for example. In this post, I will present you two cases in which I use GitHub Actions to automatically do that.</p>
-<h1 id="render-a-readme">Render a README</h1>
-<p>One of my GitHub repos is a list of JavaScript libraries that have been adapted in R. You can find the repo <a href="https://github.com/etiennebacher/r-js-adaptation">here</a>. I wanted this list to be easy to update, so that it can be done on GitHub directly. The idea is that when I (or someone else) find a JavaScript library that has been adapted into an R package, I add it to a CSV file on GitHub. The problem is that this CSV file is then used into an R Markdown file, that creates a clean README with all the information.</p>
-<p>Without GitHub Actions, in addition to modify the CSV file, I would have to clone the repo, open it in RStudio, render the README, and push it back on GitHub.</p>
-<p>But this task is repetitive: apart from the details I add to the CSV file, it can be automated. This is where GitHub Actions comes into play. The idea is that you create a <code>.yml</code> file that contains the R code you want to run to render the README. This is what mine looks like:</p>
+<p>This post shows how to create a gallery on a Distill website. Keep in mind that Distill is (purposely) less flexible than other tools, such as <code>{blogdown}</code>, so the gallery might look quite different from what you expect.</p>
+<h2 id="create-a-gallery-with-lightgallery.js">Create a gallery with lightgallery.js</h2>
+<p><a href="https://github.com/sachinchoolur/lightgallery">Lightgallery.js</a> is a Javascript library that allows you to build a gallery very simply. You will need images in full size and thumbnails, i.e a smaller version of the images (we will see how to automatically make them later in this post).</p>
+<p>First of all, let’s construct the gallery with HTML, CSS, and Javascript. We will see how to adapt this in R then. We need to load the Javascript and CSS files for lightgallery.js in the head:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> master</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> macOS-latest</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v1</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-pandoc@v1</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install rmarkdown</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> Rscript -e &#39;install.packages(&quot;rmarkdown&quot;)&#39;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> Rscript -e &#39;rmarkdown::render(&quot;README.Rmd&quot;, output_format = &quot;md_document&quot;)&#39;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Commit results</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          git commit README.md -m &#39;Re-build README.Rmd&#39; || echo &quot;No changes to commit&quot;</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>          git push origin || echo &quot;No changes to commit&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.0/css/lightgallery.min.css&quot;</span> <span class="kw">/&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- lightgallery plugins --&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span></code></pre></div>
 </div>
-<p>The first two parts are quite self-explanatory:</p>
-<ul>
-<li><p>the jobs run every time there’s a push on the master branch;</p></li>
-<li><p>the name of this process is “Render README”.</p></li>
-</ul>
-<p>The third part needs a bit more details. There are some parts that I just copied and pasted from the <a href="https://github.com/r-lib/actions">R actions repository</a>, but basically you can see that first it initiates R and pandoc (<code>setup-r@v1</code>, <code>setup-pandoc@v1</code>). Then, I run an R script to install the <code>rmarkdown</code> package and I use it to render the Rmd file to create <code>README.md</code>.</p>
-<p>Last but not least, GitHub Actions rendered the README, but the changes are not on the repo yet. Hence, the last step is to commit the changes with a message and to push them on the master branch. Now, every time I change the CSV file on the master branch, the README will be automatically rendered (after a few minutes, since all the actions have to run first).</p>
-<p>I said this was the <code>.yaml</code> file I use on my repo, but I lied a bit. Actually, for my list of JavaScript libraries to be up-to-date, I also need to scrape the <a href="https://gallery.htmlwidgets.org/">htmlwidgets gallery</a> once in a while. Hence, I use <code>cron</code> to run GitHub Actions every Sunday night at 23:59. See <a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule">the documentation</a> to know how to format your schedule. Finally, here’s the <code>.yaml</code> file I use:</p>
+<p>Then, we construct the layout of the gallery. Here, I make the minimum layout, just to make sure this works:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> master</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;59 23 * * 0&#39;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">render</span><span class="kw">:</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> macOS-latest</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@v1</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-pandoc@v1</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install rmarkdown</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> Rscript -e &#39;install.packages(&quot;rmarkdown&quot;)&#39;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> Rscript -e &#39;rmarkdown::render(&quot;README.Rmd&quot;, output_format = &quot;md_document&quot;)&#39;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Commit results</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>          git commit README.md -m &#39;Re-build README.Rmd&#39; || echo &quot;No changes to commit&quot;</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>          git push origin || echo &quot;No changes to commit&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;lightgallery&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;img1.png&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;thumb-img1.png&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/a&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;img2.png&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;thumb-img2.png&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/a&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
 </div>
-<h1 id="render-a-distill-website">Render a Distill website</h1>
-<p>To automatically render your <code>distill</code> website on every push on master branch, the logic is very similar. In my <code>.yml</code> file, there are two main differences.</p>
-<p>The first one is that I need to install more packages to render my <code>distill</code> website. Some will be essential for everyone (e.g <code>distill</code>) but other packages won’t be (e.g <code>postcards</code>).</p>
-<p>The second one is more tricky, but could be useful for several people. Before using <code>distill</code>, I used <code>blogdown</code>. For some reasons (and mostly because <code>distill</code> is much easier in my opinion), I switched to <code>distill</code>. However, this switch changed a few URLs addresses, for my posts for instance. Therefore, I needed a <a href="https://yihui.org/en/2017/11/301-redirect/"><code>_redirects</code></a> file to, well, redirect the old URLs to the new ones and prevent 404 errors. The <code>_redirects</code> file needs to be in the <code>_site</code> folder, because it is the folder that is used by Netlify to build the site. The problem here is that this folder is deleted and re-generated every time <code>rmarkdown::render_site()</code> is called, i.e every time the website is locally built. Therefore, the <code>_redirects</code> file couldn’t just stay there. I had to add it manually after every build.</p>
-<p>The solution to that is to automate this in GitHub Actions. After having rendered the website, I just copy <code>_redirects</code> from its location on the repo to the <code>_site</code> folder. Now, every time I change something on the master branch, the <code>distill</code> website is rebuilt, and then the <code>_redirects</code> file is added.</p>
-<p>One drawback though: since these files are changed on GitHub only, the first thing you have to do when opening your site project in RStudio is to pull the changes (or, like me, you will struggle with merge conflicts).</p>
-<p>To finish this post, here’s the <code>.yml</code> file for my <code>distill</code> website:</p>
+<p>As you can see, the whole gallery is in a <code>&lt;div&gt;</code> element. To add an image to the gallery, we just have to add an <code>&lt;a&gt;</code> element as the two already there.</p>
+<p>Then, we add the Javascript code to run lightgallery.js:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> master</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render &amp; Deploy Site</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build</span><span class="kw">:</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> macOS-latest</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v2</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-r@master</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-pandoc@master</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install dependencies</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>          install.packages(&quot;rmarkdown&quot;)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>          install.packages(&quot;distill&quot;)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>          install.packages(&quot;postcards&quot;)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>          install.packages(&quot;devtools&quot;)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>          install.packages(&quot;fs&quot;)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>          devtools::install_github(&quot;etiennebacher/ebmisc&quot;)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">shell</span><span class="kw">:</span><span class="at"> Rscript {0}</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render Site</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> Rscript -e &#39;rmarkdown::render_site(encoding = &quot;UTF-8&quot;)&#39;</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Copy redirects</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> Rscript -e &#39;fs::file_copy(&quot;_redirects&quot;, &quot;_site/_redirects&quot;)&#39;</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Commit results</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>          git add -A</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>          git commit -m &#39;Rebuild site&#39; || echo &quot;No changes to commit&quot;</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>          git push origin || echo &quot;No changes to commit&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lightGallery</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;lightgallery&#39;</span>))<span class="op">;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>This should work, but I just add a CSS animation to zoom a bit when hovering a thumbnail:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="pp">#lightgallery</span> <span class="op">&gt;</span> a <span class="op">&gt;</span> img<span class="in">:hover</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transform</span>: <span class="fu">scale(</span><span class="dv">1.2</span><span class="op">,</span> <span class="dv">1.2</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">transition</span>: <span class="dv">0.2</span><span class="dt">s</span> <span class="dv">ease-in-out</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">cursor</span>: <span class="dv">pointer</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span></code></pre></div>
+</div>
+<p>That’s it for the proof of concept. Now let’s adapt it in R.</p>
+<details>
+<summary>
+Click to see the full HTML.
+</summary>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!doctype </span>html<span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;head&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;link</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/css/lightgallery.css&quot;</span> <span class="kw">/&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>   <span class="co">&lt;!-- lightgallery plugins --&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>   <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/head&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;body&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;lightgallery&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;img1.png&quot;</span><span class="ot"> data-sub-html=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">h4&gt;Sunset Serenity</span><span class="er">&lt;</span><span class="st">/h4&gt;</span><span class="er">&lt;</span><span class="st">p&gt;A gorgeous Sunset tonight captured at Coniston Water....</span><span class="er">&lt;</span><span class="st">/p&gt;&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;thumb-img1.png&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/a&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;img2.png&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;thumb-img2.png&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/a&gt;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lightGallery</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;lightgallery&#39;</span>))<span class="op">;</span> </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/script&gt;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;style&gt;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      <span class="pp">#lightgallery</span> <span class="op">&gt;</span> a <span class="op">&gt;</span> img<span class="in">:hover</span> {</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="kw">transform</span>: <span class="fu">scale(</span><span class="dv">1.2</span><span class="op">,</span> <span class="dv">1.2</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="kw">transition</span>: <span class="dv">0.2</span><span class="dt">s</span> <span class="dv">ease-in-out</span><span class="op">;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="kw">cursor</span>: <span class="dv">pointer</span><span class="op">;</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/style&gt;</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/body&gt;</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+</div>
+</details>
+<h2 id="make-the-gallery-with-r">Make the gallery with R</h2>
+<h3 id="create-thumbnails">Create thumbnails</h3>
+<p>First, store your (full-size) images in a folder, let’s say <code>_gallery/img</code>. As we saw above, <code>lightgallery.js</code> also requires thumbnails in addition to full-size images. To automatically create these thumbnails, we can use the function <code>image_resize()</code> in the package <code>magick</code>. First, I create a function to resize a single image, and I will apply it to all the images I have:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/magick/">magick</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
+
+<span class="va">resize_image</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">image</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">imFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_read</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;_gallery/img/&quot;</span>, <span class="va">image</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">imFile_resized</span> <span class="op">&lt;-</span> <span class="fu">magick</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/transform.html">image_resize</a></span><span class="op">(</span><span class="va">imFile</span>, <span class="st">&quot;6%&quot;</span><span class="op">)</span>
+  <span class="fu">magick</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html">image_write</a></span><span class="op">(</span><span class="va">imFile_resized</span>, <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;_gallery/img/thumb-&quot;</span>, <span class="va">image</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  
+<span class="op">}</span>
+
+<span class="va">list_png</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">&quot;_gallery/img&quot;</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">list_png</span>, <span class="va">resize_image</span><span class="op">)</span>
+</code></pre>
+</div>
+</div>
+<h3 id="build-the-html-structure">Build the HTML structure</h3>
+<p>We can now start building the HTML structure with the package <code>htmltools</code>. First, we can see that the HTML code for each image is very similar:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;img.png&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;thumb-img.png&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span></code></pre></div>
+</div>
+<p>This can be reproduced in R with:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/htmltools">htmltools</a></span><span class="op">)</span>
+
+<span class="va">tags</span><span class="op">$</span><span class="fu">a</span><span class="op">(</span>
+  href <span class="op">=</span> <span class="st">&quot;img.png&quot;</span>,
+  <span class="va">tags</span><span class="op">$</span><span class="fu">img</span><span class="op">(</span>src <span class="op">=</span> <span class="st">&quot;thumb-img.png&quot;</span><span class="op">)</span>
+<span class="op">)</span>
+</code></pre>
+</div>
+</div>
+<p>We can now create a function to apply this structure to all the images we have:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="va">make_gallery_layout</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="co"># Get the names of all images</span>
+  <span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">&quot;_gallery/img&quot;</span><span class="op">)</span>
+  
+  <span class="co"># Get the names of all full-size images</span>
+  <span class="va">images_full_size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">&quot;thumb&quot;</span>, <span class="va">images</span>, value <span class="op">=</span> <span class="cn">TRUE</span>, invert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  
+  <span class="co"># Get the names of all thumbnails</span>
+  <span class="va">images_thumb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">&quot;thumb&quot;</span>, <span class="va">images</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  
+  <span class="co"># Create a dataframe where each row is one image (useful for</span>
+  <span class="co"># the apply() function)</span>
+  <span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>images_thumb <span class="op">=</span> <span class="va">images_thumb</span>,
+                       images_full_size <span class="op">=</span> <span class="va">images_full_size</span><span class="op">)</span>
+  
+  <span class="co"># Create the HTML structure for each image</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tag.html">tagList</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">images</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+      <span class="va">tags</span><span class="op">$</span><span class="fu">a</span><span class="op">(</span>
+        href <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;_gallery/img/&quot;</span>, <span class="va">x</span><span class="op">[[</span><span class="st">&quot;images_full_size&quot;</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
+        <span class="va">tags</span><span class="op">$</span><span class="fu">img</span><span class="op">(</span>src <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;_gallery/img/&quot;</span>, <span class="va">x</span><span class="op">[[</span><span class="st">&quot;images_thumb&quot;</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+      <span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span><span class="op">)</span>
+  
+<span class="op">}</span>
+</code></pre>
+</div>
+</div>
+<p>Lastly, we need to embed this HTML code in <code>&lt;div id=&quot;lightgallery&quot;&gt;</code>, as shown in the first section. We can do that with the following code:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/withTags.html">withTags</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html">div</a></span><span class="op">(</span>
+    class <span class="op">=</span> <span class="st">&quot;row&quot;</span>,
+    id <span class="op">=</span> <span class="st">&quot;lightgallery&quot;</span>,
+    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tag.html">tagList</a></span><span class="op">(</span>
+      <span class="fu">make_gallery_layout</span><span class="op">(</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">)</span>
+<span class="op">)</span>
+</code></pre>
+</div>
+</div>
+<p>We now have all the HTML code we need. We now have to add the CSS and the JavaScript code. We can just copy-paste it in an R Markdown file.</p>
+<details>
+<summary>
+Click to see the full R Markdown file.
+</summary>
+<pre><code>---
+title: &quot;Gallery&quot;
+output:
+  distill::distill_article
+---
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE
+)
+```
+
+&lt;head&gt;
+
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.0/css/lightgallery.min.css&quot; /&gt; 
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- lightgallery plugins --&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+
+```{css}
+#lightgallery &gt; a &gt; img:hover {
+   transform: scale(1.15, 1.15);
+   transition: 0.4s ease-in-out;
+   cursor: pointer;
+}
+```
+
+```{r include = FALSE}
+# Load the functions we have created
+source(here::here(&quot;R/functions.R&quot;))
+```
+
+```{r}
+# Create layout
+withTags(
+  div(
+    class = &quot;row&quot;,
+    id = &quot;lightgallery&quot;,
+    tagList(
+      make_gallery_layout()
+    )
+  )
+)
+
+```
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    lightGallery(document.getElementById(&#39;lightgallery&#39;)); 
+&lt;/script&gt;
+</code></pre>
+</details>
+<h2 id="update-github-actions">Update GitHub Actions</h2>
+<p>We need to add <code>fs::dir_copy(&quot;_gallery/img&quot;, &quot;_site/_gallery/img&quot;)</code> in GitHub Actions so that the images are found when the gallery is built. We also have to add <code>magick</code> and <code>httr</code> in the list of packages to install.</p>
+<p>If you haven’t set up GitHub Actions yet, you can check <a href="https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/">my previous post</a>, or check my <a href="https://github.com/etiennebacher/personal_website_distill/blob/master/.github/workflows/main.yml">current GitHub Actions</a> for this site.</p>
+<h2 id="bonus-make-a-gallery-for-tidytuesday">Bonus: make a gallery for #tidytuesday</h2>
+<p>I have started participating to <a href="https://github.com/rfordatascience/tidytuesday">#tidytuesday</a> this year, and the main reason I wanted to create a gallery was to display my favorite plots. Therefore, I created a function to make it as easy as possible for me to update the plots I want to display in the gallery.</p>
+<p>The purpose of the function below is to download a plot for a specific week in a specific year in the <a href="https://github.com/etiennebacher/tidytuesday">repo containing my plots</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span>
+
+<span class="va">get_tt_image</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">year</span>, <span class="va">week</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">week</span><span class="op">)</span><span class="op">)</span> <span class="va">week</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">week</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">week</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="va">week</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;0&quot;</span>, <span class="va">week</span><span class="op">)</span>
+  
+  <span class="co">### Get the link to download the image I want</span>
+  <span class="va">req</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span><span class="st">&quot;https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1&quot;</span><span class="op">)</span>
+  <span class="fu"><a href="https://httr.r-lib.org/reference/stop_for_status.html">stop_for_status</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span>
+  <span class="va">file_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">req</span><span class="op">)</span><span class="op">$</span><span class="va">tree</span>, <span class="st">&quot;[&quot;</span>, <span class="st">&quot;path&quot;</span><span class="op">)</span>, use.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+  <span class="va">png_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">&quot;.png&quot;</span>, <span class="va">file_list</span>, value <span class="op">=</span> <span class="cn">TRUE</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">png_wanted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">png_list</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="va">png_wanted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;W&quot;</span>, <span class="va">week</span><span class="op">)</span>, <span class="va">png_wanted</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="co"># If a png file is called accidental_art, don&#39;t take it</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">&quot;accidental_art&quot;</span>, <span class="va">png_wanted</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">png_wanted</span> <span class="op">&lt;-</span> <span class="va">png_wanted</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">&quot;accidental_art&quot;</span>, <span class="va">png_wanted</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>
+  <span class="op">}</span>
+  
+  <span class="co">### Link of the image I want to download</span>
+  <span class="va">origin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>
+    <span class="st">&quot;https://raw.githubusercontent.com/etiennebacher/tidytuesday/master/&quot;</span>,
+    <span class="va">png_wanted</span> 
+  <span class="op">)</span>
+  
+  <span class="co">### Destination of this image</span>
+  <span class="va">destination</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;_gallery/img/&quot;</span>, <span class="va">year</span>, <span class="st">&quot;-&quot;</span>, <span class="va">week</span>, <span class="st">&quot;-&quot;</span>, <span class="fu"><a href="https://rdrr.io/r/base/trimws.html">trimws</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">origin</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="co">### Download only if not already there</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="va">destination</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="st">&quot;_gallery/img&quot;</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="st">&quot;_gallery/img&quot;</span><span class="op">)</span>
+    <span class="op">}</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">destination</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  <span class="co">### Create the thumbnail if not already there</span>
+  <span class="va">thumb_destination</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;_gallery/img/thumb-&quot;</span>, <span class="va">year</span>, <span class="st">&quot;-&quot;</span>, <span class="va">week</span>, <span class="st">&quot;-&quot;</span>, 
+                        <span class="fu"><a href="https://rdrr.io/r/base/trimws.html">trimws</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">origin</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="va">thumb_destination</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">resize_image</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">year</span>, <span class="st">&quot;-&quot;</span>, <span class="va">week</span>, <span class="st">&quot;-&quot;</span>, <span class="fu"><a href="https://rdrr.io/r/base/trimws.html">trimws</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">origin</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
+ 
+<span class="op">}</span>
+</code></pre>
+</div>
+</div>
+<p>As you can see, this function downloads the plot I want, puts it in <code>_gallery/img</code> and creates the thumbnail. All I have to do now is to choose the plots I want to display and to apply the function to these year-week pairs in the R Markdown file.</p>
+<p>Note that for some reason, this function sometimes fails on GitHub Actions because of HTTP error 403. I think this is related to the number of requests to GitHub API but what is strange is that this function isn’t supposed to make a lot of requests, so it is still a mystery.</p>
+<details>
+<summary>
+Click to see the full R Markdown file.
+</summary>
+<pre><code>---
+title: &quot;Gallery&quot;
+output:
+  distill::distill_article
+---
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE
+)
+```
+
+&lt;head&gt;
+
+&lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.0/css/lightgallery.min.css&quot; /&gt; 
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.1-beta.0/js/lightgallery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- lightgallery plugins --&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.2.1/lg-fullscreen.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.2.1/lg-thumbnail.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+
+```{css}
+#lightgallery &gt; a &gt; img:hover {
+   transform: scale(1.15, 1.15);
+   transition: 0.4s ease-in-out;
+   cursor: pointer;
+}
+```
+
+```{r include = FALSE}
+# Load the functions we have created
+source(here::here(&quot;R/functions.R&quot;))
+
+# Make list of tidytuesday plots I want to show in the gallery
+tt_plots &lt;- rbind(
+  c(2021, 8),
+  c(2021, 12),
+  c(2021, 13),
+  c(2021, 15),
+  c(2021, 16)
+)
+
+# Download the plots and create the thumbnails
+apply(tt_plots, 1, function(x) get_tt_image(x[1], x[2]))
+```
+
+```{r}
+# Create layout
+withTags(
+  div(
+    class = &quot;row&quot;,
+    id = &quot;lightgallery&quot;,
+    tagList(
+      make_gallery_layout()
+    )
+  )
+)
+
+```
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    lightGallery(document.getElementById(&#39;lightgallery&#39;)); 
+&lt;/script&gt;
+</code></pre>
+</details>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this post, I tried to explain how to build a gallery with a simple example. However, you can also check the <a href="https://github.com/etiennebacher/personal_website_distill">repo of my website</a> to have a clearer view of how to do so. I also added some CSS styling that is not described here, to limit the code to what is really necessary.</p>
+<p>Check the <a href="https://www.etiennebacher.com/gallery.html">gallery</a> to see the result.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2211,12 +2476,12 @@ html body div.container-fluid.d-none.d-lg-block.d-xl-block div.d-flex.row.flex-r
   <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/etiennebacher/personal_website_distill">https://github.com/etiennebacher/personal_website_distill</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
-  <pre class="citation-appendix short">Bacher (2021, March 19). Etienne Bacher: Use GitHub actions with R Markdown and Distill. Retrieved from https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/</pre>
+  <pre class="citation-appendix short">Bacher (2021, April 11). Etienne Bacher: How to create a gallery in Distill. Retrieved from https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/</pre>
   <p>BibTeX citation</p>
-  <pre class="citation-appendix long">@misc{bacher2021use,
+  <pre class="citation-appendix long">@misc{bacher2021how,
   author = {Bacher, Etienne},
-  title = {Etienne Bacher: Use GitHub actions with R Markdown and Distill},
-  url = {https://www.etiennebacher.com/posts/2021-03-19-use-github-actions-with-r-markdown-and-distill/},
+  title = {Etienne Bacher: How to create a gallery in Distill},
+  url = {https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/},
   year = {2021}
 }</pre>
 </div>
