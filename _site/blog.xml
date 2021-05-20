@@ -7,14 +7,15 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 11 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate>
     <item>
       <title>How to create a gallery in Distill</title>
       <dc:creator>Etienne Bacher</dc:creator>
       <link>https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill</link>
       <description>Use lightgallery.js to create a gallery for your plots or images.</description>
       <guid>https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill</guid>
-      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.etiennebacher.com/posts/2021-04-11-how-to-create-a-gallery-in-distill/gallery_image.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>Use GitHub actions with R Markdown and Distill</title>
