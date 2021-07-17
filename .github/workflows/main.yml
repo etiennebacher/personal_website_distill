@@ -25,7 +25,7 @@ jobs:
       - name: Copy redirects and gallery images
         run: Rscript -e 'fs::file_copy("_redirects", "_site/_redirects"); fs::dir_copy("_gallery/img", "_site/_gallery/img")'
       - name: Get CV
-        run: Rscript -e 'download.file("https://github.com/etiennebacher/CV_perso/blob/master/cv.pdf", "cv.pdf")'
+        run: Rscript -e 'download.file("https://github.com/etiennebacher/CV_perso/blob/master/cv.pdf", "_site/cv.pdf")'
       - name: Commit results
         run: |
           git add -A
