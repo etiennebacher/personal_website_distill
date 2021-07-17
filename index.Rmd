@@ -14,6 +14,7 @@ site: distill::distill_website
 ---
 
 <!-- The postcard had a useless second scrollbar (in addition to the big one of distill). For some reason, I couldn't remove it with the CSS in custom.css. My only solution is to modify the source of the postcards::trestle template to remove this scrollbar. -->
+<!-- Same for font family -->
 ```{r, include = FALSE}
 trestles_orig <- readLines(
   system.file("pandoc_templates/trestles.html",
@@ -30,6 +31,8 @@ trestles_mod[
     )
   )
 ] <- '<div class="d-flex flex-column col px-5 align-items-center align-self-center mh-100" style="overflow-y: none;">'
+
+trestles_mod <- gsub("'Roboto Slab'", '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif', trestles_mod)
 
 cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/trestles.html",
               package = "postcards"))
