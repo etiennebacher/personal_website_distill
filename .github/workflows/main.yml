@@ -24,6 +24,8 @@ jobs:
         run: Rscript -e 'rmarkdown::render_site(encoding = "UTF-8")'
       - name: Copy redirects and gallery images
         run: Rscript -e 'fs::file_copy("_redirects", "_site/_redirects"); fs::dir_copy("_gallery/img", "_site/_gallery/img")'
+      - name: Get CV
+        run: Rscript -e 'download.file("https://github.com/etiennebacher/CV_perso/blob/master/cv.pdf", "cv.pdf")'
       - name: Commit results
         run: |
           git add -A
