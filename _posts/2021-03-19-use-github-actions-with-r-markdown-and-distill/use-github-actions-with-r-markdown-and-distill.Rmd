@@ -61,14 +61,14 @@ The third part needs a bit more details. There are some parts that I just copied
 
 Last but not least, GitHub Actions rendered the README, but the changes are not on the repo yet. Hence, the last step is to commit the changes with a message and to push them on the master branch. Now, every time I change the CSV file on the master branch, the README will be automatically rendered (after a few minutes, since all the actions have to run first).
 
-I said this was the `.yaml` file I use on my repo, but I lied a bit. Actually, for my list of JavaScript libraries to be up-to-date, I also need to scrape the [htmlwidgets gallery](https://gallery.htmlwidgets.org/) once in a while. Hence, I use `cron` to run GitHub Actions every Sunday night at 23:59. See [the documentation](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule) to know how to format your schedule. Finally, here's the `.yaml` file I use:
+I said this was the `.yaml` file I use on my repo, but I lied a bit. Actually, for my list of JavaScript libraries to be up-to-date, I also need to scrape the [htmlwidgets gallery](https://gallery.htmlwidgets.org/) once in a while. Hence, I use `cron` to run GitHub Actions every Monday at 00:00. See [the documentation](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule) to know how to format your schedule. Finally, here's the `.yaml` file I use:
 
 ```{yaml}
 on:
   push:
     branches: master
   schedule:
-    - cron: '59 23 * * 0'
+    - cron: '0 0 * * MON'
 
 name: Render README
 
