@@ -23,6 +23,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -2032,7 +2033,7 @@ d-article div.sourceCode pre {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Use GitHub actions with R Markdown and Distill","description":"How can you automatically render README, Distill website...","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-03-19T00:00:00.000+00:00","citationText":"Bacher, 2021"}
+{"title":"Use GitHub actions with R Markdown and Distill","description":"How can you automatically render README, Distill website...","authors":[{"author":"Etienne Bacher","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-03-19T00:00:00.000+01:00","citationText":"Bacher, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2125,13 +2126,13 @@ d-article div.sourceCode pre {
 </ul>
 <p>The third part needs a bit more details. There are some parts that I just copied and pasted from the <a href="https://github.com/r-lib/actions">R actions repository</a>, but basically you can see that first it initiates R and pandoc (<code>setup-r@v1</code>, <code>setup-pandoc@v1</code>). Then, I run an R script to install the <code>rmarkdown</code> package and I use it to render the Rmd file to create <code>README.md</code>.</p>
 <p>Last but not least, GitHub Actions rendered the README, but the changes are not on the repo yet. Hence, the last step is to commit the changes with a message and to push them on the master branch. Now, every time I change the CSV file on the master branch, the README will be automatically rendered (after a few minutes, since all the actions have to run first).</p>
-<p>I said this was the <code>.yaml</code> file I use on my repo, but I lied a bit. Actually, for my list of JavaScript libraries to be up-to-date, I also need to scrape the <a href="https://gallery.htmlwidgets.org/">htmlwidgets gallery</a> once in a while. Hence, I use <code>cron</code> to run GitHub Actions every Sunday night at 23:59. See <a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule">the documentation</a> to know how to format your schedule. Finally, here’s the <code>.yaml</code> file I use:</p>
+<p>I said this was the <code>.yaml</code> file I use on my repo, but I lied a bit. Actually, for my list of JavaScript libraries to be up-to-date, I also need to scrape the <a href="https://gallery.htmlwidgets.org/">htmlwidgets gallery</a> once in a while. Hence, I use <code>cron</code> to run GitHub Actions every Monday at 00:00. See <a href="https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule">the documentation</a> to know how to format your schedule. Finally, here’s the <code>.yaml</code> file I use:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> master</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;59 23 * * 0&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;0 0 * * MON&#39;</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render README</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
