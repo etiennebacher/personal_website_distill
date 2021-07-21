@@ -73,7 +73,6 @@ source(here::here("R/functions.R"))
 
 # Make list of tidytuesday plots I want to show in the gallery
 tt_plots <- rbind(
-  c(2021, 8),
   c(2021, 12),
   c(2021, 13),
   c(2021, 15),
