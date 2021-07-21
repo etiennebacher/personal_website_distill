@@ -7,7 +7,7 @@ links:
   - label: Twitter
     url: "https://twitter.com/EtienneBacher"
   - label: Email
-    url: "mailto:etienne.bacher@protonmail.com"
+    url: "mailto:etienne.bacher@liser.lu"
 output:
   postcards::trestles
 site: distill::distill_website
