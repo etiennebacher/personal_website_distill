@@ -17,8 +17,9 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Install dependencies
+      - name: Install dependencies and save github token for gh()
         run: |
+          github_token <- "${{ secrets.GITHUB_TOKEN }}"
           install.packages(c("rmarkdown", "distill", "postcards", "devtools",
           "fs", "htmltools", "here", "magick", "gh", "jsonlite"))
         shell: Rscript {0}

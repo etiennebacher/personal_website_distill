@@ -57,7 +57,9 @@ get_tt_image <- function(year, week) {
   
   ### Get the link to download the image I want
   tmp_file <- tempfile(fileext = ".json")
-  gh::gh("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1", .destfile = tmp_file)
+  
+  # github token is defined in github actions
+  gh::gh("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1", .destfile = tmp_file, .token = github_token) 
   file_list <- jsonlite::fromJSON(tmp_file)$tree$path
   
   png_list <- grep(".png", file_list, value = TRUE, fixed = TRUE)
