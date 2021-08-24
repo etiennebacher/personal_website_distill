@@ -55,7 +55,8 @@ get_tt_image <- function(year, week) {
   if (nchar(week) == 1) week <- paste0("0", week)
   
   ### Get the link to download the image I want
-  req <- GET("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1")
+  ### Add user agent, as specified here: https://stackoverflow.com/questions/39907742/github-api-is-responding-with-a-403-when-using-requests-request-function
+  req <- GET("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1", user_agent("etiennebacher"))
   stop_for_status(req)
   file_list <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
   png_list <- grep(".png", file_list, value = TRUE, fixed = TRUE)
