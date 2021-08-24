@@ -17,15 +17,14 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - name: Install dependencies and save github token for gh()
+      - name: Install dependencies, save github token for gh(), render site
         run: |
           github_token <- "${{ secrets.GITHUB_TOKEN }}"
           install.packages(c("rmarkdown", "distill", "postcards", "devtools",
           "fs", "htmltools", "here", "magick", "gh", "jsonlite"))
+          rmarkdown::render_site(encoding = "UTF-8")
         shell: Rscript {0}
-
-      - name: Render Site
-        run: Rscript -e 'rmarkdown::render_site(encoding = "UTF-8")'
+        
       - name: Copy redirects and gallery images
         run: Rscript -e 'fs::file_copy("_redirects", "_site/_redirects"); fs::dir_copy("_gallery/img", "_site/_gallery/img")'
       - name: Get CV
