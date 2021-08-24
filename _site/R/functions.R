@@ -1,5 +1,6 @@
 library(htmltools)
-library(httr)
+library(gh)
+library(jsonlite)
 library(magick)
 
 ##########
@@ -55,10 +56,10 @@ get_tt_image <- function(year, week) {
   if (nchar(week) == 1) week <- paste0("0", week)
   
   ### Get the link to download the image I want
-  ### Add user agent, as specified here: https://stackoverflow.com/questions/39907742/github-api-is-responding-with-a-403-when-using-requests-request-function
-  req <- GET("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1", user_agent("etiennebacher"))
-  stop_for_status(req)
-  file_list <- unlist(lapply(content(req)$tree, "[", "path"), use.names = F)
+  tmp_file <- tempfile(fileext = ".json")
+  gh::gh("https://api.github.com/repos/etiennebacher/tidytuesday/git/trees/master?recursive=1", .destfile = tmp_file)
+  file_list <- jsonlite::fromJSON(tmp_file)$tree$path
+  
   png_list <- grep(".png", file_list, value = TRUE, fixed = TRUE)
   png_wanted <- grep(year, png_list, value = TRUE)
   png_wanted <- grep(paste0("W", week), png_wanted, value = TRUE)
