@@ -89,10 +89,8 @@ If you want to contact me, the best way to do so is by email.
 <ul>
  
 <li class = "grad-item">   PhD student in Economics of Migration, 2020 - current <br> <p class = "grad-location"> LISER, Luxembourg </p> </li>
-<br>
 <li class = "grad-item">   Master's degree in Development Economics, 2018 - 2020 <br>
 <p class = "grad-location"> University Clermont-Auvergne, France </p> </li>
-<br>
 <li class = "grad-item">   Bachelor's degree in Development Economics, 2017 - 2018 <br> <p class = "grad-location"> University Clermont-Auvergne, France </p> 
 </li>
 
