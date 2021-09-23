@@ -9,7 +9,7 @@ navbar:
       href: index.html
     - text: "Blog"
       href: blog.html
-    - text: "Projects"
+    - text: "Software"
       href: projects.html
     - text: "Gallery"
       href: gallery.html
