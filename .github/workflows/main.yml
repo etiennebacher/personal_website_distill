@@ -18,8 +18,9 @@ jobs:
       - name: Install dependencies, save github token for gh(), render site
         run: |
           github_token <- "${{ secrets.GITHUB_TOKEN }}"
-          install.packages(c("rmarkdown", "distill", "postcards", "devtools",
+          install.packages(c("distill", "postcards", "devtools",
           "fs", "htmltools", "here", "magick", "gh", "jsonlite"))
+          devtools::install_version("rmarkdown", "2.10")
           rmarkdown::render_site(encoding = "UTF-8")
         shell: Rscript {0}
         
