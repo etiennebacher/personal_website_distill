@@ -3,7 +3,7 @@ title: ""  # any name you want here
 listing: projects # do this exactly
 ---
 
-## Projects
+## Software
 
 ```{r echo = FALSE}
 source(file.path("R", "functions.R"))
