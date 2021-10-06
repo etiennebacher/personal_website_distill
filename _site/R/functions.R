@@ -79,7 +79,7 @@ get_tt_image <- function(year, week) {
     if (!file.exists("_gallery/img")) {
       dir.create("_gallery/img")
     }
-    download.file(origin, destination)
+    download.file(origin, destination, method = "curl")
   }
   
   thumb_destination <- paste0("_gallery/img/thumb-", year, "-", week, "-", 
