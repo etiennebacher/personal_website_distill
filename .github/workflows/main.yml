@@ -20,7 +20,6 @@ jobs:
           github_token <- "${{ secrets.GITHUB_TOKEN }}"
           install.packages(c("distill", "postcards", "devtools",
           "fs", "htmltools", "here", "magick", "gh", "jsonlite"))
-          devtools::install_version("rmarkdown", "2.10")
           rmarkdown::render_site(encoding = "UTF-8")
         shell: Rscript {0}
         
