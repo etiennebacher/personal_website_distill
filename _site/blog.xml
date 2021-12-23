@@ -7,7 +7,16 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Reproduce some maps about 3G and 4G access</title>
+      <dc:creator>Etienne Bacher</dc:creator>
+      <link>https://www.etiennebacher.com/posts/2021-12-23-reproduce-some-maps-about-3g-and-4g-access</link>
+      <description>I try to reproduce some maps made by Dominic Royé.</description>
+      <guid>https://www.etiennebacher.com/posts/2021-12-23-reproduce-some-maps-about-3g-and-4g-access</guid>
+      <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://www.etiennebacher.com/posts/2021-12-23-reproduce-some-maps-about-3g-and-4g-access/my_plot_fr.png" medium="image" type="image/png" width="2100" height="2100"/>
+    </item>
     <item>
       <title>How to create a gallery in Distill</title>
       <dc:creator>Etienne Bacher</dc:creator>
