@@ -7,8 +7,7 @@ author:
 date: 2021-12-23
 preview: my_plot_fr.png
 output:
-  distill::distill_article:
-    self_contained: false
+  distill::distill_article
 ---
 
 
@@ -95,7 +94,7 @@ LTE <- celltowers |>
 Now, we could plot all those points, but there are so many that it would completely hide the map so we need to use the smallest size possible for each point. Contrary to what one might expect, this is not done with the `size` argument but with the `shape` argument. Indeed, setting `shape = "."` means that each point will be the size of one pixel^[Thanks to [this StackOverflow answer](https://stackoverflow.com/a/51700192/11598948) for pointing that out.]. Still there are too many points compared to the original plot. The solution here is to decrease the opacity of each point:
 
 ```{r, cache = TRUE, fig.height=8}
-ggplot() + 
+ggplot() +  
   geom_sf(data = france, fill = "black", color = "white", size = 0.3) + 
   geom_sf(data = UMTS, shape = ".", color = "#4d88ff", alpha = 0.3) +
   geom_sf(data = LTE, shape = ".", color = "#cc0000", alpha = 0.5)
