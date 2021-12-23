@@ -4,7 +4,8 @@ description: |
   I try to reproduce some maps made by Dominic Royé. 
 author:
   - name: Etienne Bacher
-date: 2021-12-22
+date: 2021-12-23
+preview: my_plot_fr.png
 output:
   distill::distill_article:
     self_contained: false
