@@ -16,7 +16,7 @@ navbar:
     - text: "CV"
       href: cv.pdf
   source_url: https://github.com/etiennebacher/personal_website_distill
-  search: false
+  search: true
 base_url: https://www.etiennebacher.com/
 repository_url: https://github.com/etiennebacher/personal_website_distill
 output: 
