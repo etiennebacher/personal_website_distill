@@ -1,0 +1,42 @@
+---
+title: ""  # any name you want here
+listing: projects # do this exactly
+---
+  
+## Research
+
+### Work in progress
+
+```{r echo = FALSE}
+htmltools::withTags(
+    div(class = "card2",
+        div(class = "paper-title",
+            "Do anti-immigration attitudes discourage migrants from coming?"),
+        div(class = "paper-authors",
+            "Etienne Bacher, Michel Beine, Hillel Rapoport"),
+         div(class = "paper-date",
+          "March 2022")
+          )
+  )
+```
+
+```{css echo = FALSE}
+.card2 {
+  background-color: white;
+  border: 2px solid #dae7f1;
+  border-radius: .25rem;
+  padding: 5px;
+}
+.paper-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.paper-authors {
+  font-size: 1rem;
+  font-style: italic;
+}
+.paper-date {
+  font-size: .9rem
+}
+```
+

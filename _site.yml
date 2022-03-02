@@ -7,6 +7,8 @@ navbar:
   right:
     - icon: fa-home
       href: index.html
+    - text: "Research"
+      href: research.html
     - text: "Blog"
       href: blog.html
     - text: "Software"
