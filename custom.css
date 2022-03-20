@@ -14,7 +14,7 @@
 @font-face {
     font-family: 'Luciole';
     src: url('fonts/Luciole-Regular.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 200;
     font-style: normal;
 }
 
@@ -35,11 +35,11 @@ html {
   --body-color:      rgba(0, 0, 0, 0.8);
   --aside-color:     rgba(0, 0, 0, 0.6);
   --fig-cap-color:   rgba(0, 0, 0, 0.6);
-  /*-- Specify custom fonts ~~~ must be imported above   --
-  --heading-font:    "Montserrat", sans-serif;
-  --mono-font:       "Montserrat", monospace;
-  --body-font:       "Montserrat", sans-serif;
-  --navbar-font:     "Montserrat", sans-serif;  /* websites + blogs only */
+  /*-- Specify custom fonts ~~~ must be imported above   -- */
+  --heading-font:    "Luciole", sans-serif;
+  --mono-font:       "Luciole", monospace;
+  --body-font:       "Luciole", sans-serif;
+  --navbar-font:     "Luciole", sans-serif;  /* websites + blogs only */
 }
 
 
