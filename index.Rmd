@@ -34,6 +34,8 @@ trestles_mod[
 
 trestles_mod <- gsub("'Roboto Slab'", '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif', trestles_mod)
 
+trestles_mod <- gsub('style="height:15rem"', 'style="width: 35%"', trestles_mod)
+
 cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/trestles.html",
               package = "postcards"))
 
@@ -98,10 +100,3 @@ If you want to contact me, the best way to do so is by email.
 :::
 ::::
 
-<!-- <span style = "font-size: 1.4rem; font-weight: 600;"> Education </span> -->
-
-<!-- * PhD in Economics of Migration, 2020 - current <br> LISER  -->
-
-<!-- * Master's degree in Development Economics, 2018 - 2020 <br> University Clermont-Auvergne  -->
-
-<!-- * Bachelor's degree in Development Economics, 2017 - 2018 <br> University Clermont-Auvergne -->
