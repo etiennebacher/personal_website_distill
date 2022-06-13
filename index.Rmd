@@ -2,11 +2,11 @@
 title: "Etienne Bacher"
 image: "etienne.png"
 links:
-  - label: GitHub
+  - label: '<i class="fab fa-github fa-lg"></i> GitHub'
     url: "https://github.com/etiennebacher"
-  - label: Twitter
+  - label: '<i class="fab fa-twitter fa-lg"></i> Twitter'
     url: "https://twitter.com/EtienneBacher"
-  - label: Email
+  - label: '<i class="fas fa-envelope fa-lg"></i> Email'
     url: "mailto:etienne.bacher@liser.lu"
 output:
   postcards::trestles
