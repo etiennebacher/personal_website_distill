@@ -10,13 +10,34 @@ source(file.path("R", "functions.R"))
 make_grid_project(
   
   make_card_project(
-    title = "prompter",
-    title_link = "https://github.com/etiennebacher/prompter",
-    description = "This package allows to easily add tooltips to HTML elements in R Shiny applications. It uses hint.css under the hood.",
-    button_link = "https://github.com/etiennebacher/prompter"
+    title = "altdoc",
+    title_link = "https://altdoc.etiennebacher.com",
+    description = "Use docute, docsify or mkdocs to create a website for your R package.",
+    button_link = "https://altdoc.etiennebacher.com"
   ),
   
-    make_card_project(
+  make_card_project(
+    title = "prompter",
+    title_link = "https://prompter.etiennebacher.com",
+    description = "This package allows to easily add tooltips to HTML elements in R Shiny applications. It uses hint.css under the hood.",
+    button_link = "https://prompter.etiennebacher.com"
+  ),
+  
+  make_card_project(
+    title = "conductor",
+    title_link = "https://conductor.etiennebacher.com",
+    description = " Create tours in R Shiny applications using shepherd.js.",
+    button_link = "https://conductor.etiennebacher.com"
+  ),
+  
+  make_card_project(
+    title = "R-JS adaptation",
+    title_link = "https://github.com/etiennebacher/r-js-adaptation",
+    description = "A list of all Javascript libraries adapted in R.",
+    button_link = "https://github.com/etiennebacher/r-js-adaptation"
+  ),
+  
+  make_card_project(
     title = "shinyfullscreen",
     title_link = "https://github.com/etiennebacher/shinyfullscreen",
     description = "Use screenfull.js to put HTML elements in fullscreen in R Shiny applications.",
@@ -28,14 +49,6 @@ make_grid_project(
     title_link = "https://github.com/etiennebacher/circletyper",
     description = "Curve text elements in R Shiny applications, using Circletype.js.",
     button_link = "https://github.com/etiennebacher/circletyper"
-  ),
-  
-   make_card_project(
-    title = "R-JS adaptation",
-    title_link = "https://github.com/etiennebacher/r-js-adaptation",
-    description = "A list of all Javascript libraries adapted in R.",
-    button_link = "https://github.com/etiennebacher/r-js-adaptation"
   )
-  
 )
 ```
