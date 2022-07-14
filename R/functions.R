@@ -28,7 +28,7 @@ make_card_project <- function(
             div(class = "article-style",
                 p(description)
             ),
-            a(target="_blank")
+            a(target="_blank", class = "link_button")
         )
     )
   )
