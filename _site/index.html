@@ -781,6 +781,7 @@
       .card {
         transition: 0.5s;
         border-radius: 2%;
+        position: relative;
       }
           
       .card .card-text {
@@ -789,12 +790,23 @@
         background-color: #dae7f1;
       }
       .card-text:last-child {
-        margin-bottom: 0;
         background-color: #dae7f1;
+      }
+      
+      .card-text > div.article-style {
+        padding-bottom: 2em
       }
       
       .card:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      }
+      
+      .link_button {
+        position: absolute;
+        bottom: 1em;
+        left: 30%;
+        right: 30%;
+        border-radius: 5%;
       }
       
       /* Center title in cards */
