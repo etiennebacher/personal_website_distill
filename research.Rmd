@@ -3,40 +3,56 @@ title: ""  # any name you want here
 listing: projects # do this exactly
 ---
   
+```{css echo = FALSE}
+.paper-title {
+  font-style: italic;
+}
+
+li {
+ line-height:1.5em;
+ padding-left:0px;
+ padding-top:5px;
+ padding-bottom:5px;
+ font-size:1rem;
+ list-style-type:none;
+ list-style:none;
+ display: table-row;
+}
+
+li:before {
+ font-family: 'Font Awesome 5 Free';
+ content: "\f15c ";
+ color: black;
+ padding-right: 15px;
+ display: table-cell;
+}
+
+.btn-outline-dark {
+	padding: 0.35rem;
+	border-radius: 6%;
+	border: solid 1px #4682b4;
+}
+
+d-article a, d-article a:hover {
+  border-bottom: none;
+}
+```
+
 ## Research
 
 ### Work in progress
 
-```{r echo = FALSE}
-htmltools::withTags(
-    div(class = "card2",
-        div(class = "paper-title",
-            "Do anti-immigration attitudes discourage migrants from coming?"),
-        div(class = "paper-authors",
-            "Etienne Bacher, Michel Beine, Hillel Rapoport"),
-         div(class = "paper-date",
-          "March 2022")
-          )
-  )
-```
+* Etienne Bacher, Michel Beine, Hillel Rapoport (2022), *The vicious circle of xenophobia*
 
-```{css echo = FALSE}
-.card2 {
-  background-color: white;
-  border: 2px solid #dae7f1;
-  border-radius: .25rem;
-  padding: 5px;
-}
-.paper-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-.paper-authors {
-  font-size: 1rem;
-  font-style: italic;
-}
-.paper-date {
-  font-size: .9rem
-}
-```
+</ul>
+
+
+### Software
+
+* Patil, I., Makowski, D., Ben-Shachar, M. S., Wiernik, B., Bacher, E., Lüdecke, D. (2022), *datawizard: An R Package for Easy Data Preparation and Statistical Transformations.*, Journal of Open Source Software, 7(78)
+
+<p> 
+<a href="https://joss.theoj.org/papers/10.21105/joss.04684" style="margin-left: 3em"> <button class="btn btn-outline-dark"> <i class="fas fa-file-pdf fa-lg"></i> Paper</button> </a> 
+<a href="https://github.com/easystats/datawizard/" style="margin-left: 1em"> <button class="btn btn-outline-dark"> <i class="fab fa-github fa-lg"></i> Code</button> </a>
+</p>
 
