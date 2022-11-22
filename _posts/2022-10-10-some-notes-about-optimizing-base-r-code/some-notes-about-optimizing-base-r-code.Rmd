@@ -1,0 +1,176 @@
+---
+title: "Some notes about optimizing base R code"
+description: |
+  A short description of the post.
+author:
+  - name: Etienne Bacher
+    url: {}
+date: 2022-10-10
+draft: true
+output:
+  distill::distill_article
+---
+
+Lately I've spent quite some time on packages that require (almost) only base R:
+
+* `datawizard`, a package belonging to the `easystats` ecosystem, whose goal is to 
+  provide tools for data wrangling and statistical transformations;
+* `poorman`, whose goal is to reproduce `tidyverse` functions (with a strong focus
+  on `dplyr`) using base R only.
+  
+I've used `bench::mark()` and `profvis::profvis()` a lot to improve code performance and here are a few things I learnt. Note that these performance 
+improvements are targeted to package developers. A random user shouldn't really
+care if a function takes 200 milliseconds less to run. On the other side, I think a package developer might find these tips interesting.
+
+Before we get started, here's a small function that I use to make a classic dataset (like `iris` or `mtcars`) much bigger.
+
+```{r}
+make_big <- function(data, nrep = 500000) {
+  tmp <- list()
+  for (i in 1:nrep) {
+    tmp[[i]] <- data
+  }
+  
+  data.table::rbindlist(tmp) |> 
+    as.data.frame()
+}
+```
+
+
+
+## Check if a vector has a single value
+
+One easy way to do this is to run `length(unique(x)) == 1`, which basically means that first you have to collect all unique values and then count them. This can be quite inefficient: it would be enough to stop as soon as you find two different values.
+
+What we can do is compare all values to the first value of the vector. Below is an example with a vector containing 1 million values. In the first case, it only contains `1`, and in the second case it contains `1`s and `2`s.
+
+```{r}
+# Should be TRUE
+test <- rep(1, 1e7)
+
+bench::mark(
+  length(unique(test)) == 1,
+  all(test == test[1]),
+  iterations = 10
+)
+
+# Should be FALSE
+test2 <- rep(c(1, 2), 1e7)
+
+bench::mark(
+  length(unique(test2)) == 1,
+  all(test2 == test2[1]),
+  iterations = 10
+)
+```
+
+This is also faster for character vectors:
+
+```{r}
+# Should be FALSE
+test3 <- rep(c("a", "b"), 1e7)
+
+bench::mark(
+  length(unique(test3)) == 1,
+  all(test3 == test3[1]),
+  iterations = 10
+)
+```
+
+
+## Concatenate columns
+
+Sometimes we need to concatenate columns, for example if we want to create a 
+unique id from several grouping columns.
+
+```{r}
+test <- data.frame(
+  origin = c("A", "B", "C"),
+  destination = c("Z", "Y", "X"),
+  value = 1:3
+)
+
+test <- make_big(test)
+```
+
+One option to do this is to combine `paste()` and `apply()` using `MARGIN = 1` to
+apply `paste()` to each row. However, a faster way to do this is to use `do.call()`
+instead of `apply()`:
+
+```{r}
+bench::mark(
+  apply = apply(test[, c("origin", "destination")], 1, paste, collapse = "_"),
+  do.call = do.call(paste, c(test[, c("origin", "destination")], sep = "_"))
+)
+```
+
+
+
+## Stacking and unstacking
+
+One can pivot a dataframe with `tidyr`'s `pivot_longer()` and `pivot_wider()`.
+To do this in base R, the most natural equivalent is `stats::reshape()`. However,
+there exists two functions that can fill this purpose as well: `stack()` and `unstack()`. 
+
+
+`stack()` takes several columns and *stacks* them one upon the other, like the 
+following:
+
+```{r}
+wide_data <- data.frame(replicate(5, rnorm(5)))
+names(wide_data) <- paste0("x.", 1:5)
+wide_data
+
+stack(wide_data)
+```
+
+Similarly, `unstack()` spreads a column into several ones:
+
+```{r}
+stacked <- stack(wide_data)
+
+unstack(stacked)
+```
+
+You need to do some manipulations to get these functions to behave like `reshape()`, but this can be useful to know, especially since they are faster 
+than `reshape()` (at least in simple cases):
+
+```{r}
+# make big data
+tmp <- list()
+for (i in 1:500000) {
+  tmp[[i]] <- wide_data
+}
+
+tmp <- data.table::rbindlist(tmp)
+dim(tmp)
+
+bench::mark(
+  reshape = {
+    tmp$id <- 1:nrow(tmp)
+  }
+)
+```
+
+
+## Get row names
+
+```{r}
+# with numeric rownames
+bench::mark(
+  as.numeric(row.names(tmp)),
+  attributes(tmp)$row.names
+)
+
+# with character rownames
+big_data <- data.frame(
+  id = 1:5000000
+)
+row.names(big_data) <- as.character(1:5000000)
+bench::mark(
+  row.names(big_data),
+  attributes(big_data)$row.names
+)
+```
+
+
