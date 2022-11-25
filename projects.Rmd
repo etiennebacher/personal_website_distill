@@ -5,8 +5,24 @@ listing: projects # do this exactly
 
 ## Software
 
+### Tutorials
+
 ```{r echo = FALSE}
 source(file.path("R", "functions.R"))
+
+make_grid_project(
+  make_card_project(
+    title = "Webscraping with RSelenium",
+    title_link = "https://www.rselenium-teaching.etiennebacher.com",
+    description = "A tutorial on performing webscraping with RSelenium, 100+ slides.",
+    button_link = "https://www.rselenium-teaching.etiennebacher.com"
+  )
+)
+```
+
+### Packages
+
+```{r echo = FALSE}
 make_grid_project(
 
   make_card_project(
@@ -52,3 +68,4 @@ make_grid_project(
   )
 )
 ```
+
