@@ -23,18 +23,23 @@ and here are a few things I learnt. By default, `bench::mark()` checks that all
 expressions return the same output, so we can be confident that the alternatives
 I show in this post are truly equivalent.
 
+Before we start, I want to precise a few things. 
 
-Note that these performance improvements are targeted to package developers. A
+First, these performance improvements are targeted to package developers. A
 random user shouldn't really care if a function takes 200 milliseconds less to
-run. On the other side, I think a package developer might find these tips
-interesting.
+run. However, I think a package developer might find these tips interesting.
 
-Before we get started, here's a small function that I use to make a classic dataset
+Second, if you find some ways to speed up my alternatives, feel free to comment.
+I know that there are a bunch of packages that take performance very
+seriously (for example `data.table` and `collapse`). I'm only showing some base R
+code alternatives here.
+
+Finally, here's a small function that I use to make a classic dataset
 (like `iris` or `mtcars`) much bigger.
 
 ```{r}
 make_big <- function(data, nrep = 500000) {
-  tmp <- list()
+  tmp <- vector("list", length = nrep)
   for (i in 1:nrep) {
     tmp[[i]] <- data
   }
@@ -55,7 +60,7 @@ values.
 
 What we can do is to compare all values to the first value of the vector. Below is 
 an example with a vector containing 1 million values. In the first case, it only
-contains `1`, and in the second case it contains `1`s and `2`s.
+contains `1`, and in the second case it contains `1` and `2`.
 
 ```{r}
 # Should be TRUE
@@ -119,25 +124,6 @@ bench::mark(
 
 
 
-## Get row names
-
-```{r}
-# with numeric rownames
-bench::mark(
-  as.numeric(row.names(test)),
-  attributes(test)$row.names
-)
-
-# with character rownames
-row.names(test) <- as.character(1:1500000)
-
-bench::mark(
-  row.names(test),
-  attributes(test)$row.names
-)
-```
-
-
 ## Giving attributes to large dataframes
 
 This one comes from these [StackOverflow question and answer](https://stackoverflow.com/questions/74029805/why-does-adding-attributes-to-a-dataframe-take-longer-with-large-dataframes). Manipulating a dataframe can remove some attributes. For example, if I give an
@@ -188,4 +174,32 @@ bench::mark(
 )
 ```
 
+
+## Find empty rows
+
+It can be useful to remove empty rows, meaning rows containing only `NA` or `""`.
+We could once again use `apply()` with `MARGIN = 1`, but a faster way is to use 
+`rowSums()`. First, we create a data frame full of `TRUE`/`FALSE`, and then we 
+count by row the number of `TRUE`. If this number is equal to the number of columns,
+then it means that the row only has `NA` or `""`.
+
+```{r}
+test <- data.frame(
+  a = c(1, 2, 3, NA, 5),
+  b = c("", NA, "", NA, ""),
+  c = c(NA, NA, NA, NA, NA),
+  d = c(1, NA, 3, NA, 5),
+  e = c("", "", "", "", ""),
+  f = factor(c("", "", "", "", "")),
+  g = factor(c("", NA, "", NA, "")),
+  stringsAsFactors = FALSE
+)
+
+test <- make_big(test, 100000)
+
+bench::mark(
+  apply = which(apply(test, 1, function(i) all(is.na(i) | i == ""))),
+  rowSums = which(rowSums((is.na(test) | test == "")) == ncol(test))
+)
+```
 
