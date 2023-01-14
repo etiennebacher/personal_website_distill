@@ -7,15 +7,15 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 13 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Jan 2023 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Where should my family meet?</title>
       <dc:creator>Etienne Bacher</dc:creator>
-      <link>https://www.etiennebacher.com/posts/2022-11-08-where-should-my-family-meet</link>
+      <link>https://www.etiennebacher.com/posts/2023-01-14-where-should-my-family-meet</link>
       <description>Or a mathematical way to evade the debate on the location of the next holidays.</description>
-      <guid>https://www.etiennebacher.com/posts/2022-11-08-where-should-my-family-meet</guid>
-      <pubDate>Fri, 13 Jan 2023 00:00:00 +0000</pubDate>
-      <media:content url="https://www.etiennebacher.com/posts/2022-11-08-where-should-my-family-meet/distill-preview.png" medium="image" type="image/png" width="1382" height="1076"/>
+      <guid>https://www.etiennebacher.com/posts/2023-01-14-where-should-my-family-meet</guid>
+      <pubDate>Sat, 14 Jan 2023 00:00:00 +0000</pubDate>
+      <media:content url="https://www.etiennebacher.com/posts/2023-01-14-where-should-my-family-meet/distill-preview.png" medium="image" type="image/png" width="1382" height="1076"/>
     </item>
     <item>
       <title>Some notes about improving base R code</title>
@@ -25,6 +25,15 @@
       <guid>https://www.etiennebacher.com/posts/2022-11-28-some-notes-about-improving-base-r-code</guid>
       <pubDate>Mon, 28 Nov 2022 00:00:00 +0000</pubDate>
       <media:content url="https://www.etiennebacher.com/posts/2022-11-28-some-notes-about-improving-base-r-code/fast.jpeg" medium="image" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>Lighthouses in the world</title>
+      <dc:creator>Etienne Bacher</dc:creator>
+      <link>https://www.etiennebacher.com/posts/2022-01-29-lighthouses-in-the-world</link>
+      <description>A short description of the post.</description>
+      <guid>https://www.etiennebacher.com/posts/2022-01-29-lighthouses-in-the-world</guid>
+      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://www.etiennebacher.com/posts/2022-01-29-lighthouses-in-the-world/lighthouses-in-the-world_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>Mapping French rivers network</title>
