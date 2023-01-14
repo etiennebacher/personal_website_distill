@@ -463,7 +463,7 @@ coords <- data.frame(
 coords |> 
   e_charts() |> 
   e_globe(
-    base_texture = ea_asset("world topo", convert = TRUE), 
+    base_texture = ea_asset("world topo"), 
     displacementScale = 0.05,
     shading = "color",
     viewControl = list(autoRotate = FALSE, targetCoord = c(10, 0))
