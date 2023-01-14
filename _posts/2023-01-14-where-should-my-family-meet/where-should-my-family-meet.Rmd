@@ -461,16 +461,18 @@ coords <- data.frame(
   long_sol = y$par[2]
 )
 
-# ea_copy("world topo")
-
 coords |> 
   e_charts() |> 
+  
+  # create the globe
   e_globe(
     base_texture = ea_asset("world"), 
     displacementScale = 0.05,
     shading = "color",
     viewControl = list(autoRotate = FALSE, targetCoord = c(10, 0))
   ) |> 
+  
+  # add the starting points
   e_scatter_3d(
     long, lat,
     coord_system = "globe",
@@ -478,12 +480,17 @@ coords |>
     itemStyle = list(color = "red"),
     emphasis = list(label = list(show = FALSE))
   ) |> 
+  
+  # add the solution
   e_scatter_3d(
     long_sol, lat_sol,
     coord_system = "globe",
     symbolSize = 15,
     itemStyle = list(color = "yellow")
   ) |> 
+  
+  # add tooltip with latitude and longitude (only works for
+  # starting points)
   e_tooltip(
     trigger = "item",
     formatter = htmlwidgets::JS("
