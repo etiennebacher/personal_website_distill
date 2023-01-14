@@ -110,6 +110,15 @@ a {
 	color: #4682b4;
 }
 
+d-article details {
+	grid-column: text;
+	margin-bottom: 0.8em;
+	border: 1px solid;
+	padding: 5px;
+	border-radius: 5px;
+	background: #edf3f8;
+}
+
 /* Cards in "Projects" */
 .grid-container {
   display: grid;
