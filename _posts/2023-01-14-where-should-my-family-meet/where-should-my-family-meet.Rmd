@@ -153,16 +153,18 @@ List of steps in Weiszfeld algorithm:
 
 To get the expressions above, we differentiate with respect to $X$:
 
-$$
+
+\begin{equation}
 \frac{\partial D}{\partial X} = 0 \\
 \sum_{i=1}^5\frac{\partial \sqrt{(x_i-X)^2 + (y_i-Y)^2}}{\partial X} = 0 \\
 \sum_{i=1}^5 -\frac{- 2x_i + 2X}{2\sqrt{(x_i-X)^2 + (y_i-Y)^2}} = 0 \\
 \sum_{i=1}^5 \frac{x_i - X}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}} = 0 \\
 \sum_{i=1}^5 \frac{x_i}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}} - \sum_{i=1}^5 \frac{X}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}} = 0 \\
 \sum_{i=1}^5 \frac{x_i}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}} - X \sum_{i=1}^5 \frac{1}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}} = 0 \\
-X = & \ \frac{\sum_{i=1}^5 \frac{x_i}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}}}{\sum_{i=1}^5 \frac{1}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}}} \\
-X^* = & \ T(X^*) 
-$$
+X = \ \frac{\sum_{i=1}^5 \frac{x_i}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}}}{\sum_{i=1}^5 \frac{1}{\sqrt{(x_i-X)^2 + (y_i-Y)^2}}} \\
+X^* = \ T(X^*) 
+\end{equation}
+
 
 Similarly,
 
