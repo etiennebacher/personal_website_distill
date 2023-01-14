@@ -460,10 +460,13 @@ coords <- data.frame(
   lat_sol = y$par[1],
   long_sol = y$par[2]
 )
+
+# ea_copy("world topo")
+
 coords |> 
   e_charts() |> 
   e_globe(
-    base_texture = ea_asset("world topo"), 
+    base_texture = ea_source("world topo"), 
     displacementScale = 0.05,
     shading = "color",
     viewControl = list(autoRotate = FALSE, targetCoord = c(10, 0))
