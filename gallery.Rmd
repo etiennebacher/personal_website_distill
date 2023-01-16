@@ -81,7 +81,9 @@ tt_plots <- rbind(
   c(2021, 23),
   c(2021, 27),
   c(2021, 13),
-  c(2022, 09)
+  c(2022, 09),
+  c(2022, 47),
+  c(2022, 51)
 )
 
 # Download the plots and create the thumbnails
