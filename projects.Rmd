@@ -16,6 +16,12 @@ make_grid_project(
     title_link = "https://www.rselenium-teaching.etiennebacher.com",
     description = "A tutorial on performing webscraping with RSelenium, 100+ slides.",
     button_link = "https://www.rselenium-teaching.etiennebacher.com"
+  ),
+  make_card_project(
+    title = "Good practices for research with R",
+    title_link = "https://www.good-practices.etiennebacher.com",
+    description = "A small list of what I consider to be good practices for reproducible research with R, ~40 slides.",
+    button_link = "https://www.good-practices.etiennebacher.com"
   )
 )
 ```
