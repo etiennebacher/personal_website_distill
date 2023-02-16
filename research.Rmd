@@ -42,9 +42,9 @@ d-article a, d-article a:hover {
 
 ### Work in progress
 
-* Etienne Bacher, Michel Beine, Hillel Rapoport (2022), *The vicious circle of xenophobia*
+* Etienne Bacher, Michel Beine, Hillel Rapoport, *The vicious circle of xenophobia*
 
-</ul>
+* Etienne Bacher, Frédéric Docquier, *Populism and globalization*
 
 
 ### Software
