@@ -23,6 +23,8 @@ base_url: https://www.etiennebacher.com/
 repository_url: https://github.com/etiennebacher/personal_website_distill
 output: 
   distill::distill_article:
+    toc: true
+    toc_depth: 2
     css: custom.css
     includes:
       in_header: utterances.html

@@ -6,7 +6,8 @@ preview: fast.jpeg
 author: Etienne Bacher
 date: 2022-11-28
 output:
-  distill::distill_article
+  distill::distill_article:
+    toc: true
 ---
 
 <sup>Preview image coming from: https://trainingindustry.com/magazine/nov-dec-2018/life-in-the-fast-lane-accelerated-continuous-development-for-fast-paced-organizations/</sup>
