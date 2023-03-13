@@ -3,7 +3,7 @@
   <channel>
     <title>Etienne Bacher</title>
     <link>https://www.etiennebacher.com/</link>
-    <atom:link href="https://www.etiennebacher.com/projects.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://www.etiennebacher.com/software.xml" rel="self" type="application/rss+xml"/>
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
