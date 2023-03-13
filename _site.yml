@@ -12,7 +12,7 @@ navbar:
     - text: "Blog"
       href: blog.html
     - text: "Software"
-      href: projects.html
+      href: software.html
     - text: "Gallery"
       href: gallery.html
     - text: "CV"

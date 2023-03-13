@@ -1,6 +1,7 @@
 ---
 title: ""  # any name you want here
 listing: projects # do this exactly
+toc: false
 ---
   
 ```{css echo = FALSE}
