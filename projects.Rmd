@@ -1,6 +1,7 @@
 ---
 title: ""  # any name you want here
 listing: projects # do this exactly
+toc: false
 ---
 
 ## Software
@@ -16,6 +17,12 @@ make_grid_project(
     title_link = "https://www.rselenium-teaching.etiennebacher.com",
     description = "A tutorial on performing webscraping with RSelenium, 100+ slides.",
     button_link = "https://www.rselenium-teaching.etiennebacher.com"
+  ),
+  make_card_project(
+    title = "Webscraping with RSelenium (short)",
+    title_link = "https://www.rselenium-teaching-short.etiennebacher.com",
+    description = "A shorter version of the RSelenium tutorial, ~40 slides.",
+    button_link = "https://www.rselenium-teaching-short.etiennebacher.com"
   ),
   make_card_project(
     title = "Good practices for research with R",
