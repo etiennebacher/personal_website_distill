@@ -17,6 +17,8 @@ make_card_project <- function(
   title = NULL,
   title_link = NULL,
   description = NULL,
+  link_to_pdf_text = NULL,
+  link_to_pdf = NULL,
   button = "See more",
   button_link = NULL
 ) {
@@ -26,7 +28,14 @@ make_card_project <- function(
         div(class = "card-text",
             h4(a(target="_blank")),
             div(class = "article-style",
-                p(description)
+                p(
+                  description,
+                  if (!is.null(link_to_pdf)) {
+                    a(link_to_pdf_text, href = link_to_pdf, target="_blank",
+                      class = "hint--bottom hint--info hint--medium", 
+                      `aria-label` = "PDF slides lose some functionalities, such as scrolling in long code chunks. It is preferred to use the HTML version with the button below.")
+                  }
+                )
             ),
             a(target="_blank", class = "link_button")
         )

@@ -25,7 +25,7 @@ output:
   distill::distill_article:
     toc: true
     toc_depth: 2
-    css: custom.css
+    css: [custom.css, hint.min.css]
     includes:
       in_header: utterances.html
 creative_commons: CC BY

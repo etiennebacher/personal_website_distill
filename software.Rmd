@@ -28,7 +28,9 @@ make_grid_project(
     title = "Good practices for research with R",
     title_link = "https://www.good-practices.etiennebacher.com",
     description = "A small list of what I consider to be good practices for reproducible research with R, ~40 slides.",
-    button_link = "https://www.good-practices.etiennebacher.com"
+    button_link = "https://www.good-practices.etiennebacher.com",
+    link_to_pdf_text = "Get PDF",
+    link_to_pdf = ""
   )
 )
 ```
