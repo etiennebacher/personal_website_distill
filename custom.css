@@ -215,3 +215,9 @@ d-article div.sourceCode pre {
 	border: solid 1px #1d3549;
 	border-radius: 5px;
 }
+
+/* Text in search bar */
+
+#distill-search {
+	font-size: 0.8rem;
+}

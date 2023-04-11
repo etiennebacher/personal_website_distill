@@ -50,10 +50,20 @@ d-article a, d-article a:hover {
 
 ### Software
 
-* Patil, I., Makowski, D., Ben-Shachar, M. S., Wiernik, B., Bacher, E., Lüdecke, D. (2022), *datawizard: An R Package for Easy Data Preparation and Statistical Transformations.*, Journal of Open Source Software, 7(78)
+* Patil, I., Makowski, D., Ben-Shachar, M. S., Wiernik, B., Bacher, E., Lüdecke, D. (2022), **datawizard: An R Package for Easy Data Preparation and Statistical Transformations.**, Journal of Open Source Software, 7(78)
 
 <p> 
 <a href="https://joss.theoj.org/papers/10.21105/joss.04684" style="margin-left: 3em"> <button class="btn btn-outline-dark"> <i class="fas fa-file-pdf fa-lg"></i> Paper</button> </a> 
 <a href="https://github.com/easystats/datawizard/" style="margin-left: 1em"> <button class="btn btn-outline-dark"> <i class="fab fa-github fa-lg"></i> Code</button> </a>
 </p>
 
+
+
+### Other
+
+* Bacher, E., Herrera-Rodriguez, M., Marino Fages, D., Stips, F. (2023), **A replication of Jones & Marinescu (2022)**
+
+<p> 
+<a href="https://www.etiennebacher.com/files/Oslo_Jones_Marinescu_Replication.pdf" style="margin-left: 3em"> <button class="btn btn-outline-dark"> <i class="fas fa-file-pdf fa-lg"></i> Paper</button> </a> 
+<a href="https://osf.io/6atfw" style="margin-left: 1em"> <button class="btn btn-outline-dark"> <i class="fa-solid fa-code"></i> Code</button> </a>
+</p>
