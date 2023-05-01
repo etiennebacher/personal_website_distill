@@ -1,0 +1,73 @@
+---
+title: "Making POST requests with R"
+description: |
+  An alternative to RSelenium to get data from dynamic webpages.
+author:
+  - name: Etienne Bacher
+date: 2023-05-01
+draft: true
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+A few months ago, I gave a training on `RSelenium`, a package that allows us to
+reproduce all the actions we do in a browser (open a website, scroll, click on a
+button, etc.) with some R code. This is very useful to perform some webscraping on pages that are *dynamically updated*, meaning that we can't simply use the URL to get the HTML we want. I won't explain too much the basics of webscraping here, there are plenty articles on this already and the vignettes on the `rvest` website are very good.
+
+
+Something I mentioned very briefly in my RSelenium slides^[In fact, I completely buried this in the Appendix because RSelenium was already plenty to teach and I didn't want to add another layer of complexity with POST requests.] is that, in some cases, it is possible to avoid using RSelenium at all by performing the POST requests ourselves. However, a few days ago, another case of dynamic webscraping came to me and I thought, "maybe that's a good opportunity to try doing this first". But before diving into this example, let's explain a bit more POST requests and why they could save a lot of time.
+
+
+# POST requests: what?
+
+When we go on a dynamic website, we perform some action, most of the time we click a button, and the website is automatically updated. Note that here, whether we do this by hand or via Rselenium is irrelevant: RSelenium doesn't perform additional actions, we only reproduce with code what we could do by hand.
+
+What happens when we click this button? The website sends a *request* to the server, the server sends a *response* back to us, and the website is updated using this new data that the server provided. There are several types of requests, the two most common are GET and POST requests.
+
+
+## GET requests
+
+A GET request is used to obtain some data from the server and display it in another webpage. One important thing to note is that the query parameters (which describe what data we want to obtain) are displayed in the URL after a question mark `?`. That description might make some experts scream, but it is the simplest representation I have in mind and it corresponds more or less to what actually happens.
+
+An example of GET requests is the World Bank API. Using an example on their website, we can start from this query:
+
+```
+http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL
+```
+This shows the data in the XML format. If we want to use the JSON format instead, we can add a parameter `format` in the URL:
+
+```
+http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json
+```
+
+This type of requests is not really important in our case because the URL changes with the parameters. 
+
+
+## POST requests
+
+A POST request sends data to the server to dynamically update the website. This is used every time the user fills a form: depending on what the user provided, the data sent back by the server is not the same.
+
+In the end, doing dynamic webscraping with RSelenium boils down to getting on the right page and filling the inputs so that we can perform a POST request, and then scrape the data that the server provided. But what if we could avoid doing all these steps, take a look at the POST request that we send and reproduce this POST request from R? That would be quicker and also would avoid all issues related to RSelenium.
+
+
+# Making POST requests from R
+
+There are two main packages to do this: `httr` and `httr2`. The latter is just a couple of years old and has being developed with a lot of convenient built-in features (retries if a query failed, secure secrets, etc.^[I'm just listing things that are written on the website of `httr2`, more details there.])
+
+
+Using `httr`, we can perform a POST request with (surprise!) `POST()`. 
+
+
+
+# Example
+
+The Spanish Office of Patents and Brands^[Oficina Española de Patentes y Marcas.] has a nice website where you can get historical data about patents and brands from about mid-19th century to mid-20th century. You can type anything you want in the search bar (e.g a city), specify the years range, and it provides all patents, the title, the exact date at which they were done, and some information on the person or company that deposited the patent.
+
+This website is dynamically updated, meaning that we have to use RSelenium or reproduce POST requests. 
+
+
+## How can you know the details of the request?
+
+
