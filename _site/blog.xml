@@ -7,15 +7,7 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>2023-04-30</lastBuildDate>
-    <item>
-      <title>Making POST requests with R</title>
-      <dc:creator>Etienne Bacher</dc:creator>
-      <link>https://www.etiennebacher.com/posts/2023-05-01-making-post-requests-with-r</link>
-      <description>An alternative to RSelenium to get data from dynamic webpages.</description>
-      <guid>https://www.etiennebacher.com/posts/2023-05-01-making-post-requests-with-r</guid>
-      <pubDate>2023-04-30</pubDate>
-    </item>
+    <lastBuildDate>2023-03-01</lastBuildDate>
     <item>
       <title>Do bonus points lead to more tries in 6 Nations matches?</title>
       <dc:creator>Etienne Bacher</dc:creator>
