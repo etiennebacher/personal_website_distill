@@ -127,7 +127,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","preview","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Making POST requests with R"]},{"type":"character","attributes":{},"value":["An alternative to RSelenium to get data from dynamic webpages."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2023-05-09"]},{"type":"character","attributes":{},"value":["post-photo.jpg"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2023-05-09-making-post-requests-with-r/"]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2023-05-09-making-post-requests-with-r/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","preview","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Making POST requests with R"]},{"type":"character","attributes":{},"value":["An alternative to RSelenium to get data from dynamic webpages."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2023-05-09"]},{"type":"character","attributes":{},"value":["post-photo.jpg"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2023-05-09-making-post-requests-with-r/"]},{"type":"character","attributes":{},"value":["https://www.etiennebacher.com/posts/2023-05-09-making-post-requests-with-r/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2418,6 +2418,28 @@ d-article div.sourceCode pre {
 </div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#post-and-get-requests-what" id="toc-post-and-get-requests-what">POST and GET requests: what?</a>
+<ul>
+<li><a href="#requests-and-responses" id="toc-requests-and-responses">Requests and responses</a></li>
+<li><a href="#get-requests" id="toc-get-requests">GET requests</a></li>
+<li><a href="#post-requests" id="toc-post-requests">POST requests</a></li>
+</ul></li>
+<li><a href="#making-post-requests-from-r" id="toc-making-post-requests-from-r">Making POST requests from R</a></li>
+<li><a href="#example" id="toc-example">Example</a>
+<ul>
+<li><a href="#step-1-find-the-post-request-parameters" id="toc-step-1-find-the-post-request-parameters">Step 1: find the POST request parameters</a></li>
+<li><a href="#step-2-build-the-query" id="toc-step-2-build-the-query">Step 2: build the query</a></li>
+<li><a href="#step-3-perform-the-query" id="toc-step-3-perform-the-query">Step 3: perform the query</a></li>
+<li><a href="#step-4-extract-the-information" id="toc-step-4-extract-the-information">Step 4: extract the information</a></li>
+</ul></li>
+<li><a href="#bonus" id="toc-bonus">Bonus</a></li>
+</ul>
+</nav>
+</div>
 <p><sup>Preview picture from <a href="https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kristina Tripkovic</a> on <a href="https://unsplash.com/fr/photos/8Zs5H6CnYJo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 </sup></p>
 <p>A few months ago, I gave a training on <code>RSelenium</code>, a package that allows us to
