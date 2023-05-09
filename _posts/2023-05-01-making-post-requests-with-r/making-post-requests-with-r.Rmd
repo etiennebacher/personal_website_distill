@@ -5,13 +5,14 @@ description: |
 author:
   - name: Etienne Bacher
 date: 2023-05-01
-draft: true
+preview: post-photo.jpg
 output:
   distill::distill_article:
     self_contained: false
-  # pdf_document
 ---
 
+<sup>Preview picture from <a href="https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kristina Tripkovic</a> on <a href="https://unsplash.com/fr/photos/8Zs5H6CnYJo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </sup>
 
 A few months ago, I gave a training on `RSelenium`, a package that allows us to
 reproduce all the actions we do in a browser (open a website, scroll, click on a
@@ -29,12 +30,13 @@ There are already a lot of resources on POST and GET requests, like [this W3scho
 
 What happens when we click on a button, open a new link, or other actions? The website sends a *request* to the server, the server sends a *response* back to us, and the website is updated using this new data that the server provided. There are several types of requests, the two most common being GET and POST requests.
 
+Both GET and POST are used to request data but they have key differences. 
+
 
 ## GET requests
 
-A GET request is used to obtain some data from the server and display it in another webpage. One important thing to note is that the query parameters (which describe what data we want to obtain) are displayed in the URL after a question mark `?`. That description might make some experts scream, but it is the simplest representation I have in mind and I think it corresponds more or less to what actually happens.
 
-An example of GET requests is the World Bank API. Using an example on their website, we can start from this query:
+One important thing to note in GET requests is that the query parameters (which describe what data we want to obtain) are displayed in the URL after a question mark `?`. An example of GET requests is the World Bank API. Using an example on their website, we can start from this query to get the data for a specific indicator and all countries:
 
 ```
 http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL
@@ -52,38 +54,40 @@ This type of requests changes the URL, so this is not very useful in our case wh
 
 In a POST request, the website also sends information to the server and the server also sends data back to us but this time the URL doesn't change, the website is dynamically updated. This is often used when we fill a form online: depending on what the user provided, the data sent back by the server is not the same.
 
-Basically, using RSelenium for dynamic webscraping boils down to go to the right page, fill the inputs so that we can perform a POST request (behind the scenes), and then scrape the data that the server provided. 
+Basically, using RSelenium for dynamic webscraping boils down to go to the right webpage, fill the inputs so that a POST request is performed behind the scenes, and then scrape the data that the server provided. 
 
-But what if we could avoid doing all these steps by performing the POST requests directly from R? That would be quicker and also would avoid all issues related to RSelenium. However, for this to work, we need to know the detailed request to send to the server.
+But what if we could avoid doing all these steps by performing the POST requests directly from R? That would be quicker and we would also avoid all issues related to RSelenium (which can be a pain to properly set up). For this to work, we need to know the detailed request to send to the server.
 
 
 # Making POST requests from R
 
-There are two main packages to do this: `httr` and `httr2`. The latter is just a couple of years old and has being developed with a lot of convenient built-in features (retries if a query failed, secure secrets, etc.^[I'm just listing things that are written on the website of `httr2`, more details there.]).
+There are two main packages to do this: `httr` and `httr2`. The latter is just a couple of years old and has being developed with a lot of convenient built-in features (retries if a query failed, secure secrets, etc.^[I'm just listing things that are written on the [website of `httr2`](https://httr2.r-lib.org/), more details there.]).
 
 We don't need very advanced features here so let's use `httr`. This package provides a function `POST()` that (surprise!) allows us to make POST requests. Let's explore this with an example.
 
 
 # Example
 
-The Spanish Office of Patents and Brands^[Oficina Española de Patentes y Marcas.] has a [nice website](http://historico.oepm.es/buscador.php) where you can get historical data about patents and brands from about mid-19th century to mid-20th century. You can type anything you want in the search bar (e.g a city name), specify the years range, and it provides a list of patents, their title, the exact date at which they were done, and some information on the person or company that deposited the patent.
+The Spanish Office of Patents and Brands^[Oficina Española de Patentes y Marcas.] has a [nice website](http://historico.oepm.es/buscador.php) where you can get historical data about patents and brands from about mid-19th century to mid-20th century. You can type anything you want in the search bar (e.g a city name), specify the years range, and it provides a list of patents, their title, the exact date at which they were done, and some information on the person or company that made the patent.
 
-Ideally, what we would like is to obtain all the information that is displayed when we click on the "+" button, and to do this for all records.
+**Note:** this website is in HTTP only, not HTTPS. Therefore, if you use Firefox with the mode HTTPS Everywhere enabled, you need to put http://historico.oepm.es in the list of exceptions (see [here](https://support.mozilla.org/en-US/kb/https-only-prefs)). 
+
+In the output table, we can see a "+" button for each row. Clicking on this button displays more detailed information for the patent (e.g the category it belongs to). Ideally, what we would like is to obtain this detailed information for all records. This had less to do with POST requests so I show how to do this in the "Bonus" section at the end. 
 
 This website is dynamically updated, meaning that we have to use RSelenium or reproduce POST requests. These are the packages we will use:
 
 ```{r}
-library(httr)
-library(polite)
-library(rvest)
-library(data.table)
+library(httr)       # make POST requests
+library(polite)     # be polite when we scrape
+library(rvest)      # extract HTML tables
+library(data.table) # for some data cleaning
 ```
 
 
 
 ## Step 1: find the POST request parameters
 
-To see the requests and responses, we can use the tab "Network" in the developer console. Fill the search input (for example type "Madrid"), open the network tab and then click on the magnifying glass icon. You can see what we send to the server and what the server sends back:
+To see the requests and responses, we can use the tab "Network" in the developer console. Fill the search input (for example type "Madrid"), open the network tab and then click on the magnifying glass icon to run the query. You can see what we send to the server and what the server sends back:
 
 ![](network-1.png)
 
@@ -93,9 +97,9 @@ We see four lines:
 * `Spanish.json`
 * two PNG files
 
-We already know that the information we want is not the images. The `Spanish.json` is intriguing, maybe the data we want is in this JSON? When we click on this request, we see the full URL, but if we open it in another tab, it turns out that this JSON only contains useless information like the loading message.
+We already know that the information we want is not the images so we can discard the last two lines. The `Spanish.json` is intriguing, maybe the data we want is in this JSON? When we click on this request, we see the full URL, but if we open it in another tab, it turns out that this JSON only contains useless information like the loading message.
 
-So there's only `search_lib.php` left, what we're looking for must be in here. We see several things when we click on it. First, we see that it is a POST request but if we open the URL, it says "Invalid arguments". This makes sense, there's nothing unique in this URL, nothing that would allow the server to know the records it should send back.
+So there's only `search_lib.php` left, what we're looking for must be in there. We see several things when we click on it. First, we see that it is a POST request but if we open the URL, it says "Invalid arguments". This makes sense, there's nothing unique in this URL, nothing that would allow the server to know the records it should send back.
 
 We can see a "Payload" tab when we click on the request and it seems that this is where our parameters are stored:
 
@@ -134,6 +138,8 @@ We now have:
 The next step is to actually perform the query:
 
 ```{r cache = TRUE}
+# use politely() to tell the website who is performing the requests and to add
+# a delay between requests (here we only do one)
 polite_POST <- politely(POST, verbose=TRUE) 
 
 POST_response <- polite_POST(
@@ -148,7 +154,7 @@ POST_response <- polite_POST(
 )
 ```
 
-You can see additional information in `add_headers()`. This information is available in the "Headers" tab when the click on the request. However, I don't really know why some of these headers are necessary and others are not. 
+You can see additional information in `add_headers()`. This information is available in the "Headers" tab when the click on the request. However, I don't really know why some of these headers are necessary and others are not. Note that you can easily get these headers by doing a right-click on the POST request (on the left of the "Network" tab) > "Copy value" > "Copy as fetch" and then pasting it anywhere.
 
 
 ## Step 4: extract the information
@@ -159,14 +165,14 @@ We can extract the HTML from the response with `content()`:
 content(POST_response, "parsed")
 ```
 
-This is the HTML code from the "Mostrando xxx de xxx resultados encontrados" to the bottom of the page. We only want the table, so we can extract it with `rvest::html_table()`:
+This is the HTML code from the "Mostrando xxx de xxx resultados encontrados" to the bottom of the page. We only want the table, so we extract it with `rvest::html_table()`:
 
 ```{r}
 content(POST_response, "parsed") |> 
   html_table()
 ```
 
-And voilà! You can now customize the query to loop through cities, years, etc.
+And voilà! You can now customize the query to loop through cities, years, etc. Note that by default, the number of records returned is limited to 250, and we can't bypass this.
 
 **Remember: use the package [`polite`](https://dmi3kno.github.io/polite/) to avoid flooding the server with requests**. As they say on `polite`'s website, the four pillars of polite session are 
 
@@ -176,7 +182,7 @@ And voilà! You can now customize the query to loop through cities, years, etc.
 
 You know how to make POST requests, but at the beginning of the "Example" section, I said that I wanted the detailed information that is only displayed when we click on a "+" button in the table.
 
-Using the same method as before, we see that clicking on one of these buttons triggers a GET request of the form `ficha.php?id=<ID>&db=<DB>`. Problem: these `<ID>` and `<DB>` change for each record and their value cannot be easily guessed. However, if we look at the HTML of these buttons, we can see that `<ID>` and `<DB>` are stored as attributes of the `a` tag:
+Using the same method as before, we see that clicking on one of these buttons triggers a GET request of the form `ficha.php?id=<ID>&db=<DB>`. Problem: these `<ID>` and `<DB>` change for each record and their value cannot be easily guessed. However, if we look at the HTML of these buttons, we can see that `<ID>` and `<DB>` are stored as attributes of the `<a>` tag:
 
 ![](html-tag.PNG)
 
@@ -195,7 +201,7 @@ info <- lapply(list_attrs, function(x) {
   data.frame(id = out[1], db = out[2])
 })
 
-# remove cases where there were no attributes
+# remove cases where there are no attributes
 info <- Filter(Negate(is.null), info)
 
 # transform the list into a clean dataframe

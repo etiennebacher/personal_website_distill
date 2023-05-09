@@ -113,12 +113,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","draft","output"]}},"value":[{"type":"character","attributes":{},"value":["Making POST requests with R"]},{"type":"character","attributes":{},"value":["An alternative to RSelenium to get data from dynamic webpages.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2023-05-01"]},{"type":"logical","attributes":{},"value":[true]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","preview","output"]}},"value":[{"type":"character","attributes":{},"value":["Making POST requests with R"]},{"type":"character","attributes":{},"value":["An alternative to RSelenium to get data from dynamic webpages.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2023-05-01"]},{"type":"character","attributes":{},"value":["post-photo.jpg"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["html-tag.PNG","making-post-requests-with-r.pdf","making-post-requests-with-r_files/anchor-4.2.2/anchor.min.js","making-post-requests-with-r_files/bowser-1.9.3/bowser.min.js","making-post-requests-with-r_files/distill-2.2.21/template.v2.js","making-post-requests-with-r_files/header-attrs-2.21/header-attrs.js","making-post-requests-with-r_files/jquery-3.6.0/jquery-3.6.0.js","making-post-requests-with-r_files/jquery-3.6.0/jquery-3.6.0.min.js","making-post-requests-with-r_files/jquery-3.6.0/jquery-3.6.0.min.map","making-post-requests-with-r_files/popper-2.6.0/popper.min.js","making-post-requests-with-r_files/tippy-6.2.7/tippy-bundle.umd.min.js","making-post-requests-with-r_files/tippy-6.2.7/tippy-light-border.css","making-post-requests-with-r_files/tippy-6.2.7/tippy.css","making-post-requests-with-r_files/tippy-6.2.7/tippy.umd.min.js","making-post-requests-with-r_files/webcomponents-2.0.0/webcomponents.js","network-1.PNG","network-2.PNG"]}
+  {"type":"character","attributes":{},"value":["html-tag.PNG","making-post-requests-with-r_files/anchor-4.2.2/anchor.min.js","making-post-requests-with-r_files/bowser-1.9.3/bowser.min.js","making-post-requests-with-r_files/distill-2.2.21/template.v2.js","making-post-requests-with-r_files/header-attrs-2.21/header-attrs.js","making-post-requests-with-r_files/jquery-3.6.0/jquery-3.6.0.js","making-post-requests-with-r_files/jquery-3.6.0/jquery-3.6.0.min.js","making-post-requests-with-r_files/jquery-3.6.0/jquery-3.6.0.min.map","making-post-requests-with-r_files/popper-2.6.0/popper.min.js","making-post-requests-with-r_files/tippy-6.2.7/tippy-bundle.umd.min.js","making-post-requests-with-r_files/tippy-6.2.7/tippy-light-border.css","making-post-requests-with-r_files/tippy-6.2.7/tippy.css","making-post-requests-with-r_files/tippy-6.2.7/tippy.umd.min.js","making-post-requests-with-r_files/webcomponents-2.0.0/webcomponents.js","network-1.PNG","network-2.PNG","post-photo.jpg"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1519,6 +1519,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
+<p><sup>Preview picture from <a href="https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kristina Tripkovic</a> on <a href="https://unsplash.com/fr/photos/8Zs5H6CnYJo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+</sup></p>
 <p>A few months ago, I gave a training on <code>RSelenium</code>, a package that allows us to
 reproduce all the actions we do in a browser (open a website, scroll, click on a
 button, etc.) with some R code. This is very useful to perform some webscraping on pages that are <em>dynamically updated</em>, meaning that we can’t simply use the URL to get the HTML we want. I won’t explain the basics of webscraping here, there are plenty of articles on this already and the <a href="https://rvest.tidyverse.org/articles/rvest.html">vignettes on the <code>rvest</code> website</a> are very good.</p>
@@ -1527,34 +1529,35 @@ button, etc.) with some R code. This is very useful to perform some webscraping 
 <p>There are already a lot of resources on POST and GET requests, like <a href="https://www.w3schools.com/tags/ref_httpmethods.asp">this W3schools page</a>, so here I will only do a brief summary.</p>
 <h2 id="requests-and-responses">Requests and responses</h2>
 <p>What happens when we click on a button, open a new link, or other actions? The website sends a <em>request</em> to the server, the server sends a <em>response</em> back to us, and the website is updated using this new data that the server provided. There are several types of requests, the two most common being GET and POST requests.</p>
+<p>Both GET and POST are used to request data but they have key differences.</p>
 <h2 id="get-requests">GET requests</h2>
-<p>A GET request is used to obtain some data from the server and display it in another webpage. One important thing to note is that the query parameters (which describe what data we want to obtain) are displayed in the URL after a question mark <code>?</code>. That description might make some experts scream, but it is the simplest representation I have in mind and I think it corresponds more or less to what actually happens.</p>
-<p>An example of GET requests is the World Bank API. Using an example on their website, we can start from this query:</p>
+<p>One important thing to note in GET requests is that the query parameters (which describe what data we want to obtain) are displayed in the URL after a question mark <code>?</code>. An example of GET requests is the World Bank API. Using an example on their website, we can start from this query to get the data for a specific indicator and all countries:</p>
 <pre><code>http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL</code></pre>
 <p>By default, this will show the data in the XML format. If we want to use the JSON format instead, we can add a parameter <code>format</code> in the URL:</p>
 <pre><code>http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json</code></pre>
 <p>This type of requests changes the URL, so this is not very useful in our case where the URL doesn’t change at all.</p>
 <h2 id="post-requests">POST requests</h2>
 <p>In a POST request, the website also sends information to the server and the server also sends data back to us but this time the URL doesn’t change, the website is dynamically updated. This is often used when we fill a form online: depending on what the user provided, the data sent back by the server is not the same.</p>
-<p>Basically, using RSelenium for dynamic webscraping boils down to go to the right page, fill the inputs so that we can perform a POST request (behind the scenes), and then scrape the data that the server provided.</p>
-<p>But what if we could avoid doing all these steps by performing the POST requests directly from R? That would be quicker and also would avoid all issues related to RSelenium. However, for this to work, we need to know the detailed request to send to the server.</p>
+<p>Basically, using RSelenium for dynamic webscraping boils down to go to the right webpage, fill the inputs so that a POST request is performed behind the scenes, and then scrape the data that the server provided.</p>
+<p>But what if we could avoid doing all these steps by performing the POST requests directly from R? That would be quicker and we would also avoid all issues related to RSelenium (which can be a pain to properly set up). For this to work, we need to know the detailed request to send to the server.</p>
 <h1 id="making-post-requests-from-r">Making POST requests from R</h1>
 <p>There are two main packages to do this: <code>httr</code> and <code>httr2</code>. The latter is just a couple of years old and has being developed with a lot of convenient built-in features (retries if a query failed, secure secrets, etc.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>).</p>
 <p>We don’t need very advanced features here so let’s use <code>httr</code>. This package provides a function <code>POST()</code> that (surprise!) allows us to make POST requests. Let’s explore this with an example.</p>
 <h1 id="example">Example</h1>
-<p>The Spanish Office of Patents and Brands<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> has a <a href="http://historico.oepm.es/buscador.php">nice website</a> where you can get historical data about patents and brands from about mid-19th century to mid-20th century. You can type anything you want in the search bar (e.g a city name), specify the years range, and it provides a list of patents, their title, the exact date at which they were done, and some information on the person or company that deposited the patent.</p>
-<p>Ideally, what we would like is to obtain all the information that is displayed when we click on the “+” button, and to do this for all records.</p>
+<p>The Spanish Office of Patents and Brands<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> has a <a href="http://historico.oepm.es/buscador.php">nice website</a> where you can get historical data about patents and brands from about mid-19th century to mid-20th century. You can type anything you want in the search bar (e.g a city name), specify the years range, and it provides a list of patents, their title, the exact date at which they were done, and some information on the person or company that made the patent.</p>
+<p><strong>Note:</strong> this website is in HTTP only, not HTTPS. Therefore, if you use Firefox with the mode HTTPS Everywhere enabled, you need to put <a href="http://historico.oepm.es" class="uri">http://historico.oepm.es</a> in the list of exceptions (see <a href="https://support.mozilla.org/en-US/kb/https-only-prefs">here</a>).</p>
+<p>In the output table, we can see a “+” button for each row. Clicking on this button displays more detailed information for the patent (e.g the category it belongs to). Ideally, what we would like is to obtain this detailed information for all records. This had less to do with POST requests so I show how to do this in the “Bonus” section at the end.</p>
 <p>This website is dynamically updated, meaning that we have to use RSelenium or reproduce POST requests. These are the packages we will use:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://httr.r-lib.org/'>httr</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/dmi3kno/polite'>polite</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rvest.tidyverse.org/'>rvest</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://httr.r-lib.org/'>httr</a></span><span class='op'>)</span>       <span class='co'># make POST requests</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/dmi3kno/polite'>polite</a></span><span class='op'>)</span>     <span class='co'># be polite when we scrape</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rvest.tidyverse.org/'>rvest</a></span><span class='op'>)</span>      <span class='co'># extract HTML tables</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span> <span class='co'># for some data cleaning</span></span></code></pre>
 </div>
 </div>
 <h2 id="step-1-find-the-post-request-parameters">Step 1: find the POST request parameters</h2>
-<p>To see the requests and responses, we can use the tab “Network” in the developer console. Fill the search input (for example type “Madrid”), open the network tab and then click on the magnifying glass icon. You can see what we send to the server and what the server sends back:</p>
+<p>To see the requests and responses, we can use the tab “Network” in the developer console. Fill the search input (for example type “Madrid”), open the network tab and then click on the magnifying glass icon to run the query. You can see what we send to the server and what the server sends back:</p>
 <p><img src="network-1.png" /></p>
 <p>We see four lines:</p>
 <ul>
@@ -1562,8 +1565,8 @@ button, etc.) with some R code. This is very useful to perform some webscraping 
 <li><code>Spanish.json</code></li>
 <li>two PNG files</li>
 </ul>
-<p>We already know that the information we want is not the images. The <code>Spanish.json</code> is intriguing, maybe the data we want is in this JSON? When we click on this request, we see the full URL, but if we open it in another tab, it turns out that this JSON only contains useless information like the loading message.</p>
-<p>So there’s only <code>search_lib.php</code> left, what we’re looking for must be in here. We see several things when we click on it. First, we see that it is a POST request but if we open the URL, it says “Invalid arguments”. This makes sense, there’s nothing unique in this URL, nothing that would allow the server to know the records it should send back.</p>
+<p>We already know that the information we want is not the images so we can discard the last two lines. The <code>Spanish.json</code> is intriguing, maybe the data we want is in this JSON? When we click on this request, we see the full URL, but if we open it in another tab, it turns out that this JSON only contains useless information like the loading message.</p>
+<p>So there’s only <code>search_lib.php</code> left, what we’re looking for must be in there. We see several things when we click on it. First, we see that it is a POST request but if we open the URL, it says “Invalid arguments”. This makes sense, there’s nothing unique in this URL, nothing that would allow the server to know the records it should send back.</p>
 <p>We can see a “Payload” tab when we click on the request and it seems that this is where our parameters are stored:</p>
 <p><img src="network-2.png" /></p>
 <h2 id="step-2-build-the-query">Step 2: build the query</h2>
@@ -1594,7 +1597,9 @@ timestamp=Mon May 08 2023 15:38:09 GMT+0200 (Central European Summer Time)</code
 <p>The next step is to actually perform the query:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>polite_POST</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dmi3kno.github.io/polite/reference/politely.html'>politely</a></span><span class='op'>(</span><span class='va'>POST</span>, verbose<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># use politely() to tell the website who is performing the requests and to add</span></span>
+<span><span class='co'># a delay between requests (here we only do one)</span></span>
+<span><span class='va'>polite_POST</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dmi3kno.github.io/polite/reference/politely.html'>politely</a></span><span class='op'>(</span><span class='va'>POST</span>, verbose<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> </span>
 <span></span>
 <span><span class='va'>POST_response</span> <span class='op'>&lt;-</span> <span class='fu'>polite_POST</span><span class='op'>(</span></span>
 <span>  <span class='st'>"http://historico.oepm.es/logica/search_lib.php"</span>,</span>
@@ -1608,7 +1613,7 @@ timestamp=Mon May 08 2023 15:38:09 GMT+0200 (Central European Summer Time)</code
 <span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>You can see additional information in <code>add_headers()</code>. This information is available in the “Headers” tab when the click on the request. However, I don’t really know why some of these headers are necessary and others are not.</p>
+<p>You can see additional information in <code>add_headers()</code>. This information is available in the “Headers” tab when the click on the request. However, I don’t really know why some of these headers are necessary and others are not. Note that you can easily get these headers by doing a right-click on the POST request (on the left of the “Network” tab) &gt; “Copy value” &gt; “Copy as fetch” and then pasting it anywhere.</p>
 <h2 id="step-4-extract-the-information">Step 4: extract the information</h2>
 <p>We can extract the HTML from the response with <code>content()</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1619,7 +1624,7 @@ timestamp=Mon May 08 2023 15:38:09 GMT+0200 (Central European Summer Time)</code
 &lt;html&gt;
 [1] &lt;body&gt;&lt;div class=&quot;rs1 row space-bottom&quot;&gt;\n&lt;div class=&quot;col-md-10 ...</code></pre>
 </div>
-<p>This is the HTML code from the “Mostrando xxx de xxx resultados encontrados” to the bottom of the page. We only want the table, so we can extract it with <code>rvest::html_table()</code>:</p>
+<p>This is the HTML code from the “Mostrando xxx de xxx resultados encontrados” to the bottom of the page. We only want the table, so we extract it with <code>rvest::html_table()</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://httr.r-lib.org/reference/content.html'>content</a></span><span class='op'>(</span><span class='va'>POST_response</span>, <span class='st'>"parsed"</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
@@ -1643,14 +1648,14 @@ timestamp=Mon May 08 2023 15:38:09 GMT+0200 (Central European Summer Time)</code
 12 NA    Privilegio &quot;Privilegio …       2631 1863… PROCEDIMIENTO QUIM…
 # ℹ 1 more variable: SOLICITANTE &lt;chr&gt;</code></pre>
 </div>
-<p>And voilà! You can now customize the query to loop through cities, years, etc.</p>
+<p>And voilà! You can now customize the query to loop through cities, years, etc. Note that by default, the number of records returned is limited to 250, and we can’t bypass this.</p>
 <p><strong>Remember: use the package <a href="https://dmi3kno.github.io/polite/"><code>polite</code></a> to avoid flooding the server with requests</strong>. As they say on <code>polite</code>’s website, the four pillars of polite session are</p>
 <blockquote>
 <p>Introduce Yourself, Seek Permission, Take Slowly and Never Ask Twice.</p>
 </blockquote>
 <h1 id="bonus">Bonus</h1>
 <p>You know how to make POST requests, but at the beginning of the “Example” section, I said that I wanted the detailed information that is only displayed when we click on a “+” button in the table.</p>
-<p>Using the same method as before, we see that clicking on one of these buttons triggers a GET request of the form <code>ficha.php?id=&lt;ID&gt;&amp;db=&lt;DB&gt;</code>. Problem: these <code>&lt;ID&gt;</code> and <code>&lt;DB&gt;</code> change for each record and their value cannot be easily guessed. However, if we look at the HTML of these buttons, we can see that <code>&lt;ID&gt;</code> and <code>&lt;DB&gt;</code> are stored as attributes of the <code>a</code> tag:</p>
+<p>Using the same method as before, we see that clicking on one of these buttons triggers a GET request of the form <code>ficha.php?id=&lt;ID&gt;&amp;db=&lt;DB&gt;</code>. Problem: these <code>&lt;ID&gt;</code> and <code>&lt;DB&gt;</code> change for each record and their value cannot be easily guessed. However, if we look at the HTML of these buttons, we can see that <code>&lt;ID&gt;</code> and <code>&lt;DB&gt;</code> are stored as attributes of the <code>&lt;a&gt;</code> tag:</p>
 <p><img src="html-tag.PNG" /></p>
 <p>Since the have the HTML of the full table (thanks to the POST request), we can extract these attributes with <code>html_nodes()</code>:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1667,7 +1672,7 @@ timestamp=Mon May 08 2023 15:38:09 GMT+0200 (Central European Summer Time)</code
 <span>  <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='va'>out</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, db <span class='op'>=</span> <span class='va'>out</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span></span>
 <span><span class='op'>}</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='co'># remove cases where there were no attributes</span></span>
+<span><span class='co'># remove cases where there are no attributes</span></span>
 <span><span class='va'>info</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/funprog.html'>Negate</a></span><span class='op'>(</span><span class='va'>is.null</span><span class='op'>)</span>, <span class='va'>info</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># transform the list into a clean dataframe</span></span>
@@ -1716,7 +1721,7 @@ timestamp=Mon May 08 2023 15:38:09 GMT+0200 (Central European Summer Time)</code
 <hr />
 <ol>
 <li id="fn1"><p>In fact, I completely buried this in the Appendix because RSelenium was already plenty to teach and I didn’t want to add another layer of complexity with POST requests.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>I’m just listing things that are written on the website of <code>httr2</code>, more details there.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>I’m just listing things that are written on the <a href="https://httr2.r-lib.org/">website of <code>httr2</code></a>, more details there.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Oficina Española de Patentes y Marcas.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
