@@ -4,7 +4,7 @@ description: |
   An alternative to RSelenium to get data from dynamic webpages.
 author:
   - name: Etienne Bacher
-date: 2023-05-01
+date: 2023-05-09
 preview: post-photo.jpg
 output:
   distill::distill_article:
