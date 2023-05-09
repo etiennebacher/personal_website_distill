@@ -9,6 +9,7 @@ preview: post-photo.jpg
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
 ---
 
 <sup>Preview picture from <a href="https://unsplash.com/@tinamosquito?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kristina Tripkovic</a> on <a href="https://unsplash.com/fr/photos/8Zs5H6CnYJo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
