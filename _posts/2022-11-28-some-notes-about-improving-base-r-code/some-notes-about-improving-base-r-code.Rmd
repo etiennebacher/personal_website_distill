@@ -60,7 +60,7 @@ quite inefficient: it would be enough to stop as soon as we find two different
 values.
 
 What we can do is to compare all values to the first value of the vector. Below is 
-an example with a vector containing 1 million values. In the first case, it only
+an example with a vector containing 10 million values. In the first case, it only
 contains `1`, and in the second case it contains `1` and `2`.
 
 ```{r}

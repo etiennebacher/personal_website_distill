@@ -2417,7 +2417,7 @@ that first we have to collect all unique values and then count them. This can be
 quite inefficient: it would be enough to stop as soon as we find two different
 values.</p>
 <p>What we can do is to compare all values to the first value of the vector. Below is
-an example with a vector containing 1 million values. In the first case, it only
+an example with a vector containing 10 million values. In the first case, it only
 contains <code>1</code>, and in the second case it contains <code>1</code> and <code>2</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2431,11 +2431,10 @@ contains <code>1</code>, and in the second case it contains <code>1</code> and <
 <span><span class="op">)</span></span></code></pre>
 </div>
 <pre><code># A tibble: 2 × 6
-  expression                     min   median itr/se…¹ mem_a…² gc/se…³
-  &lt;bch:expr&gt;                &lt;bch:tm&gt; &lt;bch:tm&gt;    &lt;dbl&gt; &lt;bch:b&gt;   &lt;dbl&gt;
-1 length(unique(test)) == 1  249.1ms    280ms     3.50 166.1MB    3.50
-2 all(test == test[1])        52.3ms     54ms    17.2   38.1MB    3.45
-# … with abbreviated variable names ¹​`itr/sec`, ²​mem_alloc, ³​`gc/sec`</code></pre>
+  expression                  min  median `itr/sec` mem_alloc `gc/sec`
+  &lt;bch:expr&gt;              &lt;bch:t&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+1 length(unique(test)) =… 161.8ms 185.6ms      5.31   166.1MB     5.31
+2 all(test == test[1])     44.2ms  69.7ms     14.9     38.1MB     4.47</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class="co"># Should be FALSE</span></span>
 <span><span class="va">test2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fl">1e7</span><span class="op">)</span></span>
@@ -2447,11 +2446,10 @@ contains <code>1</code>, and in the second case it contains <code>1</code> and <
 <span><span class="op">)</span></span></code></pre>
 </div>
 <pre><code># A tibble: 2 × 6
-  expression                      min   median itr/s…¹ mem_a…² gc/se…³
-  &lt;bch:expr&gt;                 &lt;bch:tm&gt; &lt;bch:tm&gt;   &lt;dbl&gt; &lt;bch:b&gt;   &lt;dbl&gt;
-1 length(unique(test2)) == 1  483.8ms    512ms    1.93 332.3MB    1.93
-2 all(test2 == test2[1])       70.4ms     71ms   12.8   76.3MB    2.57
-# … with abbreviated variable names ¹​`itr/sec`, ²​mem_alloc, ³​`gc/sec`</code></pre>
+  expression                  min  median `itr/sec` mem_alloc `gc/sec`
+  &lt;bch:expr&gt;              &lt;bch:t&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+1 length(unique(test2)) … 342.2ms 390.6ms      2.46   332.3MB     2.46
+2 all(test2 == test2[1])   63.2ms  71.6ms     11.5     76.3MB     2.30</code></pre>
 </div>
 <p>This is also faster for character vectors:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2466,11 +2464,10 @@ contains <code>1</code>, and in the second case it contains <code>1</code> and <
 <span><span class="op">)</span></span></code></pre>
 </div>
 <pre><code># A tibble: 2 × 6
-  expression                      min   median itr/s…¹ mem_a…² gc/se…³
-  &lt;bch:expr&gt;                 &lt;bch:tm&gt; &lt;bch:tm&gt;   &lt;dbl&gt; &lt;bch:b&gt;   &lt;dbl&gt;
-1 length(unique(test3)) == 1    449ms    474ms    2.10 332.3MB    2.10
-2 all(test3 == test3[1])        134ms    138ms    6.88  76.3MB    1.38
-# … with abbreviated variable names ¹​`itr/sec`, ²​mem_alloc, ³​`gc/sec`</code></pre>
+  expression                   min median `itr/sec` mem_alloc `gc/sec`
+  &lt;bch:expr&gt;               &lt;bch:t&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+1 length(unique(test3)) =… 287.8ms  326ms      3.00   332.3MB     3.00
+2 all(test3 == test3[1])    82.7ms  107ms      8.73    76.3MB     1.75</code></pre>
 </div>
 <h2 id="concatenate-columns">Concatenate columns</h2>
 <p>Sometimes we need to concatenate columns, for example if we want to create a
@@ -2499,8 +2496,8 @@ instead of <code>apply()</code>:</p>
 <pre><code># A tibble: 2 × 6
   expression      min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 apply         7.78s    7.78s     0.129    80.1MB     5.14
-2 do.call     297.4ms 297.59ms     3.36     11.4MB     0   </code></pre>
+1 apply         7.36s    7.36s     0.136    80.1MB     5.71
+2 do.call    128.14ms 139.29ms     7.08     11.4MB     0   </code></pre>
 </div>
 <h2 id="giving-attributes-to-large-dataframes">Giving attributes to large dataframes</h2>
 <p>This one comes from these <a href="https://stackoverflow.com/questions/74029805/why-does-adding-attributes-to-a-dataframe-take-longer-with-large-dataframes">StackOverflow question and answer</a>. Manipulating a dataframe can remove some attributes. For example, if I give an
@@ -2556,8 +2553,8 @@ attributes that were in <code>orig</code> but are not in <code>new</code> (in th
 <pre><code># A tibble: 2 × 6
   expression      min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 old            87ms   92.3ms      10.8    38.2MB     2.70
-2 new          88.5µs   95.3µs    9422.     24.4KB     6.80</code></pre>
+1 old            68ms     82ms      12.9    38.2MB     4.29
+2 new          52.8µs   80.5µs   11188.     24.4KB     8.77</code></pre>
 </div>
 <h2 id="find-empty-rows">Find empty rows</h2>
 <p>It can be useful to remove empty rows, meaning rows containing only <code>NA</code> or <code>&quot;&quot;</code>.
@@ -2588,8 +2585,8 @@ of columns, then it means that the row only has <code>NA</code> or <code>&quot;&
 <pre><code># A tibble: 2 × 6
   expression      min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 apply          2.8s     2.8s     0.357   112.9MB     3.22
-2 rowSums     739.3ms  739.3ms     1.35     99.7MB     0   </code></pre>
+1 apply         2.08s    2.08s     0.480   112.9MB     3.84
+2 rowSums    709.59ms 709.59ms     1.41     99.7MB     0   </code></pre>
 </div>
 <h2 id="conclusion">Conclusion</h2>
 <p>These were just a few tips I discovered. Maybe there are ways to make them even
