@@ -80,13 +80,6 @@ make_grid_project(
     title_link = "https://github.com/etiennebacher/shinyfullscreen",
     description = "Use screenfull.js to put HTML elements in fullscreen in R Shiny applications.",
     button_link = "https://github.com/etiennebacher/shinyfullscreen"
-  ),
-
-  make_card_project(
-    title = "circletyper",
-    title_link = "https://github.com/etiennebacher/circletyper",
-    description = "Curve text elements in R Shiny applications, using Circletype.js.",
-    button_link = "https://github.com/etiennebacher/circletyper"
   )
 )
 ```
