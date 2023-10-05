@@ -5,7 +5,7 @@ links:
   - label: '<i class="fab fa-github fa-lg"></i> GitHub'
     url: "https://github.com/etiennebacher"
   - label: '<i class="fab fa-mastodon fa-lg"></i> Mastodon'
-    url: "https://mastodon.social/@etiennebacher"
+    url: "https://mastodon.social/\\@etiennebacher"
   - label: '<i class="fas fa-envelope fa-lg"></i> Email'
     url: "mailto:etienne.bacher@liser.lu"
 output:
