@@ -45,7 +45,7 @@ d-article a, d-article a:hover {
 
 * Etienne Bacher, Michel Beine, Hillel Rapoport, *The vicious circle of xenophobia*
 
-* Etienne Bacher, Frédéric Docquier, *Populism and globalization*
+* Etienne Bacher, *Populism and international migration*
 
 
 ### Software
