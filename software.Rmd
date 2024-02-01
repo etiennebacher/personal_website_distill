@@ -41,6 +41,13 @@ make_grid_project(
 make_grid_project(
   
   make_card_project(
+    title = "polars",
+    title_link = "https://rpolars.github.io/",
+    description = "Bindings for rust-polars in R.",
+    button_link = "https://rpolars.github.io/"
+  ),
+  
+  make_card_project(
     title = "tidypolars",
     title_link = "https://tidypolars.etiennebacher.com",
     description = "Get the functionalities of Polars with the syntax of the tidyverse in R.",
