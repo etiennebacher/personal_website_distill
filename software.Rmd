@@ -31,6 +31,12 @@ make_grid_project(
     button_link = "https://www.good-practices.etiennebacher.com",
     link_to_pdf_text = "Get PDF",
     link_to_pdf = "good-practices.pdf"
+  ),
+  make_card_project(
+    title = "Handling large data with polars and tidypolars",
+    title_link = "https://www.handling-large-data.etiennebacher.com",
+    description = "A brief introduction (not a tutorial) to the Python and R packages polars and tidypolars, ~30 slides.",
+    button_link = "https://www.handling-large-data.etiennebacher.com"
   )
 )
 ```
