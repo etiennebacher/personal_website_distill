@@ -35,7 +35,8 @@ li:before {
 }
 
 d-article a, d-article a:hover {
-  border-bottom: none;
+	border-bottom: dotted 1px;
+	color: #4682b4;
 }
 ```
 
@@ -43,9 +44,10 @@ d-article a, d-article a:hover {
 
 ### Work in progress
 
-* Etienne Bacher, Michel Beine, Hillel Rapoport, *The vicious circle of xenophobia*
-
-* Etienne Bacher, *Populism and international migration*
+* "Populism and international migration"
+* "Migrants' voices", *with [Martín Fernández](https://sites.google.com/view/martinfernandezsanchez/)*
+* "The vicious circle of xenophobia", *with [Michel Beine](https://sites.google.com/site/michelbeineeconomics/home) and [Hillel
+  Rapoport](https://www.parisschoolofeconomics.eu/en/rapoport-hillel/)*
 
 
 ### Software
