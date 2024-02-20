@@ -5,6 +5,10 @@ on:
 
 name: Render & Deploy Site
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: macOS-latest
