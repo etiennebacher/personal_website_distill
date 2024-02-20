@@ -6,7 +6,7 @@ toc: false
 
 ## Software
 
-### Tutorials
+### Tutorials & presentations
 
 ```{r echo = FALSE}
 source(file.path("R", "functions.R"))
