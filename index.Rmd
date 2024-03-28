@@ -1,6 +1,6 @@
 ---
 title: "Etienne Bacher"
-image: "etienne.png"
+image: "etienne2.jpg"
 links:
   - label: '<i class="fab fa-github fa-lg"></i> GitHub'
     url: "https://github.com/etiennebacher"
@@ -67,6 +67,12 @@ If you want to contact me, the best way to do so is by email.
 .grad-location {
   font-size: 0.8rem;
   color: grey;
+}
+
+img.rounded {
+	width: 50% !important;
+	border-radius: 15px !important;
+	border: 3px solid #4682b4;
 }
 ```
 
