@@ -43,9 +43,9 @@ cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/t
 
 <br>
 
-I am a French PhD student in the [Doctoral Team Unit ACROSS](https://sites.google.com/view/fredericdocquier/xingb-blog/across) at LISER, Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences using both contemporaneous and historical data. During May and June 2024, I will be a visiting PhD student at the London School of Economics.
+I am a French PhD student in the [Doctoral Team Unit ACROSS](https://sites.google.com/view/fredericdocquier/xingb-blog/across) at Luxembourg Institute for Socio-Economic Research (LISER), Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences using both contemporaneous and historical data. During May and June 2024, I will be a visiting PhD student at the London School of Economics.
 
-Besides working on this topic, I also enjoy programming with R by creating Shiny apps or packages that you can find on [GitHub](https://github.com/etiennebacher/). I also write blog articles about R from time to time, that you can find in the "Blog" tab above.
+Besides working on this topic, I also develop or contribute to R packages that you can find on [GitHub](https://github.com/etiennebacher/). I also write blog articles about R from time to time.
 
 If you want to contact me, the best way to do so is by email.
 
