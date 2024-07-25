@@ -44,9 +44,9 @@ d-article a, d-article a:hover {
 
 ### Work in progress
 
-* "Populism and international migration"
+* "Populist leaders and international migration"
 * "Migrants' voices", *with [Martín Fernández](https://sites.google.com/view/martinfernandezsanchez/)*
-* "The vicious circle of xenophobia", *with [Michel Beine](https://sites.google.com/site/michelbeineeconomics/home) and [Hillel
+* "Estimating the impact of xenophobia on immigration: evidence from terrorist attacks", *with [Michel Beine](https://sites.google.com/site/michelbeineeconomics/home) and [Hillel
   Rapoport](https://www.parisschoolofeconomics.eu/en/rapoport-hillel/)*
 
 
