@@ -13,8 +13,8 @@ navbar:
       href: blog.html
     - text: "Software"
       href: software.html
-    # - text: "Gallery"
-    #   href: gallery.html
+    - text: "Gallery"
+      href: gallery.html
     - text: "CV"
       href: cv.pdf
   source_url: https://github.com/etiennebacher/personal_website_distill
