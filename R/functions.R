@@ -117,6 +117,8 @@ make_gallery_layout <- function() {
   images <- data.frame(images_thumb = images_thumb,
                        images_full_size = images_full_size)
   
+  images[] <- lapply(images, rev)
+  
   tagList(apply(images, 1, function(x) {
       tags$a(
         href = paste0("_gallery/img/", x[["images_full_size"]]),
