@@ -18,10 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 I had never heard of property testing until a few months ago when I started looking
-at some pull requests in [polars]() (the Python implementation, not the R one)
-where they use [hypothesis.io](). 
-
-<example PR?>
+at some pull requests in [polars](https://github.com/pola-rs/polars/) (the Python implementation, not the R one)
+where they use [hypothesis](https://hypothesis.readthedocs.io/en/latest/), for example [polars#17992](https://github.com/pola-rs/polars/pull/17992/files#diff-728b25c64b205cf575fb186611d9e63eff7cd1ea2c32cf811a6e68d6e3d0f4bc). 
 
 I have contributed to a fair amount of R packages but I have never seen this type
 of tests before: unit tests, plenty; snapshot tests, sometimes; but property-based
@@ -43,7 +41,59 @@ rev(rev(c(3, 1, 4)))
 
 Therefore, property-based testing doesn't use hardcoded values to check the output but ensures that our functions respects a list of properties. 
 
-<demo + explain shrinking>
+## Property-based testing in R
+
+To the best of my knowledge, there are two R packages to do property-based testing in R: [`hedgehog`](https://cran.r-project.org/web/packages/hedgehog/) and [`quickcheck`](https://cran.r-project.org/web/packages/quickcheck/) (which is based on `hedgehog`). If you already use `testthat` for testing, then integrating them in the test suite is not hard. Using the example above, we could do:
+
+```{r}
+library(quickcheck)
+library(testthat)
+
+test_that("reversing twice returns the original input", {
+  for_all(
+    a = numeric_(any_na = TRUE),
+    property = function(a) {
+      expect_equal(rev(rev(a)), a)
+    }
+  )
+})
+```
+
+This example generated 100 random inputs and checked that the `expect_equal()` clause was respected for all of them. We can see that by adding a `print()` call (I reduce the number of tests to 5 to avoid too much clutter).
+
+```{r}
+test_that("reversing twice returns the original input", {
+  for_all(
+    a = numeric_(any_na = TRUE),
+    tests = 5,
+    property = function(a) {
+      print(a)
+      expect_equal(rev(rev(a)), a)
+    }
+  )
+})
+```
+
+As we can see, a lot of different examples were generated: some have single values while other have multiple, some only have negative values while others have a mix, etc.
+
+The example above checked only on numeric inputs, but we could check on any type of vector using `any_atomic()`:
+
+```{r}
+test_that("reversing twice returns the original input", {
+  for_all(
+    a = any_atomic(any_na = TRUE),
+    tests = 5,
+    property = function(a) {
+      print(a)
+      expect_equal(rev(rev(a)), a)
+    }
+  )
+})
+```
+
+Finally, if a particular input fails, `quickcheck` will first try to reduce the size of this input as much as possible (a process called "shrinking"). 
+
+<add example>
 
 
 Besides this basic example, where could this be useful?
@@ -52,13 +102,42 @@ Besides this basic example, where could this be useful?
 
 When working with compiled code (C++, Rust, etc.), it can happen that a bug makes the R session crash (== segfault == "bomb icon" in RStudio). This can be extremely annoying as we lose all data and computations that were stored in memory. When we work with compiled code, there's one property that our code should follow:
 
-> Calling a function shouldn't lead to a segfault.
+> Calling a function should never lead to a segfault.
 
 This happened to me a few months ago. I investigated a part of some code that used `igraph::cluster_fast_greedy()`. I know almost nothing about `igraph`, I was just playing around with arguments, and suddenly... crash. I reported this situation ([igraph#2459](https://github.com/igraph/igraph/issues/2459)), which was promptly fixed (thank you `igraph` devs!), but one sentence in the explanation caught my eye: "it is a rare use case to only want modularity but not membership, and avoiding membership calculation doesn't have any advantages."
 
-I have no particular problem with this sentence or the rationale behind, it makes sense to prioritize fixes that affect a larger audience. But it got me thinking: could we try all combinations of inputs to see if it makes the session crash? We could use [parametric testing]() for this, but then again we need to hardcode at least some possible values for parameters. We could say that we start by testing only `TRUE`/`FALSE` values for all combinations of params, but what if the user passes a string?
+I have no particular problem with this sentence or the rationale behind, it makes sense to prioritize fixes that affect a larger audience. But it got me thinking: could we try all combinations of inputs to see if it makes the session crash? We could use [parametric testing](https://cran.r-project.org/web/packages/patrick/) for this, but then again we need to hardcode at least some possible values for parameters. We could say that we start by testing only `TRUE`/`FALSE` values for all combinations of params, but what if the user passes a string?
 
-I think this is a situation where property-based testing would be helpful: we know that no matter the input type, its length, and the value of other inputs, *the session shouldn't crash*.
+I think this is a situation where property-based testing would be helpful: we know that no matter the input type, its length, and the value of other inputs, *the session shouldn't crash*. Implementing it with `quickcheck` looks fairly simple:
+
+
+```{r}
+library(igraph, warn.conflicts = FALSE)
+
+test_that("cluster_fast_greedy doesn't crash", {
+  # setup a graph, from the examples of ?cluster_fast_greedy
+  g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
+  g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+
+  for_all(
+    merges = any_atomic(any_na = TRUE), 
+    modularity = any_atomic(any_na = TRUE), 
+    membership = any_atomic(any_na = TRUE), 
+    weights = any_atomic(any_na = TRUE),
+    property = function(merges, modularity, membership, weights) {
+      suppressWarnings(
+        try(
+          cluster_fast_greedy(g, merges = merges, modularity = modularity, membership = membership, weights = weights),
+          silent = TRUE
+        )
+      )
+      expect_true(TRUE)
+    }
+  )
+})
+```
+
+I don't really know what expectation to put, I don't care if the function errors or not, I just want it not to segfault. So I put `try(silent = TRUE)` and add a fake expectation.
 
 ## Ensuring that a package and its variants give the same results
 
@@ -68,9 +147,9 @@ I have spent some time working on [`tidypolars`](), a package that provides the 
 stringr::str_sub(string = "foo", start = 1, end = 2)
 ```
 
-Easy enough. But what happens if `string` is missing? Or if `start > end`? Or if `end` is negative? Or if `start` is negative *and* `end` is `NULL` *and* the length of `start` is greater than the length of `string`? Testing all of those is painful and it increases the risk of forgetting a corner case.
+Easy enough. But what happens if `string` is missing? Or if `start > end`? Or if `end` is negative? Or if `start` is negative *and* `end` is `NULL` *and* the length of `start` is greater than the length of `string`? Manually adding tests for all of those is painful and increases the risk of forgetting a corner case.
 
-It is better here to use property-based testing: we don't need to check the value of the output of functions implemented in `tidyplars`, **we only need to check that they match the output of functions in `tidyverse`**.
+It is better here to use property-based testing: we don't need to check the value of the output of functions implemented in `tidypolars`, *we only need to check that they match the output of functions in `tidyverse`*.
 
 <example>
 
