@@ -118,11 +118,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>I had never heard of property testing until a few months ago when I started looking at some pull requests in <a href="https://github.com/pola-rs/polars/">polars</a> (the Python implementation, not the R one) where they use <a href="https://hypothesis.readthedocs.io/en/latest/">hypothesis</a>, for example <a href="https://github.com/pola-rs/polars/pull/17992/files#diff-728b25c64b205cf575fb186611d9e63eff7cd1ea2c32cf811a6e68d6e3d0f4bc">polars#17992</a>.</p>
-<p>I have contributed to a fair amount of R packages but I have never seen this type of tests before: unit tests, plenty; snapshot tests, sometimes; but property-based tests? Never. And at first, I didn’t really see the point but I’ve had a couple of situations recently where I thought it could be useful, so this post is here to describe those situations and why property-based testing can be useful.</p>
+<p>I have contributed to a fair amount of R packages but I have never seen this type of tests before: unit tests, plenty; snapshot tests, sometimes; but property-based tests? Never. And at first, I didn’t really see the point, but I’ve had a couple of situations recently where I thought it could be useful, so this post is here to describe those situations and why property-based testing can be useful.</p>
 <section id="what-is-property-based-testing" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-property-based-testing">What is property-based testing?</h2>
-<p>Most of the time, unit tests check that the function performs well on a few different inputs: does it give the correct results? nice error messages? what about this corner case?</p>
-<p>Property-based testing is a way of testing where we give random inputs to the function we want to test and we want to ensure that no matter the inputs, the output will respect some properties. For example, we made a function to reverse the input, so if I pass <code>3, 1, 4</code>, it should return <code>4, 1, 3</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We can pass several inputs and see if the output is correctly reversed. But a more efficient way would be to check that our function respects a basic property, which is that <em>reversing the input twice should return the original input</em>:</p>
+<p>Most of the time, unit tests check that the function performs well on a few different inputs: does it give the correct results? Nice error messages? What about this corner case?</p>
+<p>Property-based testing is a way of testing where we give random inputs to the function we want to test and we want to ensure that no matter the inputs, the output will respect some properties. For example, suppose we made a function to reverse the input, so if I pass <code>3, 1, 4</code>, it should return <code>4, 1, 3</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We can pass several inputs and see if the output is correctly reversed. But a more efficient way would be to check that our function respects a basic property, which is that <em>reversing the input twice should return the original input</em>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rev</span>(<span class="fu">rev</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 😀</code></pre>
+<pre><code>Test passed 🎊</code></pre>
 </div>
 </div>
 <p>This example generated 100 random inputs and checked that the <code>expect_equal()</code> clause was respected for all of them. We can see that by adding a <code>print()</code> call (I reduce the number of tests to 5 to avoid too much clutter).</p>
@@ -163,13 +163,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1651
- [1]  989980371  812014572         NA -779719115          0  943861473
- [7]  214548654 -769782757  388324555 -909304573
-[1]         NA -155559734 -767648519          0
-[1] -6918 -5245 -8170    NA    NA  3335
-[1]  3592   143  8691 -9473    NA  6732  1802
-Test passed 😸</code></pre>
+<pre><code>[1] -940264730  956710462   96692968         NA
+[1]    NA  4973  -725    NA -4382 -4882  2792    NA
+[1]  763 3733   NA  241   NA 2199  556    0
+[1] -692363130
+[1]  2894 -8235  5947    NA  4797  2448     0     0
+Test passed 😀</code></pre>
 </div>
 </div>
 <p>As we can see, a lot of different examples were generated: some have single values while other have multiple, some only have negative values while others have a mix, etc.</p>
@@ -186,22 +185,111 @@ Test passed 😸</code></pre>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -407115384  333327169 -536884358         NA
-[1]         NA          0   30090565 -293755930         NA          0 -641904081
-[8]         NA   26917464
+<pre><code>[1] IU)GL? ~      Q7Ozk;
+Levels: IU)GL? ~ Q7Ozk;
+[1] TRUE   NA
+[1] "2485-12-11" "1110-02-18" "1007-04-23" NA           "2016-02-08"
+[6] "2791-11-23" "2725-03-15"
+21:01:54.117674
              NA
-02:40:40.373808
-23:20:56.468868
-15:05:20.079024
-23:05:43.145869
+12:46:17.874921
+15:19:24.982525
              NA
-NA
-08:52:04.981831
-Test passed 😸</code></pre>
+11:20:49.663802
+Test passed 🎉</code></pre>
 </div>
 </div>
-<p>Finally, if a particular input fails, <code>quickcheck</code> will first try to reduce the size of this input as much as possible (a process called “shrinking”).</p>
-<p><add example=""></add></p>
+<p>Finally, if a particular input fails, <code>quickcheck</code> will first try to reduce the size of this input as much as possible (a process called “shrinking”). To illustrate that, let’s say we make a function to normalize a numeric vector to a [0, 1] interval:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">normalize</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5000000 1.0000000 0.6666667 0.0000000</code></pre>
+</div>
+</div>
+<p>One property of this function is that all output values should be in the interval [0, 1]. Does this function pass property-based tests?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"output is in interval [0, 1]"</span>, {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">for_all</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">a =</span> <span class="fu">numeric_</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">tests =</span> <span class="dv">5</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">property =</span> <span class="cf">function</span>(a) {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">normalize</span>(a)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect_true</span>(<span class="fu">all</span>(res <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> res <span class="sc">&lt;=</span> <span class="dv">1</span>))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>── Failure<span class="sc">:</span> output is <span class="cf">in</span> interval [<span class="dv">0</span>, <span class="dv">1</span>] ───────────────────────────────────────</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>Falsifiable after <span class="dv">1</span> tests, and <span class="dv">3</span> shrinks</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>expectation_failure<span class="sc">/</span>expectation<span class="sc">/</span>error<span class="sc">/</span>condition<span class="sc">&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(res <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> res <span class="sc">&lt;=</span> <span class="dv">1</span>) is not <span class="cn">TRUE</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">actual</span><span class="st">`</span><span class="sc">:</span>   <span class="er">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">expected</span><span class="st">`</span><span class="sc">:</span> <span class="cn">TRUE</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>Backtrace<span class="sc">:</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>     ▆</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.</span> └─quickcheck<span class="sc">::</span><span class="fu">for_all</span>(...)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>      [TRUNCATED...]</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>Counterexample<span class="sc">:</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="er">$</span>a</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="dv">4037</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>Backtrace<span class="sc">:</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    ▆</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">1.</span> └─quickcheck<span class="sc">::</span><span class="fu">for_all</span>(...)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.</span>   └─hedgehog<span class="sc">::</span><span class="fu">forall</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Hah-ah! Problem: what happens if the input is a single value? Then <code>max(x) - min(x)</code> is 0, so the division gives <code>NaN</code>. In the error message, we can see:</p>
+<blockquote class="blockquote">
+<p>Falsifiable after 1 tests, <strong>and 3 shrinks</strong></p>
+</blockquote>
+<p>Shrinking is the action of reducing as much as possible the size of the input that makes the function fail. Having the smallest example possible is extremely useful when debugging.</p>
+<p>Let’s fix the function and try again:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fl">0.5</span>) <span class="co"># </span><span class="al">WARNING</span><span class="co">: this is for the sake of example, I don't guarantee</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                <span class="co"># this is the correct behavior</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"output is in interval [0, 1]"</span>, {</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">for_all</span>(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">a =</span> <span class="fu">numeric_</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">tests =</span> <span class="dv">5</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">property =</span> <span class="cf">function</span>(a) {</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">normalize</span>(a)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect_true</span>(<span class="fu">all</span>(res <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> res <span class="sc">&lt;=</span> <span class="dv">1</span>))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>── Failure<span class="sc">:</span> output is <span class="cf">in</span> interval [<span class="dv">0</span>, <span class="dv">1</span>] ───────────────────────────────────────</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>Falsifiable after <span class="dv">1</span> tests, and <span class="dv">8</span> shrinks</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>expectation_failure<span class="sc">/</span>expectation<span class="sc">/</span>error<span class="sc">/</span>condition<span class="sc">&gt;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(res <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> res <span class="sc">&lt;=</span> <span class="dv">1</span>) is not <span class="cn">TRUE</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">actual</span><span class="st">`</span><span class="sc">:</span>   <span class="er">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">expected</span><span class="st">`</span><span class="sc">:</span> <span class="cn">TRUE</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>Backtrace<span class="sc">:</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>     ▆</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.</span> └─quickcheck<span class="sc">::</span><span class="fu">for_all</span>(...)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>     [TRUNCATED...]</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>Counterexample<span class="sc">:</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="er">$</span>a</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="dv">2413</span> <span class="sc">-</span><span class="dv">2413</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>Backtrace<span class="sc">:</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    ▆</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a> <span class="fl">1.</span> └─quickcheck<span class="sc">::</span><span class="fu">for_all</span>(...)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.</span>   └─hedgehog<span class="sc">::</span><span class="fu">forall</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Dang it, now it fails when I pass a two identical values! This is for the same reason as above, <code>max(x) - min(x)</code> will return 0, but I won’t spend more time on this example, you get the idea.</p>
 <p>Besides this basic example, where could this be useful?</p>
 </section>
 <section id="ensuring-that-a-package-doesnt-crash-r" class="level2">
@@ -214,49 +302,31 @@ Test passed 😸</code></pre>
 <p>I have no particular problem with this sentence or the rationale behind, it makes sense to prioritize fixes that affect a larger audience. But it got me thinking: could we try all combinations of inputs to see if it makes the session crash? We could use <a href="https://cran.r-project.org/web/packages/patrick/">parametric testing</a> for this, but then again we need to hardcode at least some possible values for parameters. We could say that we start by testing only <code>TRUE</code>/<code>FALSE</code> values for all combinations of params, but what if the user passes a string?</p>
 <p>I think this is a situation where property-based testing would be helpful: we know that no matter the input type, its length, and the value of other inputs, <em>the session shouldn’t crash</em>. Implementing it with <code>quickcheck</code> looks fairly simple:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'igraph'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:testthat':
-
-    compare</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    decompose, spectrum</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:base':
-
-    union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"cluster_fast_greedy doesn't crash"</span>, {</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># from the examples of ?cluster_fast_greedy</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>) <span class="sc">%du%</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>) <span class="sc">%du%</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="fu">add_edges</span>(g, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">6</span>, <span class="dv">11</span>))</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">for_all</span>(</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">merges =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">modularity =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">membership =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tests = 5,</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">property =</span> <span class="cf">function</span>(merges, modularity, membership, weights) {</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">suppressWarnings</span>(</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">try</span>(</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>          <span class="fu">cluster_fast_greedy</span>(g, <span class="at">merges =</span> merges, <span class="at">modularity =</span> modularity, <span class="at">membership =</span> membership, <span class="at">weights =</span> weights),</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">silent =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect_true</span>(<span class="cn">TRUE</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"cluster_fast_greedy doesn't crash"</span>, {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># setup a graph, from the examples of ?cluster_fast_greedy</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>) <span class="sc">%du%</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>) <span class="sc">%du%</span> <span class="fu">make_full_graph</span>(<span class="dv">5</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="fu">add_edges</span>(g, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">6</span>, <span class="dv">11</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">for_all</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">merges =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">modularity =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">membership =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> <span class="fu">any_atomic</span>(<span class="at">any_na =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">property =</span> <span class="cf">function</span>(merges, modularity, membership, weights) {</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">suppressWarnings</span>(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">try</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>          <span class="fu">cluster_fast_greedy</span>(g, <span class="at">merges =</span> merges, <span class="at">modularity =</span> modularity, <span class="at">membership =</span> membership, <span class="at">weights =</span> weights),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">expect_true</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 🥳</code></pre>
+<pre><code>Test passed 🎊</code></pre>
 </div>
 </div>
 <p>I don’t really know what expectation to put, I don’t care if the function errors or not, I just want it not to segfault. So I put <code>try(silent = TRUE)</code> and add a fake expectation.</p>
@@ -265,18 +335,43 @@ Attaching package: 'igraph'</code></pre>
 <h2 class="anchored" data-anchor-id="ensuring-that-a-package-and-its-variants-give-the-same-results">Ensuring that a package and its variants give the same results</h2>
 <p>I have spent some time working on <a href=""><code>tidypolars</code></a>, a package that provides the same interface as the <code>tidyverse</code> but uses <code>polars</code> under the hood. This means that there should be the lowest amount of “surprises” for the user: the behavior of functions that are available in <code>tidypolars</code> should match the behavior of those in <code>tidyverse</code>. Once again this can be tedious to check. One example is the function <code>stringr::str_sub()</code>. For instance, we can start with basic examples, such as:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_sub</span>(<span class="at">string =</span> <span class="st">"foo"</span>, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_sub</span>(<span class="at">string =</span> <span class="st">"foo"</span>, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "fo"</code></pre>
 </div>
 </div>
-<p>Easy enough. But what happens if <code>string</code> is missing? Or if <code>start &gt; end</code>? Or if <code>end</code> is negative? Or if <code>start</code> is negative <em>and</em> <code>end</code> is <code>NULL</code> <em>and</em> the length of <code>start</code> is greater than the length of <code>string</code>? Testing all of those is painful and it increases the risk of forgetting a corner case.</p>
-<p>It is better here to use property-based testing: we don’t need to check the value of the output of functions implemented in <code>tidyplars</code>, <strong>we only need to check that they match the output of functions in <code>tidyverse</code></strong>.</p>
-<example>
-</example></section>
+<p>Easy enough. But what happens if <code>string</code> is missing? Or if <code>start &gt; end</code>? Or if <code>end</code> is negative? Or if <code>start</code> is negative <em>and</em> <code>end</code> is <code>NULL</code> <em>and</em> the length of <code>start</code> is greater than the length of <code>string</code>? Manually adding tests for all of those is painful and increases the risk of forgetting a corner case.</p>
+<p>It is better here to use property-based testing: we don’t need to check the value of the output of functions implemented in <code>tidypolars</code>, <em>we only need to check that they match the output of functions in <code>tidyverse</code></em>.</p>
+<p>Here, one additional difficulty is that sometimes throwing an error is the correct behavior. Therefore, we need to create a custom expectation that checks that the output of <code>tidypolars</code> and <code>tidyverse</code> is identical, <em>or</em> that both functions error (see the <code>testthat</code> vignette on <a href="https://testthat.r-lib.org/articles/custom-expectation.html">creating custom expectations</a>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>expect_equal_or_both_error <span class="ot">&lt;-</span> <span class="cf">function</span>(object, other) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  polars_error <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  polars_res <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    object,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">error =</span> <span class="cf">function</span>(e) polars_error <span class="ot">&lt;&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  other_error <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  other_res <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tryCatch</span>(</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>      other,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">error =</span> <span class="cf">function</span>(e) other_error <span class="ot">&lt;&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">isTRUE</span>(polars_error)) {</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    testthat<span class="sc">::</span><span class="fu">expect</span>(<span class="fu">isTRUE</span>(other_error), <span class="st">"tidypolars errored but tidyverse didn't."</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    testthat<span class="sc">::</span><span class="fu">expect_equal</span>(polars_res, other_res)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(<span class="cn">NULL</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Property-based testing will not replace all kinds of tests, and is not necessarily appropriate in all contexts. Still, it can help uncover bugs, segfaults, and it adds more confidence in our code.</p>
+<p>Property-based testing will not replace all kinds of tests, and is not necessarily appropriate in all contexts. Still, it can help uncover bugs, segfaults, and it adds more confidence in our code by randomly checking that it works even implausible cases.</p>
 </section>
 
 
