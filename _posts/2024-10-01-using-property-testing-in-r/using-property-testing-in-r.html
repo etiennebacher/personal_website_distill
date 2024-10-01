@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Etienne Bacher">
-<meta name="dcterms.date" content="2024-09-28">
-<meta name="description" content="A short description of the post.">
+<meta name="dcterms.date" content="2024-10-01">
+<meta name="description" content="When you don’t want to write dozens of versions of unit tests.">
 
-<title>Using property testing in R</title>
+<title>Using property-based testing in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,12 +70,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="using-property-testing-in-r_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="using-property-testing-in-r_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="using-property-testing-in-r_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<meta name="quarto:status" content="draft">
 
 
 </head>
 
-<body class="fullcontent"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+<body class="fullcontent">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
@@ -83,12 +82,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Using property testing in R</h1>
+<h1 class="title">Using property-based testing in R</h1>
 </div>
 
 <div>
   <div class="description">
-    <p>A short description of the post.</p>
+    <p>When you don’t want to write dozens of versions of unit tests.</p>
   </div>
 </div>
 
@@ -98,14 +97,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p><a href="true">Etienne Bacher</a> </p>
+             <p>Etienne Bacher </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 28, 2024</p>
+      <p class="date">October 1, 2024</p>
     </div>
   </div>
   
@@ -117,8 +116,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>I had never heard of property testing until a few months ago when I started looking at some pull requests in <a href="https://github.com/pola-rs/polars/">polars</a> (the Python implementation, not the R one) where they use <a href="https://hypothesis.readthedocs.io/en/latest/">hypothesis</a>, for example <a href="https://github.com/pola-rs/polars/pull/17992/files#diff-728b25c64b205cf575fb186611d9e63eff7cd1ea2c32cf811a6e68d6e3d0f4bc">polars#17992</a>.</p>
-<p>I have contributed to a fair amount of R packages but I have never seen this type of tests before: unit tests, plenty; snapshot tests, sometimes; but property-based tests? Never. And at first, I didn’t really see the point, but I’ve had a couple of situations recently where I thought it could be useful, so this post is here to describe those situations and why property-based testing can be useful.</p>
+<p>I had never heard of property-based testing until a few months ago when I started looking at some pull requests in <a href="https://github.com/pola-rs/polars/">polars</a> (the Python implementation, not the R one) where they use <a href="https://hypothesis.readthedocs.io/en/latest/">hypothesis</a>, for example <a href="https://github.com/pola-rs/polars/pull/17992/files#diff-728b25c64b205cf575fb186611d9e63eff7cd1ea2c32cf811a6e68d6e3d0f4bc">polars#17992</a>.</p>
+<p>I have contributed to a fair amount of R packages but I have never seen this type of tests before: unit tests, plenty; snapshot tests, sometimes; but property-based tests? Never. And at first, I didn’t really see the point, but I’ve had a couple of situations recently where I thought it could help, so the aim of this post is to explain (briefly) what property-based testing is and to provide some examples where it can be useful.</p>
 <section id="what-is-property-based-testing" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-property-based-testing">What is property-based testing?</h2>
 <p>Most of the time, unit tests check that the function performs well on a few different inputs: does it give the correct results? Nice error messages? What about this corner case?</p>
@@ -147,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Test passed 🎊</code></pre>
+<pre><code>Test passed 🌈</code></pre>
 </div>
 </div>
 <p>This example generated 100 random inputs and checked that the <code>expect_equal()</code> clause was respected for all of them. We can see that by adding a <code>print()</code> call (I reduce the number of tests to 5 to avoid too much clutter).</p>
@@ -163,12 +162,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -940264730  956710462   96692968         NA
-[1]    NA  4973  -725    NA -4382 -4882  2792    NA
-[1]  763 3733   NA  241   NA 2199  556    0
-[1] -692363130
-[1]  2894 -8235  5947    NA  4797  2448     0     0
-Test passed 😀</code></pre>
+<pre><code>[1] -2333  -270 -8813
+[1] -5055    NA     0 -6857 -2776  2024     0
+[1] -907917589 -233939026
+[1] -617569251
+[1] -4729 -2488    NA    NA  6859    NA  4510 -2881
+Test passed 🥇</code></pre>
 </div>
 </div>
 <p>As we can see, a lot of different examples were generated: some have single values while other have multiple, some only have negative values while others have a mix, etc.</p>
@@ -185,18 +184,21 @@ Test passed 😀</code></pre>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] IU)GL? ~      Q7Ozk;
-Levels: IU)GL? ~ Q7Ozk;
-[1] TRUE   NA
-[1] "2485-12-11" "1110-02-18" "1007-04-23" NA           "2016-02-08"
-[6] "2791-11-23" "2725-03-15"
-21:01:54.117674
+<pre><code>[1] "S"         "!0"        "`&gt;lj."     "b@Mtuc"    NA          "d~0mpY0't"
+[7] "pT"        "$Qp6"      "|"        
+18:57:36.050444
+03:17:48.793040
+17:06:49.601221
              NA
-12:46:17.874921
-15:19:24.982525
              NA
-11:20:49.663802
-Test passed 🎉</code></pre>
+01:32:41.456782
+18:17:20.199616
+04:03:16.233985
+[1]    NA FALSE
+[1] FALSE
+[1] "2571-02-26" "2484-12-12" "1870-11-26" "2880-03-12" "2515-12-01"
+[6] "2711-08-25" NA          
+Test passed 🥇</code></pre>
 </div>
 </div>
 <p>Finally, if a particular input fails, <code>quickcheck</code> will first try to reduce the size of this input as much as possible (a process called “shrinking”). To illustrate that, let’s say we make a function to normalize a numeric vector to a [0, 1] interval:</p>
@@ -252,8 +254,8 @@ Test passed 🎉</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>normalize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">1</span>) {</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fl">0.5</span>) <span class="co"># </span><span class="al">WARNING</span><span class="co">: this is for the sake of example, I don't guarantee</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                <span class="co"># this is the correct behavior</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fl">0.5</span>) <span class="co"># </span><span class="al">WARNING</span><span class="co">: this is for the sake of example, I don't </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                <span class="co"># guarantee this is the correct behavior</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  (x <span class="sc">-</span> <span class="fu">min</span>(x)) <span class="sc">/</span> (<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x))</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -298,7 +300,7 @@ Test passed 🎉</code></pre>
 <blockquote class="blockquote">
 <p>Calling a function should never lead to a segfault.</p>
 </blockquote>
-<p>This happened to me a few months ago. I investigated a part of some code that used <code>igraph::cluster_fast_greedy()</code>. I know almost nothing about <code>igraph</code>, I was just playing around with arguments, and suddenly… crash. I reported this situation (<a href="https://github.com/igraph/igraph/issues/2459">igraph#2459</a>), which was promptly fixed (thank you <code>igraph</code> devs!), but one sentence in the explanation caught my eye: “it is a rare use case to only want modularity but not membership, and avoiding membership calculation doesn’t have any advantages.”</p>
+<p>This happened to me a few months ago. I investigated some code that used <code>igraph::cluster_fast_greedy()</code>. I know almost nothing about <code>igraph</code>, I was just playing around with arguments, and suddenly… crash. I reported this situation (<a href="https://github.com/igraph/igraph/issues/2459">igraph#2459</a>), which was promptly fixed (thank you <code>igraph</code> devs!), but one sentence in the explanation caught my eye: “it is a rare use case to only want modularity but not membership, and avoiding membership calculation doesn’t have any advantages.”</p>
 <p>I have no particular problem with this sentence or the rationale behind, it makes sense to prioritize fixes that affect a larger audience. But it got me thinking: could we try all combinations of inputs to see if it makes the session crash? We could use <a href="https://cran.r-project.org/web/packages/patrick/">parametric testing</a> for this, but then again we need to hardcode at least some possible values for parameters. We could say that we start by testing only <code>TRUE</code>/<code>FALSE</code> values for all combinations of params, but what if the user passes a string?</p>
 <p>I think this is a situation where property-based testing would be helpful: we know that no matter the input type, its length, and the value of other inputs, <em>the session shouldn’t crash</em>. Implementing it with <code>quickcheck</code> looks fairly simple:</p>
 <div class="cell">
@@ -329,7 +331,7 @@ Test passed 🎉</code></pre>
 <pre><code>Test passed 🎊</code></pre>
 </div>
 </div>
-<p>I don’t really know what expectation to put, I don’t care if the function errors or not, I just want it not to segfault. So I put <code>try(silent = TRUE)</code> and add a fake expectation.</p>
+<p>I didn’t really know what expectation to put, I don’t care if the function errors or not, I just want it not to segfault. So I put <code>try(silent = TRUE)</code> and added a fake expectation.</p>
 </section>
 <section id="ensuring-that-a-package-and-its-variants-give-the-same-results" class="level2">
 <h2 class="anchored" data-anchor-id="ensuring-that-a-package-and-its-variants-give-the-same-results">Ensuring that a package and its variants give the same results</h2>
@@ -340,7 +342,7 @@ Test passed 🎉</code></pre>
 <pre><code>[1] "fo"</code></pre>
 </div>
 </div>
-<p>Easy enough. But what happens if <code>string</code> is missing? Or if <code>start &gt; end</code>? Or if <code>end</code> is negative? Or if <code>start</code> is negative <em>and</em> <code>end</code> is <code>NULL</code> <em>and</em> the length of <code>start</code> is greater than the length of <code>string</code>? Manually adding tests for all of those is painful and increases the risk of forgetting a corner case.</p>
+<p>Easy enough to test. But what happens if <code>string</code> is missing? Or if <code>start &gt; end</code>? Or if <code>end</code> is negative? Or if <code>start</code> is negative <em>and</em> <code>end</code> is <code>NULL</code> <em>and</em> the length of <code>start</code> is greater than the length of <code>string</code>? Manually adding tests for all of those is painful and increases the risk of forgetting a corner case.</p>
 <p>It is better here to use property-based testing: we don’t need to check the value of the output of functions implemented in <code>tidypolars</code>, <em>we only need to check that they match the output of functions in <code>tidyverse</code></em>.</p>
 <p>Here, one additional difficulty is that sometimes throwing an error is the correct behavior. Therefore, we need to create a custom expectation that checks that the output of <code>tidypolars</code> and <code>tidyverse</code> is identical, <em>or</em> that both functions error (see the <code>testthat</code> vignette on <a href="https://testthat.r-lib.org/articles/custom-expectation.html">creating custom expectations</a>):</p>
 <div class="cell">
@@ -371,7 +373,7 @@ Test passed 🎉</code></pre>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Property-based testing will not replace all kinds of tests, and is not necessarily appropriate in all contexts. Still, it can help uncover bugs, segfaults, and it adds more confidence in our code by randomly checking that it works even implausible cases.</p>
+<p>Property-based testing will not replace all kinds of tests, and is not necessarily appropriate in all contexts. Still, it can help uncover bugs, segfaults, and it adds more confidence in our code by randomly checking that it works even with implausible inputs.</p>
 </section>
 
 
