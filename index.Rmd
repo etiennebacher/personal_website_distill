@@ -7,7 +7,7 @@ links:
   - label: '<i class="fab fa-mastodon fa-lg"></i> Mastodon'
     url: "https://mastodon.social/\\@etiennebacher"
   - label: '<i class="fas fa-envelope fa-lg"></i> Email'
-    url: "mailto:etienne.bacher@liser.lu"
+    url: "mailto:etienne.bacher@protonmail.com"
 output:
   postcards::trestles
 site: distill::distill_website
@@ -18,7 +18,8 @@ site: distill::distill_website
 ```{r, include = FALSE}
 trestles_orig <- readLines(
   system.file("pandoc_templates/trestles.html",
-              package = "postcards")
+    package = "postcards"
+  )
 )
 
 trestles_mod <- trestles_orig
@@ -37,7 +38,8 @@ trestles_mod <- gsub("'Roboto Slab'", '-apple-system, BlinkMacSystemFont, "Segoe
 trestles_mod <- gsub('style="height:15rem"', 'style="width: 35%"', trestles_mod)
 
 cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/trestles.html",
-              package = "postcards"))
+  package = "postcards"
+))
 
 ```
 
