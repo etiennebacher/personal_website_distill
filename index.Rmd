@@ -45,9 +45,11 @@ cat(paste(trestles_mod, collapse = "\n"), file = system.file("pandoc_templates/t
 
 <br>
 
-I am a French PhD student in the [Doctoral Team Unit ACROSS](https://sites.google.com/view/fredericdocquier/xingb-blog/across) at the Luxembourg Institute for Socio-Economic Research (LISER), Luxembourg. I study the relationship between cross-border mobility, attitudes and political preferences using both contemporaneous and historical data. During May and June 2024, I will be a visiting PhD student at the London School of Economics.
+I have recently obtained my PhD in Economics as part of the [Doctoral Team Unit ACROSS](https://sites.google.com/view/fredericdocquier/xingb-blog/across) at the Luxembourg Institute for Socio-Economic Research (LISER), Luxembourg. I focused on the relationship between cross-border mobility, attitudes and political preferences using both contemporaneous and historical data. 
 
-Besides working on this topic, I also develop or contribute to R packages that you can find on [GitHub](https://github.com/etiennebacher/). I also write blog articles about R from time to time.
+I realized during my PhD that I prefer developing tools and creating datasets that other researchers can use rather than writing academic papers. Therefore, I am now looking for positions as a [research software engineer](https://www.nature.com/articles/d41586-022-01516-2) or data scientist. 
+
+I develop or contribute to many R packages, all of which you can find on my [GitHub profile](https://github.com/etiennebacher/). I also write occasional blog articles about R and I have given some training on several topics, available in the "Software" tab above.
 
 If you want to contact me, the best way to do so is by email.
 
@@ -104,7 +106,7 @@ img.rounded {
 
 <ul>
  
-<li class = "grad-item">   PhD student in Economics of Migration, 2020 - current <br> <p class = "grad-location"> LISER, Luxembourg </p> </li>
+<li class = "grad-item">   PhD in Economics, 2020 - 2024 <br> <p class = "grad-location"> LISER, Luxembourg </p> </li>
 <li class = "grad-item">   Master's degree in Development Economics, 2018 - 2020 <br>
 <p class = "grad-location"> University Clermont-Auvergne, France </p> </li>
 <li class = "grad-item">   Bachelor's degree in Development Economics, 2017 - 2018 <br> <p class = "grad-location"> University Clermont-Auvergne, France </p> 
