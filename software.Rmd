@@ -45,19 +45,24 @@ make_grid_project(
 
 ```{r echo = FALSE}
 make_grid_project(
-  
   make_card_project(
     title = "polars",
     title_link = "https://rpolars.github.io/",
     description = "Bindings for rust-polars in R. Built to be very similar to the python-polars API.",
     button_link = "https://rpolars.github.io/"
   ),
-  
+
   make_card_project(
     title = "tidypolars",
     title_link = "https://tidypolars.etiennebacher.com",
     description = "Get the functionalities of Polars with the syntax of the tidyverse in R.",
     button_link = "https://tidypolars.etiennebacher.com"
+  ),
+  make_card_project(
+    title = "flir",
+    title_link = "https://flir.etiennebacher.com",
+    description = "Detect and automatically fix bad practices in R code.",
+    button_link = "https://flir.etiennebacher.com"
   ),
 
   make_card_project(
