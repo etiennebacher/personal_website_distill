@@ -6,11 +6,39 @@ toc: false
 
 ## Software
 
-### Tutorials & presentations
+```{r, echo=FALSE}
+source(file.path("R", "functions.R"))
+```
+
+### Tutorials at University of Innsbruck (may 2025)
+
+```{r, echo=FALSE}
+make_grid_project(
+  make_card_project(
+    title = "Webscraping Part 1: static webscraping",
+    title_link = "https://innsbruck-webscraping-part-1.etiennebacher.com",
+    description = "A tutorial on webscraping static pages with rvest.",
+    button_link = "https://innsbruck-webscraping-part-1.etiennebacher.com"
+  ),
+  make_card_project(
+    title = "Webscraping Part 2: dynamic webscraping",
+    title_link = "https://innsbruck-webscraping-part-2.etiennebacher.com",
+    description = "A tutorial on webscraping dynamic pages with RSelenium.",
+    button_link = "https://innsbruck-webscraping-part-2.etiennebacher.com"
+  ),
+  make_card_project(
+    title = "Handling large data in Python and R",
+    title_link = "https://innsbruck-large-data-r-python.etiennebacher.com",
+    description = "A tutorial on handling datasets with tens of millions of observations using Polars (and tidypolars) in Python and R.",
+    button_link = "https://innsbruck-large-data-r-python.etiennebacher.com"
+  )
+)
+```
+
+
+### Other tutorials & presentations
 
 ```{r echo = FALSE}
-source(file.path("R", "functions.R"))
-
 make_grid_project(
   make_card_project(
     title = "Webscraping with RSelenium",
