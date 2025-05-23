@@ -7,7 +7,15 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 01 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 May 2025 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Refactoring code with `flir`</title>
+      <dc:creator>Etienne Bacher</dc:creator>
+      <link>https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir</link>
+      <description>A short description of the post.</description>
+      <guid>https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir</guid>
+      <pubDate>Thu, 22 May 2025 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Using property-based testing in R</title>
       <dc:creator>Etienne Bacher</dc:creator>
