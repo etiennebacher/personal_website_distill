@@ -1,0 +1,56 @@
+---
+title: "Refactoring code with `flir`"
+description: |
+  A short description of the post.
+author:
+  - name: Etienne Bacher
+date: 2025-05-23
+draft: true
+output:
+  distill::distill_article:
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Slightly less than a year ago, I created [`flir`](https://flir.etiennebacher.com/) (named `flint` at the time).
+The objective was to have a tool to detect and automatically correct a set of "bad practices" in R code.
+Those "bad practices" do not necessarily mean the code is wrong, simply that it is possible to improve its readability, robustness, and performance. 
+If you are already familiar with [`lintr`](), you could think of `flir` as an extension that is faster and apply automatic fixes (at the expense of not having coverage of the entire set of `lintr`'s rules).
+
+## Detecting and fixes bad practices
+
+`flir` provides 3 types of functions: linter functions, fixer functions, and helper functions:
+
+* linter functions give the same capability as `lintr`: they detect bad practices in the code and report them with messages indicating what's wrong;
+* fixer functions go one step further and automatically fix those bad practices in code. Note that not all rules can be automatically fixed.
+* helper functions make it easier to use `flir` on a regular basis. They can create a dedicated folder where you can specify which rules you want to use and define your own, and they can create a Github Actions workflow to run this check on each commit.
+
+You might be worried about this "automatic fixing" feature. After all, what if the fix is wrong? 
+What if I want to go back to the previous situation? 
+In this case, you should read this [vignette on the website]() that details a couple of actions you can take to be more confident about this.
+
+I won't repeat the package documentation and examples here.
+Rather, I'd like to explain how `flir` allows one to go further fixing "bad practices" and can be helpful when refactoring projects.
+
+## `flir` can rewrite (almost) anything
+
+Originally, `flir` was created to be an extension of `lintr`, but it can do more than that.
+`flir` works by detecting specific code patterns (some examples below) and rewriting them using the Rust crate [`ast-grep`](). 
+This isn't limited to linter rules, it can be applied to any R code.
+
+Let's take an example.
+
+[`dplyr`]() contains several functions marked as "deprecated" or "superseded". 
+Deprecated means that those functions will be removed in a later version of the package because they have some weaknesses that cannot be easily fixed or because there are alternative functions that are always better to use.
+Those functions are not supported anymore, meaning that bugs won't be fixed anymore so you should update your code if you use them.
+Superseded means that the function still works and is still supported in terms of fixing bugs, but there are better alternatives that are more performant or readable for instance.
+
+Let's say we have several occurrences of [`dplyr::sample_n()`]() in our project. This function is superseded and we should use `slice_sample()` instead. First, after installing `flir`, we can create a `flir` folder with `flir::setup_flir()`. Then we add a new rule with `flir::add_new_rule("superseded-sample-n)`.
+
+This creates the file below (`flir/rules/custom/superseded-sample-n.yml`):
+
