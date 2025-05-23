@@ -2389,12 +2389,13 @@ distill-header .nav a {
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#detecting-and-fixes-bad-practices" id="toc-detecting-and-fixes-bad-practices">Detecting and fixes bad practices</a></li>
+<li><a href="#detecting-and-fixing-bad-practices" id="toc-detecting-and-fixing-bad-practices">Detecting and fixing bad practices</a></li>
 <li><a href="#flir-can-rewrite-almost-anything" id="toc-flir-can-rewrite-almost-anything"><code>flir</code> can rewrite (almost) anything</a>
 <ul>
 <li><a href="#rewriting-superseded-functions" id="toc-rewriting-superseded-functions">Rewriting superseded functions</a></li>
 <li><a href="#creating-the-rule" id="toc-creating-the-rule">Creating the rule</a></li>
 <li><a href="#applying-the-rule" id="toc-applying-the-rule">Applying the rule</a></li>
+<li><a href="#going-further" id="toc-going-further">Going further</a></li>
 </ul></li>
 <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
 </ul>
@@ -2403,13 +2404,13 @@ distill-header .nav a {
 <p>Slightly less than a year ago, I created <a href="https://flir.etiennebacher.com/"><code>flir</code></a> (named <code>flint</code> at the time).
 The objective was to have a tool to detect and automatically correct a set of “bad practices” in R code.
 Those “bad practices” do not necessarily mean the code is wrong, simply that it is possible to improve its readability, robustness, and performance.
-If you are already familiar with <a href><code>lintr</code></a>, you could think of <code>flir</code> as an extension that is faster and apply automatic fixes (at the expense of not having coverage of the entire set of <code>lintr</code>’s rules).</p>
-<h2 id="detecting-and-fixes-bad-practices">Detecting and fixes bad practices</h2>
+If you are already familiar with <a href><code>lintr</code></a>, you could think of <code>flir</code> as an extension that is faster and applies automatic fixes (at the expense of not covering the entire set of <code>lintr</code>’s rules).</p>
+<h2 id="detecting-and-fixing-bad-practices">Detecting and fixing bad practices</h2>
 <p><code>flir</code> provides 3 types of functions: linter functions, fixer functions, and helper functions:</p>
 <ul>
-<li>linter functions give the same capability as <code>lintr</code>: they detect bad practices in the code and report them with messages indicating what’s wrong;</li>
+<li>linter functions give the same capability as <code>lintr</code>: they detect bad practices in the code and report them with messages indicating what’s wrong.</li>
 <li>fixer functions go one step further and automatically fix those bad practices in code. Note that not all rules can be automatically fixed.</li>
-<li>helper functions make it easier to use <code>flir</code> on a regular basis. They can create a dedicated folder where you can specify which rules you want to use and define your own, and they can create a Github Actions workflow to run this check on each commit.</li>
+<li>helper functions make it easier to use <code>flir</code> on a regular basis. They can create a dedicated folder where you can specify which rules you want to use and define your own, and they can create a Github Actions workflow to check the existence of bad practices on each commit.</li>
 </ul>
 <p>You might be worried about this “automatic fixing” feature. After all, what if the fix is wrong?
 What if I want to go back to the previous situation?
@@ -2424,8 +2425,8 @@ This isn’t limited to linter rules, it can be applied to any R code.</p>
 <h3 id="rewriting-superseded-functions">Rewriting superseded functions</h3>
 <p><a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a> contains several functions marked as “deprecated” or “superseded”.
 Deprecated means that those functions will be removed in a later version of the package because they have some weaknesses that cannot be easily fixed or because there are alternative functions that are always better to use.
-Those functions are not supported anymore, meaning that bugs won’t be fixed anymore so you should update your code if you use them.
-Superseded means that the function still works and is still supported in terms of fixing bugs, but there are better alternatives that are more performant or readable for instance.</p>
+Those functions are not supported anymore, meaning that bugs won’t be fixed, so you should update your code if you use them.
+Superseded means that the function still works and is still supported in terms of fixing bugs, but there are better alternatives that are more efficient or readable for instance.</p>
 <p>Let’s say we have several occurrences of <a href="https://dplyr.tidyverse.org/reference/sample_n.html"><code>dplyr::sample_n()</code></a> in our project. This function is superseded and we should use <code>slice_sample()</code> instead. First, after installing <code>flir</code>, we can create a <code>flir</code> folder with <code>flir::setup_flir()</code>. Then we add a new rule with <code>flir::add_new_rule(&quot;superseded-sample-n&quot;)</code>.</p>
 <p>This creates the file below (<code>flir/rules/custom/superseded-sample-n.yml</code>):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n</span></span>
@@ -2450,7 +2451,7 @@ We want to detect two patterns and replace them with the same code, so we can us
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> ...</span></span></code></pre></div>
 <p>Note that we have used <em>metavariables</em> here: <code>$DATA</code> and <code>$N</code>.
 Those will capture any code that fits in the <code>pattern</code>.
-We can then reuse those metavariables when we define the <code>fix</code> and <code>message</code>, but we’ll need to use double tilde instead of <code>$</code> to use them:</p>
+We can then reuse those metavariables when we define the <code>fix</code> and <code>message</code>, but we’ll need to use a double tilde instead of <code>$</code> to use them:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
@@ -2461,13 +2462,13 @@ We can then reuse those metavariables when we define the <code>fix</code> and <c
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> slice_sample(~~DATA~~, n = ~~N~~)</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> Use `slice_sample()` instead of `sample_n()`.</span></span></code></pre></div>
 <p>We now have our rule.
-The only thing left to do is to list in the <code>flir/config.yml</code> file so that it is taken into account by <code>flir::fix_*()</code> functions:</p>
+The only thing left to do is to list in the <code>flir/config.yml</code> file so that it is taken into account by <code>flir::lint_*()</code> and <code>flir::fix_*()</code> functions:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">keep</span><span class="kw">:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> any_duplicated</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">[</span><span class="at">...</span><span class="kw">]</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> which_grepl</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> superseded-sample-n</span></span></code></pre></div>
-<p>Alternatively, we can leave it out of the config file and specify it by hand, such as <code>flir::fix(&quot;my_file.R&quot;, linters = &quot;superseded-sample-n&quot;)</code>.</p>
+<p>Alternatively, we can leave it out of the config file and specify it by hand, such as <code>flir::lint(&quot;my_file.R&quot;, linters = &quot;superseded-sample-n&quot;)</code>.</p>
 <h3 id="applying-the-rule">Applying the rule</h3>
 <p>Now the only thing left to do is to run <code>flir</code> on the files we want.</p>
 <p>For this example, I have created two files in a project:</p>
@@ -2542,15 +2543,19 @@ Since they would need different replacements to account for the additional argum
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(<span class="fu">slice_sample</span>(df, <span class="at">n =</span> <span class="dv">3</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) { <span class="co"># fixed</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;hi&quot;</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="going-further">Going further</h3>
+<p>In this example, I have shown very simple patterns to detect, but it is possible to use much more advanced rules, using nested patterns and regular expressions for instance.</p>
+<p>Take a look at those rules in <code>flir</code> to see what it can do: <a href="https://github.com/etiennebacher/flir/blob/main/inst/rules/builtin/redundant_ifelse.yml"><code>redundant_ifelse</code></a>, <a href="https://github.com/etiennebacher/flir/blob/main/inst/rules/builtin/stopifnot_all.yml"><code>stopifnot_all</code></a>, <a href="https://github.com/etiennebacher/flir/blob/main/inst/rules/builtin/literal_coercion.yml"><code>literal_coercion</code></a>.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p><code>flir</code> is useful to detect bad practices in R code, but its usage doesn’t stop here.
-It can be used to rewrite any R code you want using flexible patterns, which can be very valuable in projects involving many R files.
-If you find bugs, would like more features, or simply have further questions, head to the <a href="https://github.com/etiennebacher/flir/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">Issues page</a>!</p>
+It can be used to rewrite any R code you want using flexible patterns, which can be very valuable in projects involving many R files.</p>
+<p>In the future, I would like to add a feature enabling package developers to provide a set of rules, for instance to replace deprecated and superseded functions in their package, that users would be able to use directly.</p>
+<p>If you find bugs, would like more features, or simply have further questions, head to the <a href="https://github.com/etiennebacher/flir/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">Issues page</a>!</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p><code>my_data</code> and <code>10</code> are just placeholders here, they could be anything<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><code>my_data</code> and <code>10</code> are just placeholders here, they could be anything.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
