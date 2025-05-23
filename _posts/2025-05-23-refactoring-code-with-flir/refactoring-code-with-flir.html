@@ -113,7 +113,7 @@ code span.wa { color: #5e5e5e; font-style: italic; }
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Refactoring code with `flir`"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2025-05-23"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","draft","output"]}},"value":[{"type":"character","attributes":{},"value":["Refactoring code with `flir`"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Etienne Bacher"]}]}]},{"type":"character","attributes":{},"value":["2025-05-23"]},{"type":"logical","attributes":{},"value":[true]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2390,7 +2390,13 @@ distill-header .nav a {
 <h3>Contents</h3>
 <ul>
 <li><a href="#detecting-and-fixes-bad-practices" id="toc-detecting-and-fixes-bad-practices">Detecting and fixes bad practices</a></li>
-<li><a href="#flir-can-rewrite-almost-anything" id="toc-flir-can-rewrite-almost-anything"><code>flir</code> can rewrite (almost) anything</a></li>
+<li><a href="#flir-can-rewrite-almost-anything" id="toc-flir-can-rewrite-almost-anything"><code>flir</code> can rewrite (almost) anything</a>
+<ul>
+<li><a href="#rewriting-superseded-functions" id="toc-rewriting-superseded-functions">Rewriting superseded functions</a></li>
+<li><a href="#creating-the-rule" id="toc-creating-the-rule">Creating the rule</a></li>
+<li><a href="#applying-the-rule" id="toc-applying-the-rule">Applying the rule</a></li>
+</ul></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
 </ul>
 </nav>
 </div>
@@ -2407,21 +2413,146 @@ If you are already familiar with <a href><code>lintr</code></a>, you could think
 </ul>
 <p>You might be worried about this “automatic fixing” feature. After all, what if the fix is wrong?
 What if I want to go back to the previous situation?
-In this case, you should read this <a href>vignette on the website</a> that details a couple of actions you can take to be more confident about this.</p>
+In this case, you should read this <a href="https://flir.etiennebacher.com/articles/automatic_fixes">vignette on the website</a> that details a couple of actions you can take to be more confident about this.</p>
 <p>I won’t repeat the package documentation and examples here.
 Rather, I’d like to explain how <code>flir</code> allows one to go further fixing “bad practices” and can be helpful when refactoring projects.</p>
 <h2 id="flir-can-rewrite-almost-anything"><code>flir</code> can rewrite (almost) anything</h2>
 <p>Originally, <code>flir</code> was created to be an extension of <code>lintr</code>, but it can do more than that.
-<code>flir</code> works by detecting specific code patterns (some examples below) and rewriting them using the Rust crate <a href><code>ast-grep</code></a>.
+<code>flir</code> works by detecting specific code patterns and rewriting them using the Rust crate <a href="https://ast-grep.github.io/"><code>ast-grep</code></a>.
 This isn’t limited to linter rules, it can be applied to any R code.</p>
 <p>Let’s take an example.</p>
-<p><a href><code>dplyr</code></a> contains several functions marked as “deprecated” or “superseded”.
+<h3 id="rewriting-superseded-functions">Rewriting superseded functions</h3>
+<p><a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a> contains several functions marked as “deprecated” or “superseded”.
 Deprecated means that those functions will be removed in a later version of the package because they have some weaknesses that cannot be easily fixed or because there are alternative functions that are always better to use.
 Those functions are not supported anymore, meaning that bugs won’t be fixed anymore so you should update your code if you use them.
 Superseded means that the function still works and is still supported in terms of fixing bugs, but there are better alternatives that are more performant or readable for instance.</p>
-<p>Let’s say we have several occurrences of <a href><code>dplyr::sample_n()</code></a> in our project. This function is superseded and we should use <code>slice_sample()</code> instead. First, after installing <code>flir</code>, we can create a <code>flir</code> folder with <code>flir::setup_flir()</code>. Then we add a new rule with <code>flir::add_new_rule(&quot;superseded-sample-n)</code>.</p>
+<p>Let’s say we have several occurrences of <a href="https://dplyr.tidyverse.org/reference/sample_n.html"><code>dplyr::sample_n()</code></a> in our project. This function is superseded and we should use <code>slice_sample()</code> instead. First, after installing <code>flir</code>, we can create a <code>flir</code> folder with <code>flir::setup_flir()</code>. Then we add a new rule with <code>flir::add_new_rule(&quot;superseded-sample-n&quot;)</code>.</p>
 <p>This creates the file below (<code>flir/rules/custom/superseded-sample-n.yml</code>):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> ...</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> ...</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> ...</span></span></code></pre></div>
+<h3 id="creating-the-rule">Creating the rule</h3>
+<p>Now we must define the patterns we want to detect in the code.
+For now, let’s say we want to catch usages of <code>sample_n(my_data, 10)</code> and <code>sample_n(my_data, size = 10)</code> and replace them with <code>slice_sample(my_data, n = 10)</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.
+We want to detect two patterns and replace them with the same code, so we can use <code>any</code> in this situation:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">any</span><span class="kw">:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> sample_n($DATA, size = $N)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> sample_n($DATA, $N)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> ...</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> ...</span></span></code></pre></div>
+<p>Note that we have used <em>metavariables</em> here: <code>$DATA</code> and <code>$N</code>.
+Those will capture any code that fits in the <code>pattern</code>.
+We can then reuse those metavariables when we define the <code>fix</code> and <code>message</code>, but we’ll need to use double tilde instead of <code>$</code> to use them:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">any</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> sample_n($DATA, size = $N)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> sample_n($DATA, $N)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> slice_sample(~~DATA~~, n = ~~N~~)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> Use `slice_sample()` instead of `sample_n()`.</span></span></code></pre></div>
+<p>We now have our rule.
+The only thing left to do is to list in the <code>flir/config.yml</code> file so that it is taken into account by <code>flir::fix_*()</code> functions:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">keep</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> any_duplicated</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">[</span><span class="at">...</span><span class="kw">]</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> which_grepl</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> superseded-sample-n</span></span></code></pre></div>
+<p>Alternatively, we can leave it out of the config file and specify it by hand, such as <code>flir::fix(&quot;my_file.R&quot;, linters = &quot;superseded-sample-n&quot;)</code>.</p>
+<h3 id="applying-the-rule">Applying the rule</h3>
+<p>Now the only thing left to do is to run <code>flir</code> on the files we want.</p>
+<p>For this example, I have created two files in a project:</p>
+<ul>
+<li><code>foo1.R</code>:</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, <span class="fl">3</span>, weight <span class="op">=</span> <span class="va">w</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">n_rows</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span></span>
+<span><span class="fu">foo</span><span class="op">(</span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, <span class="va">n_rows</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+<ul>
+<li><code>script/foo2.R</code>:</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">&quot;hi&quot;</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre>
+</div>
+</div>
+<p>First, let’s see how many times we find those patterns in our code.
+We can run <code>flir::lint()</code> and it will open a “Markers” window in RStudio (if you don’t use RStudio, it will print the messages in the R console):</p>
+<p><img role="img" src="data:image/png;base64,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" style="width:75.0%" /></p>
+<p>We have three occurrences that can be fixed.
+I can now run <code>flir::fix()</code> (note that I don’t use Git for this demo project, so I will have to manually confirm I want to run this).</p>
+<p><code>foo1.R</code> now looks like this (I manually added the comments):</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">slice_sample</span><span class="op">(</span><span class="va">df</span>, n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>          <span class="co"># fixed</span></span>
+<span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># not fixed</span></span>
+<span><span class="fu">sample_n</span><span class="op">(</span><span class="va">df</span>, <span class="fl">3</span>, weight <span class="op">=</span> <span class="va">w</span><span class="op">)</span>      <span class="co"># not fixed</span></span>
+<span></span>
+<span><span class="va">n_rows</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span></span>
+<span><span class="fu">foo</span><span class="op">(</span><span class="fu">slice_sample</span><span class="op">(</span><span class="va">df</span>, n <span class="op">=</span> <span class="va">n_rows</span><span class="op">)</span><span class="op">)</span> <span class="co"># fixed</span></span></code></pre>
+</div>
+</div>
+<p>Several occurrences of <code>sample_n()</code> weren’t modified.
+This is because they don’t match any of the <code>pattern</code>s we defined in the rule: they include additional arguments such as <code>weight</code> and <code>replace</code>.
+We would need to include those additional patterns in the rule to fix them.
+Since they would need different replacements to account for the additional arguments, we can create an extra rule in the same file using <code>---</code> to separate them (and don’t forget to change the <code>id</code>!):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">any</span><span class="kw">:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> sample_n($DATA, size = $N)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> sample_n($DATA, $N)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> slice_sample(~~DATA~~, n = ~~N~~)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> Use `slice_sample()` instead of `sample_n()`.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="kw">:</span><span class="at"> superseded-sample-n-2</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">language</span><span class="kw">:</span><span class="at"> r</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">severity</span><span class="kw">:</span><span class="at"> warning</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rule</span><span class="kw">:</span><span class="at"> ...</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">fix</span><span class="kw">:</span><span class="at"> ...</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span><span class="kw">:</span><span class="at"> ...</span></span></code></pre></div>
+<p>Similarly, <code>script/foo2.R</code> is now:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(<span class="fu">slice_sample</span>(df, <span class="at">n =</span> <span class="dv">3</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) { <span class="co"># fixed</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;hi&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+<p><code>flir</code> is useful to detect bad practices in R code, but its usage doesn’t stop here.
+It can be used to rewrite any R code you want using flexible patterns, which can be very valuable in projects involving many R files.
+If you find bugs, would like more features, or simply have further questions, head to the <a href="https://github.com/etiennebacher/flir/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">Issues page</a>!</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p><code>my_data</code> and <code>10</code> are just placeholders here, they could be anything<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
