@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://www.etiennebacher.com/blog.html</loc>
-    <lastmod>2025-05-23T17:01:50+00:00</lastmod>
+    <lastmod>2025-05-07T09:37:21+02:00</lastmod>
   </url>
   <url>
     <loc>https://www.etiennebacher.com/gallery.html</loc>
-    <lastmod>2025-05-23T17:01:50+00:00</lastmod>
+    <lastmod>2025-05-07T09:37:21+02:00</lastmod>
   </url>
   <url>
     <loc>https://www.etiennebacher.com/</loc>
-    <lastmod>2025-05-23T17:01:50+00:00</lastmod>
+    <lastmod>2025-05-07T09:49:29+02:00</lastmod>
   </url>
   <url>
     <loc>https://www.etiennebacher.com/research.html</loc>
-    <lastmod>2025-05-23T17:01:50+00:00</lastmod>
+    <lastmod>2025-05-07T09:37:21+02:00</lastmod>
   </url>
   <url>
     <loc>https://www.etiennebacher.com/software.html</loc>
-    <lastmod>2025-05-23T17:01:50+00:00</lastmod>
+    <lastmod>2025-05-20T16:44:13+02:00</lastmod>
   </url>
   <url>
     <loc>https://www.etiennebacher.com/posts/2025-05-23-refactoring-code-with-flir/</loc>
-    <lastmod>2025-05-23T17:01:50+00:00</lastmod>
+    <lastmod>2025-05-23T19:04:02+02:00</lastmod>
   </url>
   <url>
     <loc>https://www.etiennebacher.com/posts/2024-10-01-using-property-testing-in-r/</loc>

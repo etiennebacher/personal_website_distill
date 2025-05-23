@@ -1,7 +1,7 @@
 ---
 title: "Refactoring code with `flir`"
 description: |
-  A short description of the post.
+  How to efficiently rewrite many code patterns.
 author:
   - name: Etienne Bacher
 date: 2025-05-23
