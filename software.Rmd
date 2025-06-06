@@ -6,127 +6,39 @@ toc: false
 
 ## Software
 
-```{r, echo=FALSE}
-source(file.path("R", "functions.R"))
-```
+### Tutorials & presentations
 
-### Tutorials at University of Innsbruck (may 2025)
+**At University of Innsbruck (May 2025)**
 
-```{r, echo=FALSE}
-make_grid_project(
-  make_card_project(
-    title = "Webscraping Part 1: static webscraping",
-    title_link = "https://innsbruck-webscraping-part-1.etiennebacher.com",
-    description = "A tutorial on webscraping static pages with rvest.",
-    button_link = "https://innsbruck-webscraping-part-1.etiennebacher.com"
-  ),
-  make_card_project(
-    title = "Webscraping Part 2: dynamic webscraping",
-    title_link = "https://innsbruck-webscraping-part-2.etiennebacher.com",
-    description = "A tutorial on webscraping dynamic pages with RSelenium.",
-    button_link = "https://innsbruck-webscraping-part-2.etiennebacher.com"
-  ),
-  make_card_project(
-    title = "Handling large data in Python and R",
-    title_link = "https://innsbruck-large-data-r-python.etiennebacher.com",
-    description = "A tutorial on handling datasets with tens of millions of observations using Polars (and tidypolars) in Python and R.",
-    button_link = "https://innsbruck-large-data-r-python.etiennebacher.com"
-  )
-)
-```
+* [Webscraping Part 1: static webscraping](https://innsbruck-webscraping-part-1.etiennebacher.com): a tutorial on webscraping static pages with rvest.
 
+* [Webscraping Part 2: dynamic webscraping](https://innsbruck-webscraping-part-2.etiennebacher.com): a tutorial on webscraping dynamic pages with RSelenium.
 
-### Other tutorials & presentations
+* [Handling large data in Python and R](https://innsbruck-large-data-r-python.etiennebacher.com): a tutorial on handling datasets with tens of millions of observations using Polars (and tidypolars) in Python and R.
 
-```{r echo = FALSE}
-make_grid_project(
-  make_card_project(
-    title = "Webscraping with RSelenium",
-    title_link = "https://www.rselenium-teaching.etiennebacher.com",
-    description = "A tutorial on performing webscraping with RSelenium, 100+ slides.",
-    button_link = "https://www.rselenium-teaching.etiennebacher.com"
-  ),
-  make_card_project(
-    title = "Webscraping with RSelenium (short)",
-    title_link = "https://www.rselenium-teaching-short.etiennebacher.com",
-    description = "A shorter version of the RSelenium tutorial, ~40 slides.",
-    button_link = "https://www.rselenium-teaching-short.etiennebacher.com"
-  ),
-  make_card_project(
-    title = "Good practices for research with R",
-    title_link = "https://www.good-practices.etiennebacher.com",
-    description = "A small list of what I consider to be good practices for reproducible research with R, ~40 slides.",
-    button_link = "https://www.good-practices.etiennebacher.com",
-    link_to_pdf_text = "Get PDF",
-    link_to_pdf = "good-practices.pdf"
-  ),
-  make_card_project(
-    title = "Handling large data with polars and tidypolars",
-    title_link = "https://www.handling-large-data.etiennebacher.com",
-    description = "A brief introduction (not a tutorial) to the Python and R packages polars and tidypolars, ~30 slides.",
-    button_link = "https://www.handling-large-data.etiennebacher.com"
-  )
-)
-```
+**At LISER (2022-2024)**
+
+* [Webscraping with RSelenium](https://www.rselenium-teaching.etiennebacher.com): a tutorial on performing webscraping with RSelenium, 100+ slides.
+
+* [Webscraping with RSelenium (short)](https://www.rselenium-teaching-short.etiennebacher.com): a shorter version of the RSelenium tutorial, ~40 slides.
+
+* [Good practices for research with R](https://www.good-practices.etiennebacher.com): a small list of what I consider to be good practices for reproducible research with R, ~40 slides.
+
+* [Handling large data with polars and tidypolars](https://www.handling-large-data.etiennebacher.com): a brief introduction (not a tutorial) to the Python and R packages polars and tidypolars, ~30 slides.
+
 
 ### Packages
 
-```{r echo = FALSE}
-make_grid_project(
-  make_card_project(
-    title = "polars",
-    title_link = "https://rpolars.github.io/",
-    description = "Bindings for rust-polars in R. Built to be very similar to the python-polars API.",
-    button_link = "https://rpolars.github.io/"
-  ),
+* [polars](https://rpolars.github.io/): bindings for rust-polars in R. Built to be very similar to the python-polars API.
 
-  make_card_project(
-    title = "tidypolars",
-    title_link = "https://tidypolars.etiennebacher.com",
-    description = "Get the functionalities of Polars with the syntax of the tidyverse in R.",
-    button_link = "https://tidypolars.etiennebacher.com"
-  ),
-  make_card_project(
-    title = "flir",
-    title_link = "https://flir.etiennebacher.com",
-    description = "Detect and automatically fix bad practices in R code.",
-    button_link = "https://flir.etiennebacher.com"
-  ),
+* [tidypolars](https://tidypolars.etiennebacher.com): get the functionalities of Polars with the syntax of the tidyverse in R.
 
-  make_card_project(
-    title = "altdoc",
-    title_link = "https://altdoc.etiennebacher.com",
-    description = "Use docute, docsify or mkdocs to create a website for your R package.",
-    button_link = "https://altdoc.etiennebacher.com"
-  ),
+* [flir](https://flir.etiennebacher.com): detect and automatically fix bad practices in R code.
 
-  make_card_project(
-    title = "prompter",
-    title_link = "https://prompter.etiennebacher.com",
-    description = "This package allows to easily add tooltips to HTML elements in R Shiny applications. It uses hint.css under the hood.",
-    button_link = "https://prompter.etiennebacher.com"
-  ),
+* [altdoc](https://altdoc.etiennebacher.com): use docute, docsify, mkdocs or quarto to create a website for your R package.
 
-  make_card_project(
-    title = "conductor",
-    title_link = "https://conductor.etiennebacher.com",
-    description = " Create tours in R Shiny applications using shepherd.js.",
-    button_link = "https://conductor.etiennebacher.com"
-  ),
+* [prompter](https://prompter.etiennebacher.com): easily add tooltips to HTML elements in R Shiny applications, using hint.css under the hood.
 
-  make_card_project(
-    title = "R-JS adaptation",
-    title_link = "https://github.com/etiennebacher/r-js-adaptation",
-    description = "A list of all Javascript libraries adapted in R.",
-    button_link = "https://github.com/etiennebacher/r-js-adaptation"
-  ),
+* [conductor](https://conductor.etiennebacher.com): create tours in R Shiny applications using shepherd.js.
 
-  make_card_project(
-    title = "shinyfullscreen",
-    title_link = "https://github.com/etiennebacher/shinyfullscreen",
-    description = "Use screenfull.js to put HTML elements in fullscreen in R Shiny applications.",
-    button_link = "https://github.com/etiennebacher/shinyfullscreen"
-  )
-)
-```
-
+* [shinyfullscreen](https://github.com/etiennebacher/shinyfullscreen): use screenfull.js to put HTML elements in fullscreen in R Shiny applications.
