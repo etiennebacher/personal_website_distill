@@ -17,7 +17,7 @@ navbar:
       href: gallery.html
     - text: "CV"
       href: cv.pdf
-  source_url: https://github.com/etiennebacher/personal_website_distill
+  source_url: https://github.com/etiennebacher
   search: true
 base_url: https://www.etiennebacher.com/
 repository_url: https://github.com/etiennebacher/personal_website_distill
