@@ -88,6 +88,8 @@ The latter adds a lightbulb button next to rule violations, allowing you to sele
   <source src="demos/quick-fixes.webm" type="video/mp4">
 </video>
 
+In the future, those extensions could have a "Fix on save" feature similar to the "Format on save" functionality provided by Air.
+
 
 ## Configuring Jarl
 
