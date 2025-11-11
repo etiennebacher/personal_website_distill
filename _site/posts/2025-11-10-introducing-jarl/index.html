@@ -3490,7 +3490,7 @@ Suppose that we have the following file <code>foo.R</code>:</p>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>There are two rule violations in this file:</p>
 <ol type="1">
-<li><code>any(is.na(...))</code> should be replaced by <code>anyNA()</code>;</li>
+<li><code>any(is.na(mtcars))</code> should be replaced by <code>anyNA(mtcars)</code>;</li>
 <li><code>apply(x, 1, mean)</code> should be replaced by <code>rowMeans(x)</code>.</li>
 </ol>
 <p>Instead of fixing those cases by hand, we can run the following command in the terminal (not in the R console):</p>
@@ -3503,7 +3503,7 @@ Suppose that we have the following file <code>foo.R</code>:</p>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Jarl stands on the shoulders of giants, in particular:</p>
 <ul>
-<li><a href="https://lintr.r-lib.org/"><code>lintr</code></a>: this R package provides dozens of rules for linting R code, and Jarl wouldn’t exist without this package. Jarl currently supports 25 <code>lintr</code> rules.</li>
+<li><a href="https://lintr.r-lib.org/">lintr</a>: this R package provides dozens of rules for linting R code, and Jarl wouldn’t exist without this package. Jarl currently supports 25 <code>lintr</code> rules.</li>
 <li><a href="https://posit-dev.github.io/air/">Air</a>: this is a fast R formatter written in Rust, developed by Lionel Henry and Davis Vaughan, and released earlier this year. It is also a command-line tool that runs in the terminal. It is the technical foundation on which Jarl is built since Air provides the infrastructure to parse and manipulate R code.</li>
 </ul>
 <p>Jarl is a single binary, meaning that it doesn’t need an R installation to work.

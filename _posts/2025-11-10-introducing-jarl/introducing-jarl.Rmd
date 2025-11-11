@@ -38,7 +38,7 @@ f <- function(x) {
 
 There are two rule violations in this file:
 
-1. `any(is.na(...))` should be replaced by `anyNA()`;
+1. `any(is.na(mtcars))` should be replaced by `anyNA(mtcars)`;
 1. `apply(x, 1, mean)` should be replaced by `rowMeans(x)`.
 
 Instead of fixing those cases by hand, we can run the following command in the terminal (not in the R console):
@@ -59,7 +59,7 @@ f <- function(x) {
 
 Jarl stands on the shoulders of giants, in particular:
 
-* [`lintr`](https://lintr.r-lib.org/): this R package provides dozens of rules for linting R code, and Jarl wouldn't exist without this package. Jarl currently supports 25 `lintr` rules.
+* [lintr](https://lintr.r-lib.org/): this R package provides dozens of rules for linting R code, and Jarl wouldn't exist without this package. Jarl currently supports 25 `lintr` rules.
 * [Air](https://posit-dev.github.io/air/): this is a fast R formatter written in Rust, developed by Lionel Henry and Davis Vaughan, and released earlier this year. It is also a command-line tool that runs in the terminal. It is the technical foundation on which Jarl is built since Air provides the infrastructure to parse and manipulate R code.
 
 Jarl is a single binary, meaning that it doesn't need an R installation to work.
