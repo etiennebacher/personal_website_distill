@@ -88,6 +88,8 @@ The latter adds a lightbulb button next to rule violations, allowing you to sele
   <source src="demos/quick-fixes.webm" type="video/mp4">
 </video>
 
+<br>
+
 In the future, those extensions could have a "Fix on save" feature similar to the "Format on save" functionality provided by Air.
 
 
@@ -97,9 +99,9 @@ By default, Jarl will report violations for almost of its rules.
 It is possible to configure its behavior using a configuration file named `jarl.toml`.
 In particular, in this file, you can specify:
 
-* the rules you want to apply
-* the files to include or exclude
-* the rules for which you want to apply automatic fixes
+* the rules you want to apply,
+* the files to include or exclude,
+* the rules for which you want to apply automatic fixes,
 
 and more.
 
@@ -107,6 +109,10 @@ and more.
 
 Jarl is in its early days, there are more rules and options to add.
 Still, it can already be used in interactive use or in continuous integration (check out the [`setup-jarl` workflow](https://github.com/etiennebacher/setup-jarl)!).
+Eventually, many `lintr` rules should be supported in Jarl, but the end goal is not to have perfect compatibility.
+`lintr` provides many rules related to code formatting (e.g. [spaces_inside_linter](https://lintr.r-lib.org/dev/reference/spaces_inside_linter.html)).
+Those will not be integrated in Jarl since they are already covered by Air.
+Additionally (for now), Jarl cannot perform semantic analysis^[Semantic analysis refers to using the context surrounding an expression to explore rule violations.], meaning that some `lintr` rules are out of scope (e.g. [unreachable_code_linter](https://lintr.r-lib.org/dev/reference/unreachable_code_linter.html)).
 
 This was a very light introduction, go to the [Jarl website](https://jarl.etiennebacher.com/) for more information.
 
