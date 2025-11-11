@@ -58,9 +58,9 @@ f <- function(x) {
 }
 ```
 
-Jarl is built on the shoulders of giants, in particular:
+Jarl stands on the shoulders of giants, in particular:
 
-* `lintr`: this package provides dozens of rules for linting R code, and Jarl wouldn't exist without this package. Jarl currently supports 25 `lintr` rules.
+* `lintr`: this R package provides dozens of rules for linting R code, and Jarl wouldn't exist without this package. Jarl currently supports 25 `lintr` rules.
 * Air: this is a fast R formatter written in Rust, developed by Lionel Henry and Davis Vaughan, and released earlier this year. This is the technical foundation on which Jarl is built, since Air provides the infrastructure to parse and manipulate R code.
 
 Jarl is a single binary, meaning that it doesn't need an R installation to work.
