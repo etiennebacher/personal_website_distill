@@ -26,13 +26,37 @@ Here is an example of Jarl running on [r-source](https://github.com/wch/r-source
 
 <br>
 
-On top of that, Jarl can apply automatic fixes^[This is not always possible, it depends on the rule.]:
+On top of that, Jarl can apply automatic fixes^[This is not always possible, it depends on the rule.].
+Suppose that we have the following file `foo.R`:
 
-<video width="100%" height="100%" alt="Running `jarl check foo.R --fix`, where 'foo.R' is a file that contains two pieces of code that should be reported. This video shows that `any(is.na(x))` is replaced by `anyNA(x)`, and `apply(x, 1, mean)` is replaced by `rowMeans(x)`." controls>
-  <source src="demos/automatic-fixes.webm" type="video/mp4">
-</video>
+```r
+x <- any(is.na(mtcars))
 
-<br>
+f <- function(x) {
+  apply(x, 1, mean)
+}
+```
+
+There are two rule violations in this file:
+
+1. `any(is.na(...))` should be replaced by `anyNA()`;
+1. `apply(x, 1, mean)` should be replaced by `rowMeans(x)`.
+
+Instead of fixing those cases by hand, we can run the following command in the terminal (not in the R console):
+
+```sh
+jarl check foo.R --fix
+```
+
+After running this, `foo.R` now contains the following code:
+
+```r
+x <- anyNA(mtcars)
+
+f <- function(x) {
+  rowMeans(x)
+}
+```
 
 Jarl is built on the shoulders of giants, in particular:
 
