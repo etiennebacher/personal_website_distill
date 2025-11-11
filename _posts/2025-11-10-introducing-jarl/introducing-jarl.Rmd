@@ -1,8 +1,7 @@
 ---
 title: "Jarl: just another R linter"
 description: |
-  Jarl is a new R linter built in Rust. It checks thousands of lines of R code
-  in milliseconds and provides automatic fixes.
+  Remove bad patterns in your R code in the blink of an eye.
 author:
   - name: Etienne Bacher
     url: {}
