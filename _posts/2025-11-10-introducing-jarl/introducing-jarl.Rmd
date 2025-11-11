@@ -119,6 +119,7 @@ This was a very light introduction, go to the [Jarl website](https://jarl.etienn
 If you want to help developing Jarl, check out the ["Contributing" page](https://jarl.etiennebacher.com/contributing).
 Jarl is written in Rust, which may be a barrier to contributing but is also a very powerful language which is a real pleasure to use.
 I will add a more detailed tutorial soon so that this can also be a nice introduction to this language.
+You can also contribute to the documentation!
 
 # Acknowledgements
 
@@ -128,4 +129,4 @@ Jarl is also very inspired by similar tools in other languages, in particular [R
 
 Finally, thanks to the [R Consortium](https://r-consortium.org/) for funding part of the development of Jarl via the ISC Grant Program.
 
-And thank you, Maëlle, for proofreading the draft!
+And thank you, Maëlle, for improving the draft!
