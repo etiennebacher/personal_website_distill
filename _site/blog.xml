@@ -12,8 +12,7 @@
       <title>Jarl: just another R linter</title>
       <dc:creator>Etienne Bacher</dc:creator>
       <link>https://www.etiennebacher.com/posts/2025-11-10-introducing-jarl</link>
-      <description>Jarl is a new R linter built in Rust. It checks thousands of lines of R code
-in milliseconds and provides automatic fixes.</description>
+      <description>Remove bad patterns in your R code in the blink of an eye.</description>
       <guid>https://www.etiennebacher.com/posts/2025-11-10-introducing-jarl</guid>
       <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
     </item>
