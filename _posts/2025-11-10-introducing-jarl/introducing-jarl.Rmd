@@ -38,8 +38,8 @@ f <- function(x) {
 
 There are two rule violations in this file:
 
-1. `any(is.na(mtcars))` should be replaced by `anyNA(mtcars)`;
-1. `apply(x, 1, mean)` should be replaced by `rowMeans(x)`.
+1. `any(is.na(mtcars))` should be replaced by `anyNA(mtcars)`^[`anyNA(x)` is more efficient than `any(is.na(x))`.];
+1. `apply(x, 1, mean)` should be replaced by `rowMeans(x)`^[`rowMeans(x)` is more efficient than `apply(x, 1, mean)`.].
 
 Instead of fixing those cases by hand, we can run the following command in the terminal (not in the R console):
 
