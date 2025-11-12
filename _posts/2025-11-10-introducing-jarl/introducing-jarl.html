@@ -2415,8 +2415,8 @@ Suppose that we have the following file <code>foo.R</code>:</p>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>There are two rule violations in this file:</p>
 <ol type="1">
-<li><code>any(is.na(mtcars))</code> should be replaced by <code>anyNA(mtcars)</code>;</li>
-<li><code>apply(x, 1, mean)</code> should be replaced by <code>rowMeans(x)</code>.</li>
+<li><code>any(is.na(mtcars))</code> should be replaced by <code>anyNA(mtcars)</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>;</li>
+<li><code>apply(x, 1, mean)</code> should be replaced by <code>rowMeans(x)</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
 </ol>
 <p>Instead of fixing those cases by hand, we can run the following command in the terminal (not in the R console):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jarl</span> check foo.R <span class="at">--fix</span></span></code></pre></div>
@@ -2426,9 +2426,10 @@ Suppose that we have the following file <code>foo.R</code>:</p>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowMeans</span>(x)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>(Note that <code>f</code> is now useless since it is equivalent to <code>rowMeans()</code>.)</p>
 <p>Jarl stands on the shoulders of giants, in particular:</p>
 <ul>
-<li><a href="https://lintr.r-lib.org/">lintr</a>: this R package provides dozens of rules for linting R code, and Jarl wouldn’t exist without this package. Jarl currently supports 25 <code>lintr</code> rules.</li>
+<li><a href="https://lintr.r-lib.org/">lintr</a>: this R package provides dozens of rules from various sources to lint R code, and Jarl wouldn’t exist without this package. Jarl currently supports 25 <code>lintr</code> rules.</li>
 <li><a href="https://posit-dev.github.io/air/">Air</a>: this is a fast R formatter written in Rust, developed by Lionel Henry and Davis Vaughan, and released earlier this year. It is also a command-line tool that runs in the terminal. It is the technical foundation on which Jarl is built since Air provides the infrastructure to parse and manipulate R code.</li>
 </ul>
 <p>Jarl is a single binary, meaning that it doesn’t need an R installation to work.
@@ -2467,14 +2468,14 @@ Still, it can already be used in interactive use or in continuous integration (c
 Eventually, many <code>lintr</code> rules should be supported in Jarl, but the end goal is not to have perfect compatibility.
 <code>lintr</code> provides many rules related to code formatting (e.g. <a href="https://lintr.r-lib.org/dev/reference/spaces_inside_linter.html">spaces_inside_linter</a>).
 Those will not be integrated in Jarl since they are already covered by Air.
-Additionally (for now), Jarl cannot perform semantic analysis<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, meaning that some <code>lintr</code> rules are out of scope (e.g. <a href="https://lintr.r-lib.org/dev/reference/unreachable_code_linter.html">unreachable_code_linter</a>).</p>
+Additionally (for now), Jarl cannot perform semantic analysis<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>, meaning that some <code>lintr</code> rules are out of scope (e.g. <a href="https://lintr.r-lib.org/dev/reference/unreachable_code_linter.html">unreachable_code_linter</a>).</p>
 <p>This was a very light introduction, go to the <a href="https://jarl.etiennebacher.com/">Jarl website</a> for more information.</p>
 <p>If you want to help developing Jarl, check out the <a href="https://jarl.etiennebacher.com/contributing">“Contributing” page</a>.
 Jarl is written in Rust, which may be a barrier to contributing but is also a very powerful language which is a real pleasure to use.
 I will add a more detailed tutorial soon so that this can also be a nice introduction to this language.
 You can also contribute to the documentation!</p>
 <h1 id="acknowledgements">Acknowledgements</h1>
-<p>As I said above, Jarl depends enormously on the work of <code>lintr</code> and Air <a href="https://lintr.r-lib.org/authors.html">developers</a>, so thank you!</p>
+<p>As I said above, Jarl depends enormously on the work of <a href="https://lintr.r-lib.org/authors.html"><code>lintr</code></a> and Air developers, so thank you!</p>
 <p>Jarl is also very inspired by similar tools in other languages, in particular <a href="https://docs.astral.sh/ruff/">Ruff</a> in Python and <a href="https://github.com/rust-lang/rust-clippy">Cargo clippy</a> in Rust.</p>
 <p>Finally, thanks to the <a href="https://r-consortium.org/">R Consortium</a> for funding part of the development of Jarl via the ISC Grant Program.</p>
 <p>And thank you, Maëlle, for improving the draft!</p>
@@ -2484,7 +2485,9 @@ You can also contribute to the documentation!</p>
 <ol>
 <li id="fn1"><p>Jarl stands for “Just Another R Linter”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This is not always possible, it depends on the rule.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Semantic analysis refers to using the context surrounding an expression to explore rule violations.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><code>anyNA(x)</code> is more efficient than <code>any(is.na(x))</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><code>rowMeans(x)</code> is more efficient than <code>apply(x, 1, mean)</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Semantic analysis refers to using the context surrounding an expression to explore rule violations.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
