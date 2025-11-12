@@ -124,7 +124,7 @@ You can also contribute to the documentation!
 
 # Acknowledgements
 
-As I said above, Jarl depends enormously on the work of `lintr` and Air [developers](https://lintr.r-lib.org/authors.html), so thank you!
+As I said above, Jarl depends enormously on the work of [`lintr`](https://lintr.r-lib.org/authors.html) and Air developers, so thank you!
 
 Jarl is also very inspired by similar tools in other languages, in particular [Ruff](https://docs.astral.sh/ruff/) in Python and [Cargo clippy](https://github.com/rust-lang/rust-clippy) in Rust.
 
