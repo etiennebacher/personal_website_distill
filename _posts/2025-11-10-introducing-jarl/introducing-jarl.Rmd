@@ -57,6 +57,8 @@ f <- function(x) {
 }
 ```
 
+(Note that `f` is now useless since it is equivalent to `rowMeans()`.)
+
 Jarl stands on the shoulders of giants, in particular:
 
 * [lintr](https://lintr.r-lib.org/): this R package provides dozens of rules for linting R code, and Jarl wouldn't exist without this package. Jarl currently supports 25 `lintr` rules.
