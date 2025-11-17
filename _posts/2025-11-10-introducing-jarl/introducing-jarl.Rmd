@@ -70,7 +70,7 @@ This makes it a very attractive option for continuous integration for instance, 
 There are two ways to use Jarl:
 
 1. via the terminal, using `jarl check [OPTIONS]`;
-2. using the integration in your coding editor (at the time of writing, only VS Code and Positron have a Jarl extension, but support for Zed is coming soon<sup>TM</sup>).
+2. using the integration in your coding editor (at the time of writing, a Jarl extension is available in VS Code, Positron, and Zed).
 
 The Jarl extension enables code highlighting and quick fixes.
 The former means that code that violates any of the rules in your setup (more on this below) will be underlined and will show the exact violation when hovered.
