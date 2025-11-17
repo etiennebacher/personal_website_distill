@@ -11,7 +11,7 @@ output:
     toc: true
 ---
 
-I'm very excited to introduce Jarl^[Jarl stands for "Just Another R Linter".], a new R linter.
+I'm very excited to introduce [Jarl](https://jarl.etiennebacher.com/)^[Jarl stands for "Just Another R Linter".], a new R linter.
 A linter is a tool that statically parses code (meaning that it doesn't run the code in question) and searches for patterns that are inefficient, hard to read, or likely bugs.
 
 Jarl can parse dozens of files and thousands of lines of code in milliseconds.
