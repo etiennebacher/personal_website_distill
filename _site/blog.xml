@@ -7,14 +7,14 @@
     <description>Etienne Bacher
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 09 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Nov 2025 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Jarl: just another R linter</title>
       <dc:creator>Etienne Bacher</dc:creator>
-      <link>https://www.etiennebacher.com/posts/2025-11-10-introducing-jarl</link>
+      <link>https://www.etiennebacher.com/posts/2025-11-20-introducing-jarl</link>
       <description>Remove bad patterns in your R code in the blink of an eye.</description>
-      <guid>https://www.etiennebacher.com/posts/2025-11-10-introducing-jarl</guid>
-      <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://www.etiennebacher.com/posts/2025-11-20-introducing-jarl</guid>
+      <pubDate>Wed, 19 Nov 2025 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Refactoring code with `flir`</title>
