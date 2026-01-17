@@ -8,6 +8,10 @@ toc: false
 
 ### Tutorials & presentations
 
+**At the Center for Applied Public Economics (Brussels, January 2026)**
+
+* [Handling large data in Python and R](https://brussels-large-data-r-python.etiennebacher.com): a tutorial on handling datasets with tens of millions of observations using Polars (and tidypolars) in Python and R.
+
 **At University of Innsbruck (May 2025)**
 
 * [Webscraping Part 1: static webscraping](https://innsbruck-webscraping-part-1.etiennebacher.com): a tutorial on webscraping static pages with rvest.
